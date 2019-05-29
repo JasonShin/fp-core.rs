@@ -1,0 +1,14 @@
+[[package]]
+name = "functional-programming-jargon"
+version = "0.1.0"
+dependencies = [
+ "partial_application 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "partial_application"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum partial_application 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "8d8029384403539d30c30ba53b6ff2b202480e7c704c523ebb7d34e774d41eb6"
