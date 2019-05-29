@@ -4,7 +4,7 @@ Functional programming (FP) provides many advantages, and its popularity has bee
 However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary,
 we hope to make learning FP easier.
 
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land
+Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 
 The goal of this project includes understanding Rust's capability of programming in functional paradigm.
 
