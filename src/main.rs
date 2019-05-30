@@ -8,6 +8,7 @@ mod partial_application_example;
 mod currying_example;
 mod purity_example;
 mod side_effects_example;
+mod idempotent;
 
 fn main() {
     println!("Hello, world!");

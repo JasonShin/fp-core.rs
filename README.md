@@ -175,3 +175,14 @@ let now = SystemTime::now();
 println!("IO is a side effect!");
 // IO is a side effect!
 ```
+
+## Idempotent
+
+
+
+## Auto currying
+
+## Function Composition
+
+## Continuation
+
