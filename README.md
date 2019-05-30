@@ -140,10 +140,24 @@ let name = "Jason";
 let greet = || -> String {
     format!("Hi! {}", name)
 };
+
+greet(); // String = "Hi! Jason"
 ```
 
 The above example's output is based on data stored outside of the function...
 
 ```rust
+let mut greeting: String = "".to_string();
 
+let mut greet = |name: &str| {
+    greeting = format!("Hi! {}", name);
+};
+
+greet("Jason");
+
+assert_eq!("Hi! Jason", greeting); // Passes
 ```
+
+... and this one modifies state outside of the function.
+
+## Side effects
