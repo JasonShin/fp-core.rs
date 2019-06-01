@@ -10,6 +10,7 @@ mod purity_example;
 mod side_effects_example;
 mod idempotent;
 mod function_composition_example;
+mod predicate_example;
 
 fn main() {
     println!("Hello, world!");
