@@ -9,6 +9,7 @@ mod currying_example;
 mod purity_example;
 mod side_effects_example;
 mod idempotent;
+mod function_composition_example;
 
 fn main() {
     println!("Hello, world!");
