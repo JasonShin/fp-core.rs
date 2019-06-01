@@ -11,6 +11,7 @@ mod side_effects_example;
 mod idempotent;
 mod function_composition_example;
 mod predicate_example;
+mod contracts;
 
 fn main() {
     println!("Hello, world!");
