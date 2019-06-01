@@ -321,3 +321,43 @@ Since these rules govern composition at very abstract level, category theory is 
 __Further reading__
 
 * [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+
+## Value
+
+Anything that can be assigned to a variable.
+
+```rust
+let a = 5;
+let b = vec![1, 2, 3];
+let c = "test";
+```
+
+## Constant
+
+A variable that cannot be reassigned once defined.
+
+```rust
+let a = 5;
+a = 3; // error!
+```
+
+Constants are [referentially transparent](#referential-transparency).
+That is, they can be replaced with the values that they represent without affecting the result.
+
+## Functor
+
+An object that implements a map function which,
+while running over each value in the object to produce a new functor of the same type, adheres to two rules:
+
+__Preserves identity__
+```
+object.map(x => x) ≍ object
+```
+
+__Composable__
+
+```
+object.map(compose(f, g)) ≍ object.map(g).map(f)
+```
+
+(`f`, `g` are arbitrary functions)
