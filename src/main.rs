@@ -12,6 +12,7 @@ mod idempotent;
 mod function_composition_example;
 mod predicate_example;
 mod contracts;
+mod functor_example;
 
 fn main() {
     println!("Hello, world!");

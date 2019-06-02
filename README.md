@@ -361,3 +361,11 @@ object.map(compose(f, g)) ≍ object.map(g).map(f)
 ```
 
 (`f`, `g` are arbitrary functions)
+
+For example, below can be considered as a functor-like operation
+
+```rust
+let v: Vec<i32> = vec![1, 2, 3].into_iter().map(| x | x + 1).collect();
+
+assert_eq!(v, vec![2, 3, 4]); // passes while mapping the original vector and returns a new vector
+```
