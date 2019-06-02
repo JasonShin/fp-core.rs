@@ -1,6 +1,5 @@
 #[test]
 fn lambdas() {
-
     fn  increment(i: i32) -> i32 { i + 1 }
     let closure_annotated = |i: i32| { i + 1 };
     let closure_inferred = |i| i + 1;
@@ -12,5 +11,4 @@ fn lambdas() {
     assert_eq!(inc, 4);
     assert_eq!(ca, 4);
     assert_eq!(ci, 4);
-
 }
