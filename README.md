@@ -350,6 +350,7 @@ An object that implements a map function which,
 while running over each value in the object to produce a new functor of the same type, adheres to two rules:
 
 __Preserves identity__
+
 ```
 object.map(x => x) ≍ object
 ```
@@ -368,4 +369,49 @@ For example, below can be considered as a functor-like operation
 let v: Vec<i32> = vec![1, 2, 3].into_iter().map(| x | x + 1).collect();
 
 assert_eq!(v, vec![2, 3, 4]); // passes while mapping the original vector and returns a new vector
+```
+
+You can define a trait that represents Functor like below
+
+```rust
+pub trait Functor<'a, A, B, F>
+    where
+        A: 'a,
+        F: Fn(&'a A) -> B {
+    type Output;
+    fn fmap(&'a self, f: F) -> Self::Output;
+}
+```
+
+Then use it against a type such as Maybe like
+
+```rust
+// Declare Maybe data type -> http://hackage.haskell.org/package/base-4.12.0.0/docs/GHC-Maybe.html#t:Maybe
+pub enum Maybe<T> {
+    Nothing,
+    Just(T)
+}
+
+use Maybe::*;
+
+// Maybe functor
+impl<'a, A, B, F> Functor<'a, A, B, F> for Maybe<A>
+    where
+        A: 'a,
+        F: Fn(&'a A) -> B {
+
+    type Output = Maybe<B>;
+    fn fmap(&'a self, f: F) -> Maybe<B> {
+        match *self {
+            Maybe::Just(ref x) => Maybe::Just(f(x)),
+            Maybe::Nothing => Maybe::Nothing,
+        }
+    }
+}
+
+let just = Just(7);
+let nothing = Maybe::fmap(&Maybe::Nothing, |x| x + 1);
+let other = Maybe::fmap(&just, |x| x + 1);
+assert_eq!(nothing, Nothing);
+assert_eq!(other, Just(8));
 ```

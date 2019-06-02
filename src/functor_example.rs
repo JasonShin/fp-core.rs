@@ -5,6 +5,11 @@ fn functor_example_1() {
     assert_eq!(v, vec![2, 3, 4]);
 }
 
+#[derive(Debug, PartialEq, Eq)]
+enum Maybe<T> {
+    Nothing,
+    Just(T),
+}
 
 pub trait Functor<'a, A, B, F>
     where
@@ -14,22 +19,25 @@ pub trait Functor<'a, A, B, F>
     fn fmap(&'a self, f: F) -> Self::Output;
 }
 
-
-impl<'a, A, B, C> Functor<'a, A, B, C> for Maybe<A>
+impl<'a, A, B, F> Functor<'a, A, B, F> for Maybe<A>
     where
         A: 'a,
-        F: Fn<&'a, A> -> B {
+        F: Fn(&'a A) -> B {
 
     type Output = Maybe<B>;
-    fn fmap(&'a, self, f: F) {
-
+    fn fmap(&'a self, f: F) -> Maybe<B> {
+        match *self {
+            Maybe::Just(ref x) => Maybe::Just(f(x)),
+            Maybe::Nothing => Maybe::Nothing,
+        }
     }
-
 }
-
-
 
 #[test]
 fn functor_example_2() {
-
+    let just = Maybe::Just(7);
+    let nothing = Maybe::fmap(&Maybe::Nothing, |x| x + 1);
+    let other = Maybe::fmap(&just, |x| x + 1);
+    assert_eq!(nothing, Maybe::Nothing);
+    assert_eq!(other, Maybe::Just(8));
 }
