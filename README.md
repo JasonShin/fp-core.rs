@@ -414,3 +414,30 @@ let other = Maybe::fmap(&just, |x| x + 1);
 assert_eq!(nothing, Nothing);
 assert_eq!(other, Just(8));
 ```
+
+## Pointed Functor
+
+An object with an of function that puts any single value into it.
+
+```rust
+#[derive(Debug, PartialEq, Eq)]
+enum Maybe<T> {
+    Nothing,
+    Just(T),
+}
+
+
+impl<T> Maybe<T> {
+    fn of(x: T) -> Self {
+        return Maybe::Just(x);
+    }
+}
+```
+
+Then use it like
+
+```rust
+let pointed_functor = Maybe::of(1);
+
+assert_eq!(pointed_functor, Maybe::Just(1));
+```
