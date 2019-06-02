@@ -441,3 +441,7 @@ let pointed_functor = Maybe::of(1);
 
 assert_eq!(pointed_functor, Maybe::Just(1));
 ```
+
+## Equational Reasoning
+
+When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
