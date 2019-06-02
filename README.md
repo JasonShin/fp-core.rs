@@ -49,8 +49,6 @@ A closure is a scope which retains variables available to a function when it's c
 
 ```rust
 let add_to = | x: i32 | { move | y: i32 | { x + y } };
-    
-
 ```
 
 We can call `add_to` with a number and get back a function with a baked-in `x`. Notice that we also need to move the
@@ -392,6 +390,7 @@ pub enum Maybe<T> {
     Just(T)
 }
 
+use Maybe;
 use Maybe::*;
 
 // Maybe functor
@@ -403,14 +402,14 @@ impl<'a, A, B, F> Functor<'a, A, B, F> for Maybe<A>
     type Output = Maybe<B>;
     fn fmap(&'a self, f: F) -> Maybe<B> {
         match *self {
-            Maybe::Just(ref x) => Maybe::Just(f(x)),
-            Maybe::Nothing => Maybe::Nothing,
+            Just(ref x) => Just(f(x)),
+            Nothing => Nothing,
         }
     }
 }
 
 let just = Just(7);
-let nothing = Maybe::fmap(&Maybe::Nothing, |x| x + 1);
+let nothing = Maybe::fmap(&Nothing, |x| x + 1);
 let other = Maybe::fmap(&just, |x| x + 1);
 assert_eq!(nothing, Nothing);
 assert_eq!(other, Just(8));
