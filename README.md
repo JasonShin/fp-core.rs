@@ -120,6 +120,34 @@ add5(10); // 15
 __Further reading__
 * [Currying in Rust](https://hashnode.com/post/currying-in-rust-cjpfb0i2z00cm56s2aideuo4z)
 
+
+## Referential Transparency
+
+An expression that can be replaced with its value without changing the behavior of the program is said to be referentially transparent.
+
+Say we have function greet:
+
+```rust
+let greet = || "Hello World!";
+```
+
+Any invocation of `greet()` can be replaced with `Hello World!` hence greet is referentially transparent.
+
+
+## Lambda
+
+An anonymous function that can be treated like a value.
+
+```rust
+fn  increment(i: i32) -> i32 { i + 1 }
+
+let closure_annotated = |i: i32| { i + 1 };
+let closure_inferred = |i| i + 1;
+```
+
+Lambdas are often passed as arguments to Higher-Order functions.
+You can assign a lambda to a variable, as shown above.
+
 ## Purity
 
 A function is pure if the return value is only determined by its input values, and does not produce side effects.
