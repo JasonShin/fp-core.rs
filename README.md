@@ -1,6 +1,4 @@
-<div style="text-align:center !important">
-  <img src="https://i.imgur.com/pqQLDFz.png" width="30%" />
-</div>
+<p align="center"><img src="https://i.imgur.com/pqQLDFz.png" width="30%" /></p>
 
 # Functional Programming Jargon in Rust
 
