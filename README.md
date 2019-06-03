@@ -1,6 +1,5 @@
 <div style="text-align:center">
-<img src="https://i.imgur.com/2OD4gBI.png" />
-<figcaption>Rustacean and Category Theory for Programmers</figcaption>
+<img src="https://i.imgur.com/pqQLDFz.png" />
 </div>
 
 # Functional Programming Jargon in Rust
