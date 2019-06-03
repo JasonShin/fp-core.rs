@@ -1,5 +1,5 @@
 <div style="text-align:center">
-<img src="https://i.imgur.com/2OD4gBI.png" height="50%" />
+<img src="https://i.imgur.com/2OD4gBI.png" />
 </div>
 
 # Functional Programming Jargon in Rust
