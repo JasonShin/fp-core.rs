@@ -1,3 +1,7 @@
+<div style="text-align:center">
+<img src="https://i.imgur.com/2OD4gBI.png" height="50%" />
+</div>
+
 # Functional Programming Jargon in Rust
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result.
