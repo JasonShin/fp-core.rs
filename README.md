@@ -1,3 +1,5 @@
+<p align="center"><img src="https://i.imgur.com/pqQLDFz.png" width="30%" /></p>
+
 # Functional Programming Jargon in Rust
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result.
@@ -473,3 +475,60 @@ assert_eq!(pointed_functor, Maybe::Just(1));
 ## Equational Reasoning
 
 When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
+
+## Monoid
+
+An object with a function that "combines" that object with another of the same type.
+
+One simple monoid is the addition of numbers:
+
+```rust
+1 + 1
+// i32: 2
+```
+
+In this case number is the object and `+` is the function.
+
+An "identity" value must also exist that when combined with a value doesn't change it.
+
+The identity value for addition is `0`.
+
+```rust
+1 + 0 
+// i32: 1
+```
+
+It's also required that the grouping of operations will not affect the result (associativity):
+
+```rust
+1 + (2 + 3) == (1 + 2) + 3
+// bool: true
+```
+
+Array concatenation also forms a monoid:
+
+```rust
+[vec![1, 2, 3], vec![4, 5, 6]].concat();
+// Vec<i32>: vec![1, 2, 3, 4, 5, 6]
+```
+
+The identity value is empty array `[]`
+
+```rust
+[vec![1, 2], vec![]].concat();
+// Vec<i32>: vec![1, 2]
+```
+
+If identity and compose functions are provided, functions themselves form a monoid:
+
+```rust
+fn identity<A>(a: A) -> A {
+    return a;
+}
+```
+
+`foo` is any function that takes one argument.
+
+```rust
+compose(foo, identity) ≍ compose(identity, foo) ≍ foo
+```
