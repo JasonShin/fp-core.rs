@@ -151,7 +151,12 @@ __Further reading__
 
 ## Auto Currying
 
-to implement auto currying
+Transforming a function that takes multiple arguments into one that if given less than its
+correct number of arguments returns a function that takes the rest. When the function gets the correct number of
+arguments it is then evaluated.
+
+Although Auto Currying is not possible in Rust right now, there is a debate on this issue on the Rust forum:
+https://internals.rust-lang.org/t/auto-currying-in-rust/149/22
 
 ## Referential Transparency
 
