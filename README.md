@@ -20,11 +20,13 @@ __Table of Contents__
 * [Partial Application](#partial-application)
 * [Currying](#currying)
 * [Auto Currying](#auto-currying)
-* [Function Composition](#function-composition)
-* [Continuation](#continuation)
+* [Referential Transparency](#referential-transparency)
+* [Lambda](#lambda)
 * [Purity](#purity)
 * [Side effects](#side-effects)
 * [Idempotent](#idempotent)
+* [Function Composition](#function-composition)
+* [Continuation](#continuation)
 * [Point-Free Style](#point-free-style)
 * [Predicate](#predicate)
 * [Contracts](#contracts)
@@ -33,6 +35,10 @@ __Table of Contents__
 * [Constant](#constant)
 * [Functor](#functor)
 * [Pointed Functor](#pointed-functor)
+* [Equational Reasoning](#equational-reasoning)
+* [Monoid](#monoid)
+* [Monad](#monad)
+* [Comonad](#comonad)
 
 ## Arity
 
@@ -143,6 +149,9 @@ add5(10); // 15
 __Further reading__
 * [Currying in Rust](https://hashnode.com/post/currying-in-rust-cjpfb0i2z00cm56s2aideuo4z)
 
+## Auto Currying
+
+to implement auto currying
 
 ## Referential Transparency
 
@@ -257,8 +266,6 @@ let result = abs(abs(x));
 assert_eq!(result, x); // passes
 ```
 
-## Auto currying
-
 ## Function Composition
 
 The act of putting two functions together to form a third function where the output of one function is the input of the other.
@@ -300,6 +307,8 @@ assert_eq!(result, expected); // passes
 ```
 
 ## Continuation
+
+To implement
 
 ## Point-Free style
 
