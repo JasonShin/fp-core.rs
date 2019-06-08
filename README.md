@@ -13,6 +13,27 @@ The goal of this project includes understanding Rust's capability of programming
 __Table of Contents__
 <!-- RM(noparent,notop) -->
 
+
+* [Arity](#arity)
+* [Higher-Order Functions (HOF)](#higher-order-functions-hof)
+* [Closure](#closure)
+* [Partial Application](#partial-application)
+* [Currying](#currying)
+* [Auto Currying](#auto-currying)
+* [Function Composition](#function-composition)
+* [Continuation](#continuation)
+* [Purity](#purity)
+* [Side effects](#side-effects)
+* [Idempotent](#idempotent)
+* [Point-Free Style](#point-free-style)
+* [Predicate](#predicate)
+* [Contracts](#contracts)
+* [Category](#category)
+* [Value](#value)
+* [Constant](#constant)
+* [Functor](#functor)
+* [Pointed Functor](#pointed-functor)
+
 ## Arity
 
 The number of arguments a function takes. From words like unary, binary, ternary, etc.
@@ -584,3 +605,7 @@ Extend runs a function on the Comonad.
 ```rust
 CoIdentity(1).extend(|co: CoIdentity<i32>| co.extract() + 1); // 2
 ```
+
+## Applicative Functor
+
+
