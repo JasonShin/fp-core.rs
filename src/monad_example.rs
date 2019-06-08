@@ -1,11 +1,6 @@
-pub trait Functor<'a, A, B, F>
-    where
-        A: 'a,
-        F: Fn(&'a A) -> B {
-    type Output;
-
-    fn pure(&'a self) -> Self::Output;
-    fn
-    fn flat_map(&'a self, f: F) -> Self::Output;
-
+#[test]
+fn monad_example() {
+    // check out the Readme file.
+    // Monad is going to implemented in PureRust along with HKT, Applicative and Functor implementations
+    assert_eq!(1, 1);
 }

@@ -557,3 +557,8 @@ vec!["cat,dog", "first,bird"].map(|a| a.split(","));
 
 `pure` is also known as `return` in other functional languages. `flat_map` is also known as `bind` in other languages.
 
+## Comonad
+
+An object that has `extract` and `coflat_map` functions.
+
+
