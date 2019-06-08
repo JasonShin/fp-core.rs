@@ -17,6 +17,8 @@ mod pointed_functor_example;
 mod lambda_example;
 mod referential_transparency_example;
 mod monoid_example;
+mod monad_example;
+mod comonad_example;
 
 fn main() {
     println!("Hello, world!");

@@ -559,6 +559,28 @@ vec!["cat,dog", "first,bird"].map(|a| a.split(","));
 
 ## Comonad
 
-An object that has `extract` and `coflat_map` functions.
+An object that has `extract` and `extend` functions. 
 
+```
+trait Comonad<A, B>: Extend<A, B>
+{
+    fn extract(self) -> A;
 
+    // extend should already be provided from `Extend`
+    fn extend(self, f: F) -> HKT1<B>
+    where
+        F: Fn(Self) -> B;
+}
+```
+
+Extract takes a value out of a functor.
+
+```rust
+CoIdentity(1).extract(); // 1
+```
+
+Extend runs a function on the Comonad.
+
+```rust
+CoIdentity(1).extend(|co: CoIdentity<i32>| co.extract() + 1); // 2
+```
