@@ -532,3 +532,28 @@ fn identity<A>(a: A) -> A {
 ```rust
 compose(foo, identity) ≍ compose(identity, foo) ≍ foo
 ```
+
+## Monad
+
+A monad is a trait that implements the Monad specification including `of` and `chain`, also must implement `Applicative`
+and `Chain` specifications.
+
+Below is a Monad implementation in Rust. `Bind` is used to simulate `higher kinded types`.
+
+```rust
+trait Monad<A, F, B>: Bind<A, B> + Applicative<A, F, B>
+where
+  F: Fn(A) -> B,
+  {}
+  
+// Assuming that light-weight HKT is implemented along with Applicative and Functor.
+// Also a Monad representation of Vec should be implemented
+vec!["cat,dog", "first,bird"].flat_map(|a| a.split(","));
+// vec!["cat", "dog", "first", "bird"]
+
+vec!["cat,dog", "first,bird"].map(|a| a.split(","));
+// vec![vec!["cat", "dog"], vec!["first"," bird]]
+```
+
+`pure` is also known as `return` in other functional languages. `flat_map` is also known as `bind` in other languages.
+
