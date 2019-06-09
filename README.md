@@ -719,3 +719,14 @@ assert_eq!(
     Either::of("oreos".to_uppercase),
 ); // passes
 ```
+
+### Catamorphism
+
+A `reduceRight` function that applies a function against an accumulator and each value of the array (from right-to-left)
+to reduce it to a single value.
+
+```rust
+let sum = |xs: Vec<i32>| xs.iter().fold(0, |mut sum, &val| { sum += val; sum });
+
+assert_eq!(sum(vec![1, 2, 3, 4, 5]), 15);
+```
