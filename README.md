@@ -43,6 +43,7 @@ __Table of Contents__
 * [Applicative Functor](#applicative-functor)
 * [Morphism](#morphism)
 * [Endomorphism](#endomorphism)
+* [Isomorphism](#isomorphism)
 
 ## Arity
 
@@ -665,3 +666,35 @@ let uppercase = |x: &str| x.to_uppercase();
 // decrement :: i32 -> i32
 let decrement = |x: i32| x - 1;
 ```
+
+### Isomorphism
+
+A pair of transformations between 2 types of objects that is structural in nature and no data is lost.
+
+For example, 2D coordinates could be stored as a i32 vector [2,3] or a struct {x: 2, y: 3}.
+
+```rust
+#[derive(PartialEq, Debug)]
+struct Coords {
+    x: i32,
+    y: i32,
+}
+
+let pair_to_coords = | pair: (i32, i32) | Coords { x: pair.0, y: pair.1 };
+let coords_to_pair = | coords: Coords | (coords.x, coords.y);
+assert_eq!(
+    pair_to_coords((1, 2)),
+    Coords { x: 1, y: 2 },
+); // passes
+assert_eq!(
+    coords_to_pair(Coords { x: 1, y: 2 }),
+    (1, 2),
+); // passes
+```
+
+### Homomorphism
+
+A homomorphism is just a structure preserving map.
+In fact, a functor is just a homomorphism between categories as it preserves the original category's structure under the mapping.
+
+
