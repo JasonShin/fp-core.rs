@@ -34,6 +34,9 @@ __Table of Contents__
 * [Category](#category)
 * [Value](#value)
 * [Constant](#constant)
+* [Covariance](#covariance)
+* [Contravariance](#contravariance)
+* [Invariance](#invariance)
 * [Functor](#functor)
 * [Pointed Functor](#pointed-functor)
 * [Equational Reasoning](#equational-reasoning)
@@ -415,6 +418,18 @@ a = 3; // error!
 
 Constants are [referentially transparent](#referential-transparency).
 That is, they can be replaced with the values that they represent without affecting the result.
+
+## Covariance
+
+Fill this in
+
+## Contravariance
+
+Fill this in
+
+## Invariance
+
+Fill this in
 
 ## Functor
 
