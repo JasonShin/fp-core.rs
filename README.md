@@ -697,4 +697,10 @@ assert_eq!(
 A homomorphism is just a structure preserving map.
 In fact, a functor is just a homomorphism between categories as it preserves the original category's structure under the mapping.
 
-
+```rust
+assert_eq!(A::of(f).ap(A::of(x)), A::of(f(x))); // passes
+assert_eq!(
+    Either::of(|x: &str| x.to_uppercase(x)).ap(Either::of("oreos")),
+    Either::of("oreos".to_uppercase),
+); // passes
+```
