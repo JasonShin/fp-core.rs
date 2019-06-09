@@ -22,6 +22,7 @@ __Table of Contents__
 * [Auto Currying](#auto-currying)
 * [Referential Transparency](#referential-transparency)
 * [Lambda](#lambda)
+* [Lambda Calculus](#lambda-calculus)
 * [Purity](#purity)
 * [Side effects](#side-effects)
 * [Idempotent](#idempotent)
