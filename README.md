@@ -185,6 +185,10 @@ let closure_inferred = |i| i + 1;
 Lambdas are often passed as arguments to Higher-Order functions.
 You can assign a lambda to a variable, as shown above.
 
+## Lambda Calculus
+
+A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
+
 ## Purity
 
 A function is pure if the return value is only determined by its input values, and does not produce side effects.
@@ -506,6 +510,11 @@ let pointed_functor = Maybe::of(1);
 
 assert_eq!(pointed_functor, Maybe::Just(1));
 ```
+
+## Lift
+
+To implement
+
 
 ## Equational Reasoning
 
