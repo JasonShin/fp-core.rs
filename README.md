@@ -40,6 +40,9 @@ __Table of Contents__
 * [Monoid](#monoid)
 * [Monad](#monad)
 * [Comonad](#comonad)
+* [Applicative Functor](#applicative-functor)
+* [Morphism](#morphism)
+* [Endomorphism](#endomorphism)
 
 ## Arity
 
@@ -632,4 +635,33 @@ CoIdentity(1).extend(|co: CoIdentity<i32>| co.extract() + 1); // 2
 
 ## Applicative Functor
 
+An applicative functor is an object with an `ap` function. `ap` applies a function in the object to a value in another
+object of the same type. In short, it implements everything in `Functor`, `Apply` and `Pure`.
 
+```rust
+pub trait Applicative<A, F, B>: Functor<A, B> + Apply<A, F, B> + Pure<A>
+where
+    F: Fn(A) -> B,
+{
+}
+```
+
+```rust
+
+```
+
+## Morphism
+
+A transformation function.
+
+### Endomorphism
+
+A function where the input type is same as the output.
+
+```rust
+// uppercase :: &str -> String
+let uppercase = |x: &str| x.to_uppercase();
+
+// decrement :: i32 -> i32
+let decrement = |x: i32| x - 1;
+```

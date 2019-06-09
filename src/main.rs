@@ -19,6 +19,7 @@ mod referential_transparency_example;
 mod monoid_example;
 mod monad_example;
 mod comonad_example;
+mod endomorphism_example;
 
 fn main() {
     println!("Hello, world!");
