@@ -2,23 +2,23 @@ use itertools::unfold;
 
 #[test]
 fn anamorphism_example() {
-    let (mut x1, mut x2) = (1u32, 1u32);
-    let mut fibonacci = unfold((8), move |mut x| {
-        // Attempt to get the next Fibonacci number
-        let next = x - 1;
+    let count_down = unfold((8_u32, 1_u32), |state| {
+        let (ref mut x1, ref mut x2) = *state;
 
-        x = next;
-
-        if &next == 0 {
+        if *x1 == 0 {
+            println!("stopping!");
             return None;
         }
-        Some(next)
+
+        let next = *x1 - *x2;
+        let ret = *x1;
+        *x1 = next;
+
+        Some(ret)
     });
 
-
-    println!("{:?}", fibonacci.by_ref().take(8));
-
-    itertools::assert_equal(fibonacci.by_ref().take(8),
-                        vec![1, 1, 2, 3, 5, 8, 13, 21]);
-    assert_eq!(1, 2);
+    assert_eq!(
+        count_down.collect::<Vec<u32>>(),
+        vec![8, 7, 6, 5, 4, 3, 2, 1],
+    );
 }

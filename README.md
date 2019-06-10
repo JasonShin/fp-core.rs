@@ -735,6 +735,25 @@ assert_eq!(sum(vec![1, 2, 3, 4, 5]), 15);
 
 An `unfold` function. An `unfold` is the opposite of `fold` (`reduce`). It generates a list from a single value.
 
+```rust
+let count_down = unfold((8_u32, 1_u32), |state| {
+    let (ref mut x1, ref mut x2) = *state;
+
+    if *x1 == 0 {
+        println!("stopping!");
+        return None;
+    }
+
+    let next = *x1 - *x2;
+    let ret = *x1;
+    *x1 = next;
+
+    Some(ret)
+});
+
+
+```
+
 ## My thought on this project
 
 Please be mindful that the project does not fully cover every single definitions with code examples since it does not worth
