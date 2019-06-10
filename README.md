@@ -751,8 +751,28 @@ let count_down = unfold((8_u32, 1_u32), |state| {
     Some(ret)
 });
 
-
+assert_eq!(
+    count_down.collect::<Vec<u32>>(),
+    vec![8, 7, 6, 5, 4, 3, 2, 1],
+);
 ```
+
+### Hylomorphism
+
+The combination of anamorphism and catamorphism.
+
+## Functional Programming references
+
+- [Scala with Cats](https://underscore.io/books/scala-with-cats/)
+- [Haskell Programming](http://haskellbook.com/)
+- [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+- [Category Theory Notes](http://cheng.staff.shef.ac.uk/catnotes/categorynotes-cheng.pdf)
+
+## Functional Programming development in Rust Language
+
+- [Higher Kinded Polymorphism RFC](https://github.com/rust-lang/rfcs/issues/324)
+- [Currying in Rust](https://internals.rust-lang.org/t/currying-in-rust/10326)
+- [Auto-Currying in Rust](https://internals.rust-lang.org/t/auto-currying-in-rust/149)
 
 ## My thought on this project
 
