@@ -6,7 +6,6 @@ fn anamorphism_example() {
         let (ref mut x1, ref mut x2) = *state;
 
         if *x1 == 0 {
-            println!("stopping!");
             return None;
         }
 
