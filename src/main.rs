@@ -22,6 +22,7 @@ mod comonad_example;
 mod endomorphism_example;
 mod isomorphism_example;
 mod catamorphism_example;
+mod anamorphism_example;
 
 fn main() {
     println!("Hello, world!");

@@ -6,9 +6,8 @@ Functional programming (FP) provides many advantages, and its popularity has bee
 However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary,
 we hope to make learning FP easier.
 
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
-
-The goal of this project includes understanding Rust's capability of programming in functional paradigm.
+Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land) 
+and Rust programming language to give code examples 
 
 __Table of Contents__
 <!-- RM(noparent,notop) -->
@@ -47,6 +46,7 @@ __Table of Contents__
 * [Morphism](#morphism)
 * [Endomorphism](#endomorphism)
 * [Isomorphism](#isomorphism)
+* [My thought on this project]()
 
 ## Arity
 
@@ -730,3 +730,13 @@ let sum = |xs: Vec<i32>| xs.iter().fold(0, |mut sum, &val| { sum += val; sum });
 
 assert_eq!(sum(vec![1, 2, 3, 4, 5]), 15);
 ```
+
+### Anamorphism
+
+An `unfold` function. An `unfold` is the opposite of `fold` (`reduce`). It generates a list from a single value.
+
+## My thought on this project
+
+Please be mindful that the project does not fully cover every single definitions with code examples since it does not worth
+investing too much time in a glossary project. I have put extra effort in adding complementary external references that 
+you can check out for further study.
