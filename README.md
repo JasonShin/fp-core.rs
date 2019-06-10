@@ -46,7 +46,14 @@ __Table of Contents__
 * [Morphism](#morphism)
 * [Endomorphism](#endomorphism)
 * [Isomorphism](#isomorphism)
-* [My thought on this project]()
+* [Homomorphism](#homomorphism)
+* [Catamorphism](#catamorphism)
+* [Hylomorphism](#hylomorphism)
+* [Paramophism](#paramorphism)
+* [Anamorphism](#anamorphism)
+* [Functional Programming References](#functional-programming-references)
+* [Function Programming development in Rust Language](#functional-programming-development-in-rust-language)
+* [My thought on this project](#my-thought-on-this-project)
 
 ## Arity
 
@@ -760,6 +767,15 @@ assert_eq!(
 ### Hylomorphism
 
 The combination of anamorphism and catamorphism.
+
+### Paramorphism
+
+Fill this in
+
+### Apomorphism
+it's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism.
+Whereas with paramorphism, you combine with access to the accumulator and what has been accumulated,
+apomorphism lets you unfold with the potential to return early.
 
 ## Functional Programming references
 
