@@ -773,9 +773,13 @@ The combination of anamorphism and catamorphism.
 Fill this in
 
 ### Apomorphism
-it's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism.
+It's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism.
 Whereas with paramorphism, you combine with access to the accumulator and what has been accumulated,
 apomorphism lets you unfold with the potential to return early.
+
+## Setoid
+
+
 
 ## Functional Programming references
 
