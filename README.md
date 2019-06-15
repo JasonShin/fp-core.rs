@@ -782,6 +782,12 @@ apomorphism lets you unfold with the potential to return early.
 
 An object that has an `equals` function which can be used to compare other objects of the same type.
 
+It must obey following rules to be `Setoid`
+
+1. `a.equals(a) == true` (reflexivity)
+2. `a.equals(b) == b.equals(a)` (symmetry)
+3. `a.equals(b)` and `b.equals(c)` then `a.equals(c)` (transitivity)
+
 Make a Vector a setoid:
 
 ```rust
