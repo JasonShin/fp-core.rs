@@ -779,7 +779,23 @@ apomorphism lets you unfold with the potential to return early.
 
 ## Setoid
 
+An object that has an `equals` function which can be used to compare other objects of the same type.
 
+Make a Vector a setoid:
+
+```rust
+trait Setoid<A> {
+    fn equals(&self, other: &Self) -> bool;
+}
+
+impl<A> Setoid<A> for Vec<A> {
+    fn equals(&self, other: &Self) -> bool {
+        return self.len() == other.len();
+    }
+}
+
+assert_eq!(vec![1, 2].equals(&vec![1, 2]), true); // passes
+```
 
 ## Functional Programming references
 
