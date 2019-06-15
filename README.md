@@ -790,12 +790,14 @@ It must obey following rules to be `Setoid`
 
 Make a Vector a setoid:
 
+Note that I am treating `Self` / `self` like `a`.
+
 ```rust
-trait Setoid<A> {
+trait Setoid {
     fn equals(&self, other: &Self) -> bool;
 }
 
-impl<A> Setoid<A> for Vec<A> {
+impl Setoid for Vec<i32> {
     fn equals(&self, other: &Self) -> bool {
         return self.len() == other.len();
     }
@@ -803,6 +805,10 @@ impl<A> Setoid<A> for Vec<A> {
 
 assert_eq!(vec![1, 2].equals(&vec![1, 2]), true); // passes
 ```
+
+## Semigroup
+
+
 
 ## Functional Programming references
 

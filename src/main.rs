@@ -24,6 +24,7 @@ mod isomorphism_example;
 mod catamorphism_example;
 mod anamorphism_example;
 mod setoid_example;
+mod semigroup_example;
 
 fn main() {
     println!("Hello, world!");
