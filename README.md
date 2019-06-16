@@ -54,6 +54,7 @@ __Table of Contents__
 * [Paramophism](#paramorphism)
 * [Anamorphism](#anamorphism)
 * [Setoid](#setoid)
+* [Semigroup](#semigroup)
 * [Functional Programming References](#functional-programming-references)
 * [Function Programming development in Rust Language](#functional-programming-development-in-rust-language)
 * [My thought on this project](#my-thought-on-this-project)
@@ -812,7 +813,33 @@ assert_eq!(vec![1, 2].equals(&vec![1, 2]), true); // passes
 
 An object that has a `combine` function that combines it with another object of the same type.
 
+It must obey following rules to be `Semigroup`
 
+1. `a.combine(b).combine(c)` is equivalent to `a.combine(b.combine(c))` (associativity)
+
+```rust
+use itertools::concat;
+
+trait Semigroup {
+    fn combine(&self, b: &Self) -> Self;
+}
+
+impl Semigroup for Vec<i32> {
+    fn combine(&self, b: &Self) -> Vec<i32> {
+        return concat(vec![self.clone(), b.clone()]);
+    }
+}
+
+assert_eq!(
+    vec![1, 2].combine(&vec![3, 4]),
+    vec![1, 2, 3, 4],
+); // passes
+
+assert_eq!(
+    a.combine(&b).combine(&c),
+    a.combine(&b.combine(&c)),
+); // passes
+```
 
 ## Functional Programming references
 
