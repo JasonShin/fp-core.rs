@@ -808,6 +808,8 @@ assert_eq!(vec![1, 2].equals(&vec![1, 2]), true); // passes
 
 ## Semigroup
 
+An object that has a `combine` function that combines it with another object of the same type.
+
 
 
 ## Functional Programming references
