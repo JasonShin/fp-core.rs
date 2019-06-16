@@ -35,9 +35,10 @@ __Table of Contents__
 * [Category](#category)
 * [Value](#value)
 * [Constant](#constant)
-* [Covariance](#covariance)
-* [Contravariance](#contravariance)
-* [Invariance](#invariance)
+* [Variance](#variance)
+  * [Covariance](#covariance)
+  * [Contravariance](#contravariance)
+  * [Invariance](#invariance)
 * [Functor](#functor)
 * [Pointed Functor](#pointed-functor)
 * [Equational Reasoning](#equational-reasoning)
@@ -46,13 +47,13 @@ __Table of Contents__
 * [Comonad](#comonad)
 * [Applicative Functor](#applicative-functor)
 * [Morphism](#morphism)
-* [Endomorphism](#endomorphism)
-* [Isomorphism](#isomorphism)
-* [Homomorphism](#homomorphism)
-* [Catamorphism](#catamorphism)
-* [Hylomorphism](#hylomorphism)
-* [Paramophism](#paramorphism)
-* [Anamorphism](#anamorphism)
+  * [Endomorphism](#endomorphism)
+  * [Isomorphism](#isomorphism)
+  * [Homomorphism](#homomorphism)
+  * [Catamorphism](#catamorphism)
+  * [Hylomorphism](#hylomorphism)
+  * [Paramophism](#paramorphism)
+  * [Anamorphism](#anamorphism)
 * [Setoid](#setoid)
 * [Semigroup](#semigroup)
 * [Functional Programming References](#functional-programming-references)
@@ -430,15 +431,17 @@ a = 3; // error!
 Constants are [referentially transparent](#referential-transparency).
 That is, they can be replaced with the values that they represent without affecting the result.
 
-## Covariance
+## Variance
+
+### Covariance
 
 Fill this in
 
-## Contravariance
+### Contravariance
 
 Fill this in
 
-## Invariance
+### Invariance
 
 Fill this in
 
@@ -840,6 +843,10 @@ assert_eq!(
     a.combine(&b.combine(&c)),
 ); // passes
 ```
+
+## Foldable
+
+An object that has a `foldr/l` function that can transform that object into some other type.
 
 ## Functional Programming references
 
