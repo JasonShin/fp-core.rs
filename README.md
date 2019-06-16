@@ -1,5 +1,7 @@
 <p align="center"><img src="https://i.imgur.com/pqQLDFz.png" width="30%" /></p>
 
+[![Build Status](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_apis/build/status/JasonShin.functional-programming-jargon.rs?branchName=master)](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_build/latest?definitionId=3&branchName=master)
+
 # Functional Programming Jargon in Rust
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result.
