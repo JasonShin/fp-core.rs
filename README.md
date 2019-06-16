@@ -60,6 +60,7 @@ __Table of Contents__
   * [Anamorphism](#anamorphism)
 * [Setoid](#setoid)
 * [Semigroup](#semigroup)
+* [Foldable](#foldable)
 * [Functional Programming References](#functional-programming-references)
 * [Function Programming development in Rust Language](#functional-programming-development-in-rust-language)
 * [My thought on this project](#my-thought-on-this-project)
