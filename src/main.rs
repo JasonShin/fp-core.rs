@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate partial_application;
+extern crate rats;
 
 mod arity_example;
 mod hof_example;
@@ -25,6 +26,7 @@ mod catamorphism_example;
 mod anamorphism_example;
 mod setoid_example;
 mod semigroup_example;
+mod foldable_example;
 
 fn main() {
     println!("Hello, world!");
