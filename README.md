@@ -9,7 +9,10 @@ However, each programming paradigm comes with its own unique jargon and FP is no
 we hope to make learning FP easier.
 
 Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land) 
-and Rust programming language to give code examples 
+and Rust programming language to give code examples.
+
+Also please be mindful that the project sometimes utilise FP related crates that are unfinished but contains
+a specific typeclass or data type that is appropriate to give an explanation.
 
 __Table of Contents__
 <!-- RM(noparent,notop) -->
