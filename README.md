@@ -868,6 +868,12 @@ let result = VecKind::fold_right(k, 0, | (i, acc) | i + acc);
 assert_eq!(result, 6);
 ```
 
+## Lens
+
+A lens is a type that pairs a getter and a non-mutating setter for some other data structure.
+
+
+
 ## Functional Programming references
 
 - [Scala with Cats](https://underscore.io/books/scala-with-cats/)
