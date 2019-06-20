@@ -27,6 +27,7 @@ mod anamorphism_example;
 mod setoid_example;
 mod semigroup_example;
 mod foldable_example;
+mod lens_example;
 
 fn main() {
     println!("Hello, world!");
