@@ -11,7 +11,7 @@ struct Street {
     name: String,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, PartialEq, Clone)]
 struct Address {
     city: String,
     street: Street
@@ -40,11 +40,8 @@ fn lens_example() {
         name: "Cooper".to_string(),
     };
     let a1 = Address {
-        city: "seoul".to_string(),
-        street: e1,
+        city: "Seoul".to_string(),
+        street: e1.clone(),
     };
-    AddressLens::get(a1);
-
-    assert_eq!(AddressLens::get(a1.clone()), e1.clone());
-    assert_eq!(1, 1);
+    assert_eq!(AddressLens::get(a1), e1);
 }
