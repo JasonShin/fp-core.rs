@@ -881,36 +881,41 @@ trait Lens<S, A> {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-struct Street {
-    num: i32,
+struct Person {
     name: String,
 }
 
-#[derive(Debug, PartialEq, Clone)]
-struct Address {
-    city: String,
-    street: Street
-}
 #[derive(Debug)]
-struct AddressLens;
+struct PersonNameLens;
 
-impl Lens<Address, Street> for AddressLens {
-    fn get(s: Address) -> Street {
-        return s.street;
+impl Lens<Person, String> for PersonNameLens {
+    fn get(s: Person) -> String {
+        return s.name;
     }
 
-    fn set(a: Street, s: Address) -> Address {
-       return Address {
-           city: s.city,
-           street: a,
-       }
+    fn set(a: String, s: Person) -> Person {
+        return Person {
+            name: a,
+        }
     }
 }
 ```
 
 Having the pair of get and set for a given data structure enables a few key features.
 
+```rust
+let e1 = Person {
+    name: "Jason".to_string(),
+};
 
+let name = PersonNameLens::get(e1.clone());
+let e2 = PersonNameLens::set("John".to_string(), e1.clone());
+let expected = Person {
+    name: "John".to_string()
+};
+assert_eq!(name, e1.name);
+assert_eq!(e2, expected);
+```
 
 
 ## Functional Programming references

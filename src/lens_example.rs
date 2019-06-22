@@ -30,5 +30,10 @@ fn lens_example() {
     };
 
     let name = PersonNameLens::get(e1.clone());
+    let e2 = PersonNameLens::set("John".to_string(), e1.clone());
+    let expected = Person {
+        name: "John".to_string()
+    };
     assert_eq!(name, e1.name);
+    assert_eq!(e2, expected);
 }
