@@ -872,6 +872,45 @@ assert_eq!(result, 6);
 
 A lens is a type that pairs a getter and a non-mutating setter for some other data structure.
 
+First, define `Lens` and required structs `Street` and `Address`
+
+```rust
+trait Lens<S, A> {
+    fn get(s: S) -> A;
+    fn set(a: A, s: S) -> S;
+}
+
+#[derive(Debug, PartialEq, Clone)]
+struct Street {
+    num: i32,
+    name: String,
+}
+
+#[derive(Debug, PartialEq, Clone)]
+struct Address {
+    city: String,
+    street: Street
+}
+#[derive(Debug)]
+struct AddressLens;
+
+impl Lens<Address, Street> for AddressLens {
+    fn get(s: Address) -> Street {
+        return s.street;
+    }
+
+    fn set(a: Street, s: Address) -> Address {
+       return Address {
+           city: s.city,
+           street: a,
+       }
+    }
+}
+```
+
+Having the pair of get and set for a given data structure enables a few key features.
+
+
 
 
 ## Functional Programming references
