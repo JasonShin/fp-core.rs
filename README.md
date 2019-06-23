@@ -951,6 +951,31 @@ Lens::over(composeL!(FirstLens, NameLens), &|x: Option<&String>| {
 }, people); // vec![Person { name: "JASON" }, Person { name: "John" }];
 ```
 
+## Type Signature
+
+Every function in Rust will indicate the types of their arguments and return values.
+
+```rust
+// add :: i32 -> i32 -> i32
+fn add(x: i32) -> impl Fn(i32)-> i32 {
+    return move |y| x + y;
+}
+
+// increment :: i32 -> i32
+fn increment(x: i32) -> i32 {
+    return x + 1;
+}
+```
+
+If a function accepts another function as an argument it is wrapped in parentheses.
+
+```rust
+// call :: (a -> b) -> a -> b
+fn call<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
+    return move |x| f(x);
+}
+```
+
 **References**
 
 - https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial

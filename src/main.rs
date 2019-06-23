@@ -28,6 +28,7 @@ mod setoid_example;
 mod semigroup_example;
 mod foldable_example;
 mod lens_example;
+mod type_signature_example;
 
 fn main() {
     println!("Hello, world!");
