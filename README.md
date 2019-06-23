@@ -1001,11 +1001,32 @@ fn map<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
 
 ## Algebraic data type
 
+A composite type made from putting other types together. Two common classes of algebraic types are [sum](#sum-type) and [product](#product-type).
+
+### Sum Type
+
+A Sum type is the combination of two types together into another one.
+It is called sum because the number of possible values in the result type is the sum of the input types.
+
+Rust has `enum` that literally represent `sum` in ADT.
+
+```rust
+enum WeakLogicValues {
+   True(bool),
+   False(bool),
+   HalfTrue(bool),
+}
+// WeakLogicValues = bool + otherbool + anotherbool
+```
+
+### Product Type
+
 
 
 **Further Reading**
 
 - [ADT in 4 different languages](https://blog.softwaremill.com/algebraic-data-types-in-four-languages-858788043d4e)
+- [What are Sum Product and Pi Types](https://manishearth.github.io/blog/2017/03/04/what-are-sum-product-and-pi-types/)
 
 ## Functional Programming references
 
