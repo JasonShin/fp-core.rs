@@ -1021,7 +1021,20 @@ enum WeakLogicValues {
 
 ### Product Type
 
+A product type combines types together in a way you're probably more familiar with:
 
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
+// Point = i32 x i32
+```
+
+It's called a product because the total possible values of the data structure is the product of the different values.
+Many languages have a tuple type which is the simplest formulation of a product type.
+
+See also [Set Theory](https://en.wikipedia.org/wiki/Set_theory)
 
 **Further Reading**
 

@@ -6,4 +6,9 @@ fn adt_example() {
        HalfTrue(bool),
     }
     // WeakLogicValues = bool + otherbool + anotherbool
+
+    struct Point {
+        x: i32,
+        y: i32,
+    }
 }
