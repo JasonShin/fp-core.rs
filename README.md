@@ -873,51 +873,28 @@ assert_eq!(result, 6);
 
 A lens is a type that pairs a getter and a non-mutating setter for some other data structure.
 
-First, define `Lens` and required structs `Street` and `Address`
-
 ```rust
-trait Lens<S, A> {
-    fn get(s: S) -> A;
-    fn set(a: A, s: S) -> S;
-}
+use monocle;
 
-#[derive(Debug, PartialEq, Clone)]
 struct Person {
-    name: String,
+    name: String
 }
 
-#[derive(Debug)]
-struct PersonNameLens;
+let nameLens = Lens<Person>::prop(|y| y.name)
 
-impl Lens<Person, String> for PersonNameLens {
-    fn get(s: Person) -> String {
-        return s.name;
-    }
-
-    fn set(a: String, s: Person) -> Person {
-        return Person {
-            name: a,
-        }
-    }
-}
 ```
 
 Having the pair of get and set for a given data structure enables a few key features.
 
 ```rust
-let e1 = Person {
-    name: "Jason".to_string(),
+let p = Person {
+    name: "jason"
 };
 
-let name = PersonNameLens::get(e1.clone());
-let e2 = PersonNameLens::set("John".to_string(), e1.clone());
-let expected = Person {
-    name: "John".to_string()
-};
-assert_eq!(name, e1.name);
-assert_eq!(e2, expected);
+Lens::view(nameLens, &p); // Jason
+Lens::set(nameLens, "john", p.clone()); // Person { name: "john" }
+Lens::over(nameLens, |y| y.to_uppercase(), &p); // Person { name: "JASON" }
 ```
-
 
 ## Functional Programming references
 
