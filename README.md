@@ -951,6 +951,11 @@ Lens::over(composeL!(FirstLens, NameLens), &|x: Option<&String>| {
 }, people); // vec![Person { name: "JASON" }, Person { name: "John" }];
 ```
 
+**Further Reading**
+
+- [A Little Lens Starter](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial)
+- [Monocle Scala](https://scalac.io/scala-optics-lenses-with-monocle/)
+
 ## Type Signature
 
 Every function in Rust will indicate the types of their arguments and return values.
@@ -987,10 +992,10 @@ fn map<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
 }
 ```
 
-**References**
+**Further Reading**
 
-- https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial
-- https://scalac.io/scala-optics-lenses-with-monocle/
+- [Mostly Adequate Guide](https://drboolean.gitbooks.io/mostly-adequate-guide-old/content/ch7.html#tales-from-the-cryptic)
+- [What is Hindley-Milner?](https://stackoverflow.com/questions/399312/what-is-hindley-milner/399392#399392)
 
 ## Functional Programming references
 
