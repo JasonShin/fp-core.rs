@@ -64,6 +64,9 @@ __Table of Contents__
 * [Lens](#lens)
 * [Type Signature](#type-signature)
 * [Algebraic data type](#algebraic-data-type)
+  * [Sum Type](#sum-type)
+  * [Product Type](#product-type)
+* [Option](#option)
 * [Functional Programming References](#functional-programming-references)
 * [Function Programming development in Rust Language](#functional-programming-development-in-rust-language)
 * [My thought on this project](#my-thought-on-this-project)
@@ -1040,6 +1043,14 @@ See also [Set Theory](https://en.wikipedia.org/wiki/Set_theory)
 
 - [ADT in 4 different languages](https://blog.softwaremill.com/algebraic-data-types-in-four-languages-858788043d4e)
 - [What are Sum Product and Pi Types](https://manishearth.github.io/blog/2017/03/04/what-are-sum-product-and-pi-types/)
+
+## Option
+
+Option is a [sum type](#sum-type) with two cases often called Some and None.
+
+Option is useful for composing functions that might not return a value.
+
+
 
 ## Functional Programming references
 
