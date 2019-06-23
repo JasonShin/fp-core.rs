@@ -875,24 +875,25 @@ A lens is a type that pairs a getter and a non-mutating setter for some other da
 
 ```rust
 trait Lens<S, A> {
-    fn over(s: &S, f: &Fn(A) -> A) -> S {
+    fn over(s: &S, f: &Fn(Option<&A>) -> A) -> S {
         let result: A = f(Self::get(s));
         return Self::set(result, &s);
     }
-    fn get(s: &S) -> A;
+    fn get(s: &S) -> Option<&A>;
     fn set(a: A, s: &S) -> S;
 }
 
+#[derive(Debug, PartialEq, Clone)]
 struct Person {
-    name: String
+    name: String,
 }
 
 #[derive(Debug)]
 struct PersonNameLens;
 
 impl Lens<Person, String> for PersonNameLens {
-    fn get(s: &Person) -> String {
-        return s.name.to_string();
+    fn get(s: &Person) -> Option<&String> {
+        return Some(&s.name);
     }
 
     fn set(a: String, s: &Person) -> Person {
@@ -909,15 +910,19 @@ Having the pair of get and set for a given data structure enables a few key feat
 let e1 = Person {
     name: "Jason".to_string(),
 };
-
 let name = PersonNameLens::get(&e1);
 let e2 = PersonNameLens::set("John".to_string(), &e1);
 let expected = Person {
     name: "John".to_string()
 };
+let e3 = PersonNameLens::over(&e1, &|x: Option<&String>| {
+    match x {
+        Some(y) => y.to_uppercase(),
+        None => panic!("T_T") // lol...
+    }
+});
 
-let e3 = PersonNameLens::over(&e1, &|x: String| x.to_uppercase());
-assert_eq!(name, e1.name); // passes
+assert_eq!(*name.unwrap(), e1.name); // passes
 assert_eq!(e2, expected); // passes
 assert_eq!(e3, Person { name: "JASON".to_string() }); // passes
 ```
