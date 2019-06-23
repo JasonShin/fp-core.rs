@@ -56,7 +56,11 @@ fn lens_example() {
         }
     });
 
+    let rando = vec![1, 2];
+    let e4 = FirstLens::get(&rando);
+
     assert_eq!(*name.unwrap(), e1.name);
     assert_eq!(e2, expected);
     assert_eq!(e3, Person { name: "JASON".to_string() });
+    assert_eq!(*e4.unwrap(), 1);
 }
