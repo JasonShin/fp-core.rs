@@ -1,4 +1,4 @@
-trait Lens<S,    A> {
+trait Lens<S, A> {
     fn over(s: &S, f: &Fn(A) -> A) -> S {
         let result: A = f(Self::get(s));
         return Self::set(result, &s);
