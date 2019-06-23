@@ -873,6 +873,8 @@ assert_eq!(result, 6);
 
 A lens is a type that pairs a getter and a non-mutating setter for some other data structure.
 
+Please note that we are using an imaginary Crate called `monocle` for the examples.
+
 ```rust
 use monocle;
 
@@ -881,7 +883,6 @@ struct Person {
 }
 
 let nameLens = Lens<Person>::prop(|y| y.name)
-
 ```
 
 Having the pair of get and set for a given data structure enables a few key features.
@@ -891,10 +892,20 @@ let p = Person {
     name: "jason"
 };
 
+// Invoke getter
 Lens::view(nameLens, &p); // Jason
+
+// Invoke setter
 Lens::set(nameLens, "john", p.clone()); // Person { name: "john" }
+
+// Invoke modifier
 Lens::over(nameLens, |y| y.to_uppercase(), &p); // Person { name: "JASON" }
 ```
+
+**References**
+
+- https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial
+- https://scalac.io/scala-optics-lenses-with-monocle/
 
 ## Functional Programming references
 
