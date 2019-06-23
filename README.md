@@ -62,6 +62,8 @@ __Table of Contents__
 * [Semigroup](#semigroup)
 * [Foldable](#foldable)
 * [Lens](#lens)
+* [Type Signature](#type-signature)
+* [Algebraic data type](#algebraic-data-type)
 * [Functional Programming References](#functional-programming-references)
 * [Function Programming development in Rust Language](#functional-programming-development-in-rust-language)
 * [My thought on this project](#my-thought-on-this-project)
@@ -996,6 +998,9 @@ fn map<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
 
 - [Mostly Adequate Guide](https://drboolean.gitbooks.io/mostly-adequate-guide-old/content/ch7.html#tales-from-the-cryptic)
 - [What is Hindley-Milner?](https://stackoverflow.com/questions/399312/what-is-hindley-milner/399392#399392)
+
+## Algebraic data type
+
 
 ## Functional Programming references
 
