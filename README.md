@@ -873,8 +873,6 @@ assert_eq!(result, 6);
 
 A lens is a type that pairs a getter and a non-mutating setter for some other data structure.
 
-Please note that we are using an imaginary Crate called `monocle` for the examples.
-
 ```rust
 trait Lens<S, A> {
     fn over(s: &S, f: &Fn(A) -> A) -> S {
@@ -919,10 +917,12 @@ let expected = Person {
 };
 
 let e3 = PersonNameLens::over(&e1, &|x: String| x.to_uppercase());
-assert_eq!(name, e1.name);
-assert_eq!(e2, expected);
-assert_eq!(e3, Person { name: "JASON".to_string() });
+assert_eq!(name, e1.name); // passes
+assert_eq!(e2, expected); // passes
+assert_eq!(e3, Person { name: "JASON".to_string() }); // passes
 ```
+
+Lenses are also composable. This allows easy immutable updates to deeply nested data.
 
 **References**
 
