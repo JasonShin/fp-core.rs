@@ -1002,6 +1002,11 @@ fn map<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
 ## Algebraic data type
 
 
+
+**Further Reading**
+
+- [ADT in 4 different languages](https://blog.softwaremill.com/algebraic-data-types-in-four-languages-858788043d4e)
+
 ## Functional Programming references
 
 - [Scala with Cats](https://underscore.io/books/scala-with-cats/)
