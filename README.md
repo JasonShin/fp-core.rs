@@ -976,6 +976,17 @@ fn call<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
 }
 ```
 
+The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type.
+The following version of map takes `a` function that transforms `a` value of some type `a` into another type `b`,
+an array of values of type `a`, and returns an array of values of type `b`.
+
+```rust
+// map :: (a -> b) -> [a] -> [b]
+fn map<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
+    return move |x| f(x);
+}
+```
+
 **References**
 
 - https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial
