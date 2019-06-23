@@ -55,7 +55,6 @@ fn lens_example() {
             None => panic!("T_T")
         }
     });
-
     let rando = vec![1, 2];
     let e4 = FirstLens::get(&rando);
 

@@ -929,6 +929,28 @@ assert_eq!(e3, Person { name: "JASON".to_string() }); // passes
 
 Lenses are also composable. This allows easy immutable updates to deeply nested data.
 
+```rust
+struct FirstLens;
+
+impl<A> Lens<Vec<A>, A> for FirstLens {
+  fn get(s: &Vec<A>) -> Option<&A> {
+     return s.first();
+  }
+
+  fn set(a: A, s: &Vec<A>) -> Vec<A> {
+      unimplemented!();
+  }
+}
+
+let people = vec![Person { name: "Jason" }, Person { name: "John" }];
+Lens::over(composeL!(FirstLens, NameLens), &|x: Option<&String>| {
+  match x {
+      Some(y) => y.to_uppercase(),
+      None => panic!("T_T")
+  }
+}, people); // vec![Person { name: "JASON" }, Person { name: "John" }];
+```
+
 **References**
 
 - https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial
