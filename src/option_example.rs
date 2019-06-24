@@ -25,5 +25,10 @@ fn option_example() {
         return get_item(cart).and_then(get_price);
     }
 
-    assert_eq!(get_nested_price(&cart).unwrap(), &12);
+    let price = get_nested_price(&cart);
+
+    match price {
+        Some(v) => assert_eq!(v, &12),
+        None => panic!("T_T"),
+    }
 }
