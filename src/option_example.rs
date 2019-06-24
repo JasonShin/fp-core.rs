@@ -13,15 +13,17 @@ fn option_example() {
         item,
     );
 
-    fn get_item<'a>(cart: HashMap<String, HashMap<String, i32>>) -> Option<&'a HashMap<String, i32>> {
+    fn get_item(cart: &HashMap<String, HashMap<String, i32>>) -> Option<&HashMap<String, i32>> {
         return cart.get("item");
     }
 
-    fn get_price<'a>(item: &HashMap<String, i32>) -> Option<&'a i32> {
+    fn get_price(item: &HashMap<String, i32>) -> Option<&i32> {
         return item.get("price");
     }
 
-    fn get_nested_price<'a>(cart: HashMap<String, HashMap<String, i32>>) -> Option<Option<&'a i32>> {
-        return get_item(cart).map(get_price);
+    fn get_nested_price(cart: &HashMap<String, HashMap<String, i32>>) -> Option<&i32> {
+        return get_item(cart).and_then(get_price);
     }
+
+    assert_eq!(get_nested_price(&cart).unwrap(), &12);
 }
