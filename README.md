@@ -1070,6 +1070,11 @@ fn get_price(item: &HashMap<String, i32>) -> Option<&i32> {
     return item.get("price");
 }
 
+```
+
+Use [and_then](https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then) or [map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map) to sequence functions that return Options
+
+```rust
 fn get_nested_price(cart: &HashMap<String, HashMap<String, i32>>) -> Option<&i32> {
     return get_item(cart).and_then(get_price);
 }
@@ -1081,6 +1086,8 @@ match price {
     None => panic!("T_T"),
 }
 ```
+
+`Option` is also known as `Maybe`. `Some` is sometimes called `Just`. `None` is sometimes called `Nothing`.
 
 ## Functional Programming references
 
