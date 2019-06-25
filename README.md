@@ -40,9 +40,6 @@ __Table of Contents__
 * [Value](#value)
 * [Constant](#constant)
 * [Variance](#variance)
-  * [Covariance](#covariance)
-  * [Contravariance](#contravariance)
-  * [Invariance](#invariance)
 * [Functor](#functor)
 * [Pointed Functor](#pointed-functor)
 * [Equational Reasoning](#equational-reasoning)
@@ -444,17 +441,12 @@ That is, they can be replaced with the values that they represent without affect
 
 ## Variance
 
-### Covariance
+Variance in Rust is used during the type checking against type and lifetime parameters. More details
 
-Fill this in
+**Further Reading**
 
-### Contravariance
-
-Fill this in
-
-### Invariance
-
-Fill this in
+- https://github.com/rust-lang/rustc-guide/blob/master/src/variance.md
+- https://nearprotocol.com/blog/understanding-rust-lifetimes/
 
 ## Functor
 
