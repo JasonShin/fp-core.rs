@@ -441,7 +441,16 @@ That is, they can be replaced with the values that they represent without affect
 
 ## Variance
 
-Variance in Rust is used during the type checking against type and lifetime parameters. More details
+Variance in functional programming refers to subtyping between more complex types related to subtyping between
+their components.
+
+Unlike other usage of variance in [Object Oriented Programming like Typescript or C#](https://medium.com/@michalskoczylas/covariance-contravariance-and-a-little-bit-of-typescript-2e61f41f6f68)
+or [functional programming language like Scala or Haskell](https://medium.com/@wiemzin/variances-in-scala-9c7d17af9dc4)
+
+Variance in Rust is used during the type checking against type and lifetime parameters. Here are examples:
+- By default, all lifetimes are co-variant except for `'static` because it outlives all others
+- `'static` is always contra-variant to others regardless of where it appears or used
+- It is `in-variant` if you use `Cell<T>` or `UnsafeCell<T>` in `PhatomData`
 
 **Further Reading**
 
