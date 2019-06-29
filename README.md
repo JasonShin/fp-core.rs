@@ -40,6 +40,7 @@ __Table of Contents__
 * [Value](#value)
 * [Constant](#constant)
 * [Variance](#variance)
+* [Higher Kinded Type](#higher-kinded-type-hkt)
 * [Functor](#functor)
 * [Pointed Functor](#pointed-functor)
 * [Equational Reasoning](#equational-reasoning)
@@ -456,6 +457,35 @@ Variance in Rust is used during the type checking against type and lifetime para
 
 - https://github.com/rust-lang/rustc-guide/blob/master/src/variance.md
 - https://nearprotocol.com/blog/understanding-rust-lifetimes/
+
+## Higher Kinded Type (HKT)
+
+Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a 
+type with a "hole" in it, so you can declare a type signature such as `trait Functor<F<A>>`.
+
+Although Rust lacks in a native support for HKT, we always have a walk around called [Lightweight Higher Kinded Type](https://www.cl.cam.ac.uk/~jdy22/papers/lightweight-higher-kinded-polymorphism.pdf)
+
+An implementation above above theory in Rust look like below:
+
+```rust
+pub trait HKT<A, B> {
+    type URI;
+    type Target;
+}
+
+// Lifted Option
+impl<A, B> HKT<A, B> for Option<A> {
+    type URI = Self;
+    type Target = Option<B>;
+}
+```
+
+Higher Kinded Type is crucial for functional programming in general.
+
+**Further Reading**
+
+- https://gist.github.com/CMCDragonkai/a5638f50c87d49f815b8
+- https://www.youtube.com/watch?v=ERM0mBPNLHc
 
 ## Functor
 

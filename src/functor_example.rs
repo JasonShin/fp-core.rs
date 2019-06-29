@@ -3,7 +3,7 @@ pub trait HKT<A, B> {
     type Target;
 }
 
-pub trait Functor2<A, B>: HKT<A, B> {
+pub trait Functor<A, B>: HKT<A, B> {
     fn fmap(self, f: fn(A) -> B) -> <Self as HKT<A, B>>::Target;
 }
 
@@ -12,14 +12,14 @@ impl<A, B> HKT<A, B> for Option<A> {
     type Target = Option<B>;
 }
 
-impl<A, B> Functor2<A, B> for Option<A> {
+impl<A, B> Functor<A, B> for Option<A> {
     fn fmap(self, f: fn(A) -> B) -> Self::Target {
         self.map(f)
     }
 }
 
 #[test]
-fn test_functor2() {
+fn test_functor() {
     let  z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
     assert_eq!(z.unwrap(), 3);
 }
