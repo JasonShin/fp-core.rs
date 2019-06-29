@@ -1,3 +1,31 @@
+pub trait HKT<A, B> {
+    type URI;
+    type Target;
+}
+
+pub trait Functor2<A, B>: HKT<A, B> {
+    fn fmap(self, f: fn(A) -> B) -> <Self as HKT<A, B>>::Target;
+}
+
+impl<A, B> HKT<A, B> for Option<A> {
+    type URI = Self;
+    type Target = Option<B>;
+}
+
+impl<A, B> Functor2<A, B> for Option<A> {
+    fn fmap(self, f: fn(A) -> B) -> Self::Target {
+        self.map(f)
+    }
+}
+
+#[test]
+fn test_functor2() {
+    let  z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
+    assert_eq!(z.unwrap(), 3);
+}
+
+/*
+// Below is an old implementation
 #[derive(Debug, PartialEq, Eq)]
 pub enum Maybe<T> {
     Nothing,
@@ -41,3 +69,4 @@ fn functor_example_2() {
     assert_eq!(nothing, Maybe::Nothing);
     assert_eq!(other, Maybe::Just(8));
 }
+*/
