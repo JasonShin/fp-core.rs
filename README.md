@@ -519,7 +519,8 @@ While leveraging the [HKT implementation](#higher-kinded-type-hkt), You can defi
 
 ```rust
 pub trait Functor<A, B>: HKT<A, B> {
-    fn fmap(self, f: fn(A) -> B) -> <Self as HKT<A, B>>::Target;
+    fn fmap<F>(self, f: F) -> <Self as HKT<A, B>>::Target
+        where F: FnOnce(A) -> B;
 }
 ```
 
@@ -527,7 +528,10 @@ Then use it against a type such as [Option](#https://doc.rust-lang.org/std/optio
 
 ```rust
 impl<A, B> Functor<A, B> for Option<A> {
-    fn fmap(self, f: fn(A) -> B) -> Self::Target {
+    fn fmap<F>(self, f: F) -> Self::Target
+        where
+            F: FnOnce(A) -> B
+    {
         self.map(f)
     }
 }
@@ -535,7 +539,7 @@ impl<A, B> Functor<A, B> for Option<A> {
 #[test]
 fn test_functor() {
     let z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1); // Return Option<B>
-    assert_eq!(z.unwrap(), 3); // passes
+    assert_eq!(z, Some(3)); // passes
 }
 ```
 
