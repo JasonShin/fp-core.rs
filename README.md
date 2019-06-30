@@ -514,50 +514,28 @@ let v: Vec<i32> = vec![1, 2, 3].into_iter().map(| x | x + 1).collect();
 assert_eq!(v, vec![2, 3, 4]); // passes while mapping the original vector and returns a new vector
 ```
 
-You can define a trait that represents Functor like below
+While leveraging the [HKT implementation](#higher-kinded-type-hkt), You can define a trait that represents Functor like below
 
 ```rust
-pub trait Functor<'a, A, B, F>
-    where
-        A: 'a,
-        F: Fn(&'a A) -> B {
-    type Output;
-    fn fmap(&'a self, f: F) -> Self::Output;
+pub trait Functor<A, B>: HKT<A, B> {
+    fn fmap(self, f: fn(A) -> B) -> <Self as HKT<A, B>>::Target;
 }
 ```
 
-Then use it against a type such as Maybe like
+Then use it against a type such as [Option](#https://doc.rust-lang.org/std/option/index.html) like
 
 ```rust
-// Declare Maybe data type -> http://hackage.haskell.org/package/base-4.12.0.0/docs/GHC-Maybe.html#t:Maybe
-pub enum Maybe<T> {
-    Nothing,
-    Just(T)
-}
-
-use Maybe;
-use Maybe::*;
-
-// Maybe functor
-impl<'a, A, B, F> Functor<'a, A, B, F> for Maybe<A>
-    where
-        A: 'a,
-        F: Fn(&'a A) -> B {
-
-    type Output = Maybe<B>;
-    fn fmap(&'a self, f: F) -> Maybe<B> {
-        match *self {
-            Just(ref x) => Just(f(x)),
-            Nothing => Nothing,
-        }
+impl<A, B> Functor<A, B> for Option<A> {
+    fn fmap(self, f: fn(A) -> B) -> Self::Target {
+        self.map(f)
     }
 }
 
-let just = Just(7);
-let nothing = Maybe::fmap(&Nothing, |x| x + 1);
-let other = Maybe::fmap(&just, |x| x + 1);
-assert_eq!(nothing, Nothing);
-assert_eq!(other, Just(8));
+#[test]
+fn test_functor() {
+    let  z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
+    assert_eq!(z.unwrap(), 3); // passes
+}
 ```
 
 ## Pointed Functor
