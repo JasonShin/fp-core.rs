@@ -533,7 +533,7 @@ impl<A, B> Functor<A, B> for Option<A> {
 
 #[test]
 fn test_functor() {
-    let  z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
+    let z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1); // Return Option<B>
     assert_eq!(z.unwrap(), 3); // passes
 }
 ```
