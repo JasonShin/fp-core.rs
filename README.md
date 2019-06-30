@@ -466,7 +466,7 @@ type with a "hole" in it, so you can declare a type signature such as `trait Fun
 
 Although Rust lacks in a native support for HKT, we always have a walk around called [Lightweight Higher Kinded Type](https://www.cl.cam.ac.uk/~jdy22/papers/lightweight-higher-kinded-polymorphism.pdf)
 
-An implementation above above theory in Rust look like below:
+An implementation example of above theory in Rust would look like below:
 
 ```rust
 pub trait HKT<A, B> {
