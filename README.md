@@ -48,7 +48,7 @@ __Table of Contents__
 * [Monoid](#monoid)
 * [Monad](#monad)
 * [Comonad](#comonad)
-* [Applicative Functor](#applicative)
+* [Applicative](#applicative)
 * [Morphism](#morphism)
   * [Endomorphism](#endomorphism)
   * [Isomorphism](#isomorphism)
