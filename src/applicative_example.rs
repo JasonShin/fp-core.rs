@@ -28,3 +28,11 @@ trait Applicative<A, F, B> : Apply<A, F, B>
     fn of(a: A) -> <Self as HKT<A, B>>::Target;
 }
 
+impl<A, F, B> Applicative<A, F, B> for Option<A>
+    where F: FnOnce(A) -> B,
+{
+    fn of(a: A) -> Self::Target {
+        Some(a)
+    }
+}
+
