@@ -31,7 +31,8 @@ mod lens_example;
 mod type_signature_example;
 mod adt_example;
 mod option_example;
+mod applicative_example;
 
 fn main() {
-    println!("Hello, world!");
+    println!("Hello, PureRust!");
 }
