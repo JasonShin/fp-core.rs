@@ -43,6 +43,7 @@ __Table of Contents__
 * [Higher Kinded Type](#higher-kinded-type-hkt)
 * [Functor](#functor)
 * [Pointed Functor](#pointed-functor)
+* [Lifting](#lifting)
 * [Equational Reasoning](#equational-reasoning)
 * [Monoid](#monoid)
 * [Monad](#monad)
@@ -565,10 +566,16 @@ let pointed_functor = Maybe::of(1);
 assert_eq!(pointed_functor, Maybe::Just(1));
 ```
 
-## Lift
+## Lifting
 
-To implement
+Lifting in functional programming typically means to lift a function into a context (a Functor or Monad). 
+For example, give a function `a -> b` and lift it into a `List` then the signature would
+look like `List[a] -> List[b]`.
 
+**Further Reading**
+- https://wiki.haskell.org/Lifting
+- https://stackoverflow.com/questions/43482772/difference-between-lifting-and-higher-order-functions
+- https://stackoverflow.com/questions/2395697/what-is-lifting-in-haskell/2395956
 
 ## Equational Reasoning
 
