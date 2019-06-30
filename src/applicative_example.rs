@@ -1,7 +1,7 @@
 use crate::functor_example::{Functor, HKT};
 
 // HKT 3
-trait HKT3<A, B, C> {
+pub trait HKT3<A, B, C> {
     type Target2;
 }
 
@@ -11,7 +11,7 @@ impl<A, B, C> HKT3<A, B, C> for Option<A> {
 
 
 // Apply
-trait Apply<A, F, B> : Functor<A, B> + HKT3<A, F, B>
+pub trait Apply<A, F, B> : Functor<A, B> + HKT3<A, F, B>
     where F: FnOnce(A) -> B,
 {
     fn ap(self, f: <Self as HKT3<A, F, B>>::Target2) -> <Self as HKT<A, B>>::Target;
@@ -26,7 +26,7 @@ impl<A, F, B> Apply<A, F, B> for Option<A>
 }
 
 // Pure
-trait Pure<A>: HKT<A, A> {
+pub trait Pure<A>: HKT<A, A> {
     fn of(self) -> <Self as HKT<A, A>>::Target;
 }
 
@@ -37,7 +37,7 @@ impl<A> Pure<A> for Option<A> {
 }
 
 // Applicative
-trait Applicative<A, F, B> : Apply<A, F, B> + Pure<A>
+pub trait Applicative<A, F, B> : Apply<A, F, B> + Pure<A>
     where F: FnOnce(A) -> B,
 {
 }
