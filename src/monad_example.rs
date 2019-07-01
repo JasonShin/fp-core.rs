@@ -1,4 +1,4 @@
-use crate::applicative_example::{Applicative, Apply, Pure};
+use crate::applicative_example::{Applicative, Pure};
 use crate::functor_example::HKT;
 
 pub trait Chain<A, B>: HKT<A, B> {
