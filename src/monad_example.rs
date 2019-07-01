@@ -1,5 +1,5 @@
 use crate::functor_example::HKT;
-use crate::applicative_example::{Applicative, Apply};
+use crate::applicative_example::{Applicative, Apply, Pure};
 
 /*
 pub trait Chain<A, F, B>: Applicative<A, F, B>
@@ -39,9 +39,6 @@ impl<A, F, B> Monad<A, F, B> for Option<A>
 
 #[test]
 fn monad_example() {
-    // check out the Readme file.
-    // Monad is going to implemented in PureRust along with HKT, Applicative and Functor implementations
-    // let x = Option::of(1).chain(|x| x + 1);
-    let x = Monad::of(Some(1)).ap(Some(|x| x + 1));
-    assert_eq!(1, 1);
+    let x = Option::of(Some(1)).chain(|x| Some(x + 1));
+    assert_eq!(x, Some(2));
 }
