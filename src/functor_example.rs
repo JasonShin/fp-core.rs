@@ -5,7 +5,8 @@ pub trait HKT<A, B> {
 
 pub trait Functor<A, B>: HKT<A, B> {
     fn fmap<F>(self, f: F) -> <Self as HKT<A, B>>::Target
-        where F: FnOnce(A) -> B;
+    where
+        F: FnOnce(A) -> B;
 }
 
 impl<A, B> HKT<A, B> for Option<A> {
@@ -15,8 +16,8 @@ impl<A, B> HKT<A, B> for Option<A> {
 
 impl<A, B> Functor<A, B> for Option<A> {
     fn fmap<F>(self, f: F) -> Self::Target
-        where
-            F: FnOnce(A) -> B
+    where
+        F: FnOnce(A) -> B,
     {
         self.map(f)
     }
@@ -24,7 +25,7 @@ impl<A, B> Functor<A, B> for Option<A> {
 
 #[test]
 fn test_functor() {
-    let  z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
+    let z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
     assert_eq!(z, Some(3));
 }
 

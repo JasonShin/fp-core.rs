@@ -15,13 +15,13 @@ where
 
 #[test]
 fn function_composition() {
-    let add = | x: i32 | x + 2;
-    let multiply = | x: i32 | x * 2;
-    let divide = | x: i32 | x / 2;
+    let add = |x: i32| x + 2;
+    let multiply = |x: i32| x * 2;
+    let divide = |x: i32| x / 2;
 
     let intermediate = compose!(add, multiply, divide);
 
-    let subtract = | x: i32 | x - 1;
+    let subtract = |x: i32| x - 1;
 
     let finally = compose!(intermediate, subtract);
 

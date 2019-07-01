@@ -1,6 +1,6 @@
 #[test]
 fn purity() {
-    let greet = |name: &str| { format!("Hi! {}", name) };
+    let greet = |name: &str| format!("Hi! {}", name);
 
     assert_eq!("Hi! Jason", greet("Jason"));
 }
@@ -9,9 +9,7 @@ fn purity() {
 fn impure() {
     let name = "Jason";
 
-    let greet = || -> String {
-        format!("Hi! {}", name)
-    };
+    let greet = || -> String { format!("Hi! {}", name) };
 
     assert_eq!("Hi! Jason", greet());
 }

@@ -4,14 +4,8 @@ use std::collections::HashMap;
 fn option_example() {
     let mut cart = HashMap::new();
     let mut item = HashMap::new();
-    item.insert(
-        "price".to_string(),
-        12
-    );
-    cart.insert(
-        "item".to_string(),
-        item,
-    );
+    item.insert("price".to_string(), 12);
+    cart.insert("item".to_string(), item);
 
     fn get_item(cart: &HashMap<String, HashMap<String, i32>>) -> Option<&HashMap<String, i32>> {
         return cart.get("item");

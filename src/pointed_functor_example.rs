@@ -4,7 +4,6 @@ enum Maybe<T> {
     Just(T),
 }
 
-
 impl<T> Maybe<T> {
     fn of(x: T) -> Self {
         return Maybe::Just(x);

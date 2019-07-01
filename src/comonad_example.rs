@@ -10,7 +10,6 @@ trait Comonad<A, B>: Extend<A, B>
 }
 */
 
-
 #[test]
 fn comonad_test() {
     // Check the readme to understand comonad

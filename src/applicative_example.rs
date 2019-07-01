@@ -9,16 +9,17 @@ impl<A, B, C> HKT3<A, B, C> for Option<A> {
     type Target2 = Option<B>;
 }
 
-
 // Apply
-pub trait Apply<A, F, B> : Functor<A, B> + HKT3<A, F, B>
-    where F: FnOnce(A) -> B,
+pub trait Apply<A, F, B>: Functor<A, B> + HKT3<A, F, B>
+where
+    F: FnOnce(A) -> B,
 {
     fn ap(self, f: <Self as HKT3<A, F, B>>::Target2) -> <Self as HKT<A, B>>::Target;
 }
 
 impl<A, F, B> Apply<A, F, B> for Option<A>
-    where F: FnOnce(A) -> B,
+where
+    F: FnOnce(A) -> B,
 {
     fn ap(self, f: Self::Target2) -> Self::Target {
         self.and_then(|v| f.map(|z| z(v)))
@@ -37,15 +38,13 @@ impl<A> Pure<A> for Option<A> {
 }
 
 // Applicative
-pub trait Applicative<A, F, B> : Apply<A, F, B> + Pure<A>
-    where F: FnOnce(A) -> B,
+pub trait Applicative<A, F, B>: Apply<A, F, B> + Pure<A>
+where
+    F: FnOnce(A) -> B,
 {
 }
 
-impl<A, F, B> Applicative<A, F, B> for Option<A>
-    where F: FnOnce(A) -> B,
-{
-}
+impl<A, F, B> Applicative<A, F, B> for Option<A> where F: FnOnce(A) -> B {}
 
 #[test]
 fn applicative_example() {
