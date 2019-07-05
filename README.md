@@ -686,27 +686,48 @@ fn monad_example() {
 An object that has `extract` and `extend` functions. 
 
 ```
-trait Comonad<A, B>: Extend<A, B>
-{
-    fn extract(self) -> A;
-
-    // extend should already be provided from `Extend`
-    fn extend(self, f: F) -> HKT1<B>
+trait Extend<A, B>: Functor<A, B> + Sized {
+    fn extend<W>(self, f: W) -> <Self as HKT<A, B>>::Target
     where
-        F: Fn(Self) -> B;
+        W: FnOnce(Self) -> B;
+}
+
+trait Extract<A> {
+    fn extract(self) -> A;
+}
+
+trait Comonad<A, B>: Extend<A, B> + Extract<A> {}
+```
+
+Then we can implement these types for Option
+
+```rust
+impl<A, B> Extend<A, B> for Option<A> {
+    fn extend<W>(self, f: W) -> Self::Target
+    where
+        W: FnOnce(Self) -> B,
+    {
+        self.map(|x| f(Some(x)))
+    }
+}
+
+impl<A> Extract<A> for Option<A> {
+    fn extract(self) -> A {
+        self.unwrap() // is there a better way to achieve this?
+    }
 }
 ```
 
 Extract takes a value out of a functor.
 
 ```rust
-CoIdentity(1).extract(); // 1
+Some(1).extract(); // 1
 ```
 
 Extend runs a function on the Comonad.
 
 ```rust
-CoIdentity(1).extend(|co: CoIdentity<i32>| co.extract() + 1); // 2
+Some(1).extend(|co| co.extract() + 1); // Some(2)
 ```
 
 ## Applicative 
