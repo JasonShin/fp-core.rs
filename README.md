@@ -32,7 +32,6 @@ __Table of Contents__
 * [Side effects](#side-effects)
 * [Idempotent](#idempotent)
 * [Function Composition](#function-composition)
-* [Continuation](#continuation)
 * [Point-Free Style](#point-free-style)
 * [Predicate](#predicate)
 * [Contracts](#contracts)
@@ -55,7 +54,6 @@ __Table of Contents__
   * [Homomorphism](#homomorphism)
   * [Catamorphism](#catamorphism)
   * [Hylomorphism](#hylomorphism)
-  * [Paramophism](#paramorphism)
   * [Anamorphism](#anamorphism)
 * [Setoid](#setoid)
 * [Semigroup](#semigroup)
@@ -344,10 +342,6 @@ let expected = 11;
 let result = finally(10);
 assert_eq!(result, expected); // passes
 ```
-
-## Continuation
-
-To implement
 
 ## Point-Free style
 
