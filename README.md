@@ -685,7 +685,7 @@ fn monad_example() {
 
 An object that has `extract` and `extend` functions. 
 
-```
+```rust
 trait Extend<A, B>: Functor<A, B> + Sized {
     fn extend<W>(self, f: W) -> <Self as HKT<A, B>>::Target
     where
