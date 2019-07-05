@@ -891,10 +891,6 @@ assert_eq!(
 
 The combination of anamorphism and catamorphism.
 
-### Paramorphism
-
-Fill this in
-
 ### Apomorphism
 It's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism.
 Whereas with paramorphism, you combine with access to the accumulator and what has been accumulated,
