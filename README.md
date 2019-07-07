@@ -374,7 +374,7 @@ let contract = | x: &i32 | -> bool {
 
 let add_one = | x: &i32 | -> Result<i32, String> {
     if contract(x) {
-        Ok(x + 1);
+        return Ok(x + 1);
     }
     Err("Cannot add one".to_string())
 };
