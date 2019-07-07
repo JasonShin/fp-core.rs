@@ -979,7 +979,7 @@ A lens is a type that pairs a getter and a non-mutating setter for some other da
 trait Lens<S, A> {
     fn over(s: &S, f: &Fn(Option<&A>) -> A) -> S {
         let result: A = f(Self::get(s));
-        return Self::set(result, &s);
+        Self::set(result, &s)
     }
     fn get(s: &S) -> Option<&A>;
     fn set(a: A, s: &S) -> S;
@@ -995,11 +995,11 @@ struct PersonNameLens;
 
 impl Lens<Person, String> for PersonNameLens {
     fn get(s: &Person) -> Option<&String> {
-        return Some(&s.name);
+       Some(&s.name)
     }
 
     fn set(a: String, s: &Person) -> Person {
-        return Person {
+        Person {
             name: a,
         }
     }
@@ -1036,11 +1036,11 @@ struct FirstLens;
 
 impl<A> Lens<Vec<A>, A> for FirstLens {
   fn get(s: &Vec<A>) -> Option<&A> {
-     return s.first();
+     s.first()
   }
 
   fn set(a: A, s: &Vec<A>) -> Vec<A> {
-      unimplemented!();
+      unimplemented!() // Nothing to set in FirstLens
   }
 }
 
