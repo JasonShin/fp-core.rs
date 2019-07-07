@@ -4,7 +4,7 @@ fn contracts_example() {
 
     let add_one = |x: &i32| -> Result<i32, String> {
         if contract(x) {
-            Ok(x + 1)
+            Ok(x + 1);
         }
         Err("Cannot add one".to_string())
     };
