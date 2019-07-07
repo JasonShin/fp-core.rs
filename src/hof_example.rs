@@ -2,7 +2,7 @@
 fn hof() {
     let filter = |predicate: fn(&i32) -> bool, xs: Vec<i32>| {
         // A good Reddit post on how Filter works https://www.reddit.com/r/rust/comments/3bmua6/can_someone_help_me_understand_stditerfilter/
-        return xs.into_iter().filter(predicate).collect::<Vec<i32>>();
+        xs.into_iter().filter(predicate).collect::<Vec<i32>>()
     };
 
     let is_even = |x: &i32| x % 2 == 0;

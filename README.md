@@ -87,7 +87,7 @@ A function which takes a function as an argument and/or returns a function.
 
 ```rust
 let filter = | predicate: fn(&i32) -> bool, xs: Vec<i32> | {
-    return xs.into_iter().filter(predicate).collect::<Vec<i32>>();
+    xs.into_iter().filter(predicate).collect::<Vec<i32>>()
 };
 ```
 
