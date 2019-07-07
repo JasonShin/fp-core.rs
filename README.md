@@ -167,7 +167,7 @@ Each time the function is called it only accepts one argument and returns a func
 
 ```rust
 fn add(x: i32) -> impl Fn(i32)-> i32 {
-    return move |y| x + y;
+    move |y| x + y
 }
 
 let add5 = add(5);
