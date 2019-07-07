@@ -937,7 +937,7 @@ trait Semigroup {
 
 impl Semigroup for Vec<i32> {
     fn combine(&self, b: &Self) -> Vec<i32> {
-        return concat(vec![self.clone(), b.clone()]);
+        concat(vec![self.clone(), b.clone()])
     }
 }
 
