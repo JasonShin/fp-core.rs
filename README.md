@@ -626,7 +626,7 @@ If identity and compose functions are provided, functions themselves form a mono
 
 ```rust
 fn identity<A>(a: A) -> A {
-    return a;
+    a
 }
 ```
 
