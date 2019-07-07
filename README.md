@@ -280,7 +280,7 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 let sort = | x: Vec<i32> | -> Vec<i32> {
     let mut cloned_x = x.clone();
     cloned_x.sort();
-    return cloned_x;
+    cloned_x
 };
 ```
 
@@ -295,7 +295,7 @@ assert_eq!(sorted_x, expected); // passes
 
 ```rust
 let abs = | x: i32 | -> i32 {
-    return x.abs();
+    x.abs()
 };
 
 let x: i32 = 10;

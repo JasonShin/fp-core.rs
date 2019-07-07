@@ -5,7 +5,7 @@ fn idempotent_sort() {
     let sort = |x: Vec<i32>| -> Vec<i32> {
         let mut cloned_x = x.clone();
         cloned_x.sort();
-        return cloned_x;
+        cloned_x
     };
 
     let x = vec![2, 1];
@@ -16,9 +16,7 @@ fn idempotent_sort() {
 
 #[test]
 fn idempotent_abs() {
-    let abs = |x: i32| -> i32 {
-        return x.abs();
-    };
+    let abs = |x: i32| -> i32 { x.abs() };
 
     let x: i32 = 10;
     let result = abs(abs(x));
