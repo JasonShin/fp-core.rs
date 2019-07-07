@@ -1160,11 +1160,11 @@ cart.insert(
 );
 
 fn get_item(cart: &HashMap<String, HashMap<String, i32>>) -> Option<&HashMap<String, i32>> {
-    return cart.get("item");
+    cart.get("item")
 }
 
 fn get_price(item: &HashMap<String, i32>) -> Option<&i32> {
-    return item.get("price");
+    item.get("price")
 }
 
 ```

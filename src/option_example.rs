@@ -8,15 +8,15 @@ fn option_example() {
     cart.insert("item".to_string(), item);
 
     fn get_item(cart: &HashMap<String, HashMap<String, i32>>) -> Option<&HashMap<String, i32>> {
-        return cart.get("item");
+        cart.get("item")
     }
 
     fn get_price(item: &HashMap<String, i32>) -> Option<&i32> {
-        return item.get("price");
+        item.get("price")
     }
 
     fn get_nested_price(cart: &HashMap<String, HashMap<String, i32>>) -> Option<&i32> {
-        return get_item(cart).and_then(get_price);
+        get_item(cart).and_then(get_price)
     }
 
     let price = get_nested_price(&cart);
