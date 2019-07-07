@@ -87,7 +87,7 @@ A function which takes a function as an argument and/or returns a function.
 
 ```rust
 let filter = | predicate: fn(&i32) -> bool, xs: Vec<i32> | {
-    return xs.into_iter().filter(predicate).collect::<Vec<i32>>();
+    xs.into_iter().filter(predicate).collect::<Vec<i32>>()
 };
 ```
 
@@ -105,7 +105,7 @@ A closure is a scope which retains variables available to a function when it's c
 [partial application](#partial-application) to work.
 
 ```rust
-let add_to = | x: i32 | { move | y: i32 | { x + y } };
+let add_to = |x: i32| move |y: i32| x + y;
 ```
 
 We can call `add_to` with a number and get back a function with a baked-in `x`. Notice that we also need to move the
@@ -167,7 +167,7 @@ Each time the function is called it only accepts one argument and returns a func
 
 ```rust
 fn add(x: i32) -> impl Fn(i32)-> i32 {
-    return move |y| x + y;
+    move |y| x + y
 }
 
 let add5 = add(5);
@@ -280,7 +280,7 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 let sort = | x: Vec<i32> | -> Vec<i32> {
     let mut cloned_x = x.clone();
     cloned_x.sort();
-    return cloned_x;
+    cloned_x
 };
 ```
 
@@ -295,7 +295,7 @@ assert_eq!(sorted_x, expected); // passes
 
 ```rust
 let abs = | x: i32 | -> i32 {
-    return x.abs();
+    x.abs()
 };
 
 let x: i32 = 10;
@@ -369,14 +369,14 @@ and errors are generally reported whenever a contract is violated.
 
 ```rust
 let contract = | x: &i32 | -> bool {
-    return x > &10;
+    x > &10
 };
 
 let add_one = | x: &i32 | -> Result<i32, String> {
     if contract(x) {
         return Ok(x + 1);
     }
-    return Err("Cannot add one".to_string());
+    Err("Cannot add one".to_string())
 };
 ```
 
@@ -551,7 +551,7 @@ enum Maybe<T> {
 
 impl<T> Maybe<T> {
     fn of(x: T) -> Self {
-        return Maybe::Just(x);
+        Maybe::Just(x)
     }
 }
 ```
@@ -626,7 +626,7 @@ If identity and compose functions are provided, functions themselves form a mono
 
 ```rust
 fn identity<A>(a: A) -> A {
-    return a;
+    a
 }
 ```
 
@@ -776,11 +776,13 @@ impl<A> Pure<A> for Option<A> {
 // Applicative
 trait Applicative<A, F, B> : Apply<A, F, B> + Pure<A>
     where F: FnOnce(A) -> B,
-{} // Simply derives Apply and Pure
+{
+} // Simply derives Apply and Pure
 
 impl<A, F, B> Applicative<A, F, B> for Option<A>
     where F: FnOnce(A) -> B,
-{}
+{
+}
 ```
 
 Then we can use Option Applicative like this:
@@ -864,7 +866,6 @@ let count_down = unfold((8_u32, 1_u32), |state| {
     let (ref mut x1, ref mut x2) = *state;
 
     if *x1 == 0 {
-        println!("stopping!");
         return None;
     }
 
@@ -911,7 +912,7 @@ trait Setoid {
 
 impl Setoid for Vec<i32> {
     fn equals(&self, other: &Self) -> bool {
-        return self.len() == other.len();
+        self.len() == other.len()
     }
 }
 
@@ -935,7 +936,7 @@ trait Semigroup {
 
 impl Semigroup for Vec<i32> {
     fn combine(&self, b: &Self) -> Vec<i32> {
-        return concat(vec![self.clone(), b.clone()]);
+        concat(vec![self.clone(), b.clone()])
     }
 }
 
@@ -977,7 +978,7 @@ A lens is a type that pairs a getter and a non-mutating setter for some other da
 trait Lens<S, A> {
     fn over(s: &S, f: &Fn(Option<&A>) -> A) -> S {
         let result: A = f(Self::get(s));
-        return Self::set(result, &s);
+        Self::set(result, &s)
     }
     fn get(s: &S) -> Option<&A>;
     fn set(a: A, s: &S) -> S;
@@ -993,11 +994,11 @@ struct PersonNameLens;
 
 impl Lens<Person, String> for PersonNameLens {
     fn get(s: &Person) -> Option<&String> {
-        return Some(&s.name);
+       Some(&s.name)
     }
 
     fn set(a: String, s: &Person) -> Person {
-        return Person {
+        Person {
             name: a,
         }
     }
@@ -1034,11 +1035,11 @@ struct FirstLens;
 
 impl<A> Lens<Vec<A>, A> for FirstLens {
   fn get(s: &Vec<A>) -> Option<&A> {
-     return s.first();
+     s.first()
   }
 
   fn set(a: A, s: &Vec<A>) -> Vec<A> {
-      unimplemented!();
+      unimplemented!() // Nothing to set in FirstLens
   }
 }
 
@@ -1063,12 +1064,12 @@ Every function in Rust will indicate the types of their arguments and return val
 ```rust
 // add :: i32 -> i32 -> i32
 fn add(x: i32) -> impl Fn(i32)-> i32 {
-    return move |y| x + y;
+    move |y| x + y
 }
 
 // increment :: i32 -> i32
 fn increment(x: i32) -> i32 {
-    return x + 1;
+    x + 1
 }
 ```
 
@@ -1077,7 +1078,7 @@ If a function accepts another function as an argument it is wrapped in parenthes
 ```rust
 // call :: (a -> b) -> a -> b
 fn call<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
-    return move |x| f(x);
+    move |x| f(x)
 }
 ```
 
@@ -1088,7 +1089,7 @@ an array of values of type `a`, and returns an array of values of type `b`.
 ```rust
 // map :: (a -> b) -> [a] -> [b]
 fn map<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
-    return move |x| f(x);
+    move |x| f(x)
 }
 ```
 
@@ -1158,11 +1159,11 @@ cart.insert(
 );
 
 fn get_item(cart: &HashMap<String, HashMap<String, i32>>) -> Option<&HashMap<String, i32>> {
-    return cart.get("item");
+    cart.get("item")
 }
 
 fn get_price(item: &HashMap<String, i32>) -> Option<&i32> {
-    return item.get("price");
+    item.get("price")
 }
 
 ```

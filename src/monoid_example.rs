@@ -14,11 +14,11 @@ where
 }
 
 fn identity<A>(a: A) -> A {
-    return a;
+    a
 }
 
 fn foo(a: i32) -> i32 {
-    return a + 20;
+    a + 20
 }
 
 #[test]
