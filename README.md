@@ -776,11 +776,13 @@ impl<A> Pure<A> for Option<A> {
 // Applicative
 trait Applicative<A, F, B> : Apply<A, F, B> + Pure<A>
     where F: FnOnce(A) -> B,
-{} // Simply derives Apply and Pure
+{
+} // Simply derives Apply and Pure
 
 impl<A, F, B> Applicative<A, F, B> for Option<A>
     where F: FnOnce(A) -> B,
-{}
+{
+}
 ```
 
 Then we can use Option Applicative like this:
