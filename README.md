@@ -913,7 +913,7 @@ trait Setoid {
 
 impl Setoid for Vec<i32> {
     fn equals(&self, other: &Self) -> bool {
-        return self.len() == other.len();
+        self.len() == other.len()
     }
 }
 

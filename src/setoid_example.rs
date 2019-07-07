@@ -4,13 +4,13 @@ trait Setoid {
 
 impl Setoid for Vec<i32> {
     fn equals(&self, other: &Self) -> bool {
-        return self.len() == other.len();
+        self.len() == other.len()
     }
 }
 
 impl Setoid for &str {
     fn equals(&self, other: &Self) -> bool {
-        return self.eq(other);
+        self.eq(other)
     }
 }
 
