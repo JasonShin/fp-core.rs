@@ -6,7 +6,7 @@ fn anamorphism_example() {
         let (ref mut x1, ref mut x2) = *state;
 
         if *x1 == 0 {
-            return None;
+            None
         }
 
         let next = *x1 - *x2;

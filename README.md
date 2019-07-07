@@ -867,7 +867,7 @@ let count_down = unfold((8_u32, 1_u32), |state| {
 
     if *x1 == 0 {
         println!("stopping!");
-        return None;
+        None
     }
 
     let next = *x1 - *x2;
