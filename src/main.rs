@@ -9,6 +9,7 @@ mod arity_example;
 mod catamorphism_example;
 mod closure_example;
 mod comonad_example;
+mod continuation;
 mod contracts;
 mod currying_example;
 mod endomorphism_example;

@@ -32,6 +32,7 @@ __Table of Contents__
 * [Side effects](#side-effects)
 * [Idempotent](#idempotent)
 * [Function Composition](#function-composition)
+* [Continuation](#continuation)
 * [Point-Free Style](#point-free-style)
 * [Predicate](#predicate)
 * [Contracts](#contracts)
@@ -341,6 +342,24 @@ let expected = 11;
 let result = finally(10);
 assert_eq!(result, expected); // passes
 ```
+
+## Continuation
+
+At any given point in a program, the part of the code that's yet to be executed is known as a continuation.
+
+```rust
+let print_as_string = |num: i32| println!("Given {}", num);
+
+let add_one_and_continue = |num: i32, cc: fn(i32)| {
+    let result = num + 1;
+    cc(result)
+};
+
+add_one_and_continue(1, print_as_string); // Given 2
+```
+
+Continuations are often seen in asynchronous programming when the program needs to wait to receive data before it can continue.
+ The response is often passed off to the rest of the program, which is the continuation, once it's been received.
 
 ## Point-Free style
 
