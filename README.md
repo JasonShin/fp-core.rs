@@ -108,8 +108,7 @@ A closure is a scope which retains variables available to a function when it's c
 let add_to = |x: i32| move |y: i32| x + y;
 ```
 
-We can call `add_to` with a number and get back a function with a baked-in `x`. Notice that we also need to move the
-ownership of the y to the internal lambda.
+We can call `add_to` with a number and get back a function with a baked-in `x`. Notice that we also need to move the ownership of the x to the internal lambda.
 
 ```rust
 let add_to_five = add_to(5);
