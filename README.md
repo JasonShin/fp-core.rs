@@ -1224,8 +1224,10 @@ fn cartesian_product<A, B>(s: impl Iterator<Item=A>,
 ```
 
 (At least, if we suspend disbelief and say that an `impl Iterator`
-is a set.) Concretely, the product of `{A, B, C}` and `{1, 2, 3}`
+is a set.) Concretely, the product of `S = {A, B, C}` and `T = {1, 2, 3}`
 is `{(A, 1), (B, 1), (C, 1), (A, 2), (B, 2), (C, 2), (A, 3), (B, 3), (C, 3)}`. I'll refer back to this throughout.
+
+### Diagrams
 
 **Diagrams** are smaller categories with just the objects and
 morphisms we care about. The most formal way to present this
@@ -1241,6 +1243,8 @@ the diagram has only 2 objects and no extra arrows (just the identity arrows on 
 So in the above example, the diagram would just be `{A, B, C}`
 and `{1, 2, 3}` as two objects.
 
+### Cones
+
 **Cones** are "taken over diagrams." Formally, a cone is an object,
 a diagram, and a set of arrows from the object to the objects in
 the diagram. Furthermore, the triangles formed must commute.
@@ -1254,6 +1258,8 @@ arrows are forced from the defintion. Given the example, we are
 lucky that no triangles are formed so we need not check for
 commutativity.
 
+### Limits
+
 Finally: **limits** are special cones: they are cones so that
 for any other cone
 the object in the cone has a unique arrow to the object of
@@ -1261,6 +1267,11 @@ the limit over the same diagram. The object in the limit cone
 is generally called the limit.
 
 In the example, `P = {(A, 1), (B, 1), (C, 1), (A, 2), (B, 2), (C, 2), (A, 3), (B, 3), (C, 3)}` is the limit.
+To prove this, one must consider the cones: in particular, the `f` and `g` above (`|(x, _)| x` and `|(_, y)| y`)
+are generally the projection arrows from the product to the two multiplicands.
+Now, suppose there was another cone: a set `X` where `ff: Fn(X) -> S` and `gg: Fn(X) -> T`.
+If `P` is indeed a limit, we'd have some `h: Fn(X) -> P` so that `f h = ff` and `g h = gg`.
+For this, we fix a `z` in `X` and define: `h(z) = (ff(z), gg(z))`.
 
 Here is some contrived psuedo-Rust that might clarify:
 
