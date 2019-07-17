@@ -277,10 +277,10 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 
 ```rust
 // Custom immutable sort method
-let sort = | x: Vec<i32> | -> Vec<i32> {
-    let mut cloned_x = x.clone();
-    cloned_x.sort();
-    cloned_x
+let sort = |x: Vec<i32>| -> Vec<i32> {
+    let mut x = x;
+    x.sort();
+    x
 };
 ```
 
