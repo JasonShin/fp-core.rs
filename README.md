@@ -8,7 +8,7 @@ Functional programming (FP) provides many advantages, and its popularity has bee
 However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary,
 we hope to make learning FP easier.
 
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land) 
+Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 and Rust programming language to give code examples.
 
 Also please be mindful that the project sometimes utilise FP related crates that are unfinished but contains
@@ -129,7 +129,7 @@ __Further reading__
 * [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
 * [How do JavaScript Closures Work?](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
 
-## Partial Application 
+## Partial Application
 
 Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
 
@@ -277,10 +277,10 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 
 ```rust
 // Custom immutable sort method
-let sort = | x: Vec<i32> | -> Vec<i32> {
-    let mut cloned_x = x.clone();
-    cloned_x.sort();
-    cloned_x
+let sort = |x: Vec<i32>| -> Vec<i32> {
+    let mut x = x;
+    x.sort();
+    x
 };
 ```
 
@@ -473,7 +473,7 @@ Variance in Rust is used during the type checking against type and lifetime para
 
 ## Higher Kinded Type (HKT)
 
-Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a 
+Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a
 type with a "hole" in it, so you can declare a type signature such as `trait Functor<F<A>>`.
 
 Although Rust lacks in a native support for HKT, we always have a walk around called [Lightweight Higher Kinded Type](https://www.cl.cam.ac.uk/~jdy22/papers/lightweight-higher-kinded-polymorphism.pdf)
@@ -584,7 +584,7 @@ assert_eq!(pointed_functor, Maybe::Just(1));
 
 ## Lifting
 
-Lifting in functional programming typically means to lift a function into a context (a Functor or Monad). 
+Lifting in functional programming typically means to lift a function into a context (a Functor or Monad).
 For example, give a function `a -> b` and lift it into a `List` then the signature would
 look like `List[a] -> List[b]`.
 
@@ -615,7 +615,7 @@ An "identity" value must also exist that when combined with a value doesn't chan
 The identity value for addition is `0`.
 
 ```rust
-1 + 0 
+1 + 0
 // i32: 1
 ```
 
@@ -695,7 +695,7 @@ fn monad_example() {
 
 ## Comonad
 
-An object that has `extract` and `extend` functions. 
+An object that has `extract` and `extend` functions.
 
 ```rust
 trait Extend<A, B>: Functor<A, B> + Sized {
@@ -742,7 +742,7 @@ Extend runs a function on the Comonad.
 Some(1).extend(|co| co.extract() + 1); // Some(2)
 ```
 
-## Applicative 
+## Applicative
 
 An applicative functor is an object with an `ap` function. `ap` applies a function in the object to a value in another
 object of the same type. Given a pure program `g: (b: A) -> B`, we must lift it to `g: (fb: F<A>) -> F<B>`. In order to achieve
@@ -1219,5 +1219,5 @@ match price {
 ## My thought on this project
 
 Please be mindful that the project does not fully cover every single definitions with code examples since it does not worth
-investing too much time in a glossary project. I have put extra effort in adding complementary external references that 
+investing too much time in a glossary project. I have put extra effort in adding complementary external references that
 you can check out for further study.
