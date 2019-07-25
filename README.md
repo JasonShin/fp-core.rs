@@ -654,6 +654,22 @@ fn identity<A>(a: A) -> A {
 compose(foo, identity) ≍ compose(identity, foo) ≍ foo
 ```
 
+We can express Monoid as a Rust trait and the type signature would look like below
+
+```rust
+use crate::applicative_example::Applicative;
+
+trait Empty<A> {
+    fn empty() -> A;
+}
+
+trait Monoid<A, F, B> : Empty<A> + Applicative<A, F, B>
+{
+}
+```
+
+According to Fantasy Land Specification, Monoid should implement `Empty` and `Applicative`.
+
 ## Monad
 
 A [Monad](https://github.com/fantasyland/fantasy-land#monad) is a trait that implements `Applicative` and `Chain` specifications. `chain` is
