@@ -663,7 +663,9 @@ trait Empty<A> {
     fn empty() -> A;
 }
 
-trait Monoid<A, F, B> : Empty<A> + Applicative<A, F, B>
+trait Monoid<A, F, B>: Empty<A> + Applicative<A, F, B>
+where
+    F: FnOnce(A) -> B,
 {
 }
 ```
