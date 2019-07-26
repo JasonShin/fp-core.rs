@@ -18,7 +18,6 @@ are not suitable for production usage.
 __Table of Contents__
 <!-- RM(noparent,notop) -->
 
-
 * [Arity](#arity)
 * [Higher-Order Functions (HOF)](#higher-order-functions-hof)
 * [Closure](#closure)
@@ -426,10 +425,27 @@ To be a valid category 3 rules must be met:
     `f • (g • h)` is the same as `(f • g) • h`
 
 Since these rules govern composition at very abstract level, category theory is great at uncovering new ways of composing things.
+In particular, many see this as another foundation of mathematics (so, everything would be a category from this view of math).
+Various definitions in this guide are related to category theory since this approach applies elegantly to functional programming.
+
+__Examples of categories__
+
+When one specifies a category, the objects and morphisms are essential. Additionally, showing that the rules are met is nice
+though usually left to the reader as an exercise.
+
+* Any type and pure functions on the type. (Note, we require purity since side-effects affect associativity (the third rule).)
+
+These examples come up in mathematics:
+
+* 1: the category with 1 object and its identity morphism.
+* Monoidal categories: [monoids are defined later](#monoids) but any monoid is a category with 1 object and many morphisms
+  from the object to itself. (Yes, there is also a category of monoids -- this is not that -- this example is that any monoid is its own
+  category.)
 
 __Further reading__
 
 * [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+* [Awodey's introduction](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.211.4754&rep=rep1&type=pdf) for those who like math.
 
 ## Value
 
@@ -554,6 +570,23 @@ fn test_functor() {
     assert_eq!(z, Some(3)); // passes
 }
 ```
+
+__The Underlying Math__
+
+The confusing fact is that functors are morphisms in the category of categories. Really, this means that
+a functor from category `C` into `D` preserves properties of the category, so that the data is somewhat
+preserved.
+
+Technically, every category has a functor into the simplest (non-empty) category (1): since the category `1` just
+has one object and one function, map all the objects and functions in whatever category you start from into the
+thing in `1`. So, data isn't quite preserved in a "nice" sense. Such functors are called forgetful sometimes as
+they drop structure.
+
+However, less forgetful examples provide more insight and empower useful statements about types.
+
+__Examples__
+
+* Generic types are generally functors.
 
 ## Pointed Functor
 
