@@ -23,10 +23,36 @@ impl<A, B> Functor<A, B> for Option<A> {
     }
 }
 
+// impl<A, B, T> HKT<A, B> for T
+// where
+//     T: Sized + Iterator<Item = A>,
+//     U: Sized + Iterator<Item = B>,
+// {
+//     type URI = Self;
+//     type Target = U;
+// }
+//
+// impl<A, B, T> Functor<A, B> for T
+// where
+//     T: Iterator<Item = A>,
+// {
+//     fn fmap<F>(self, f: F) -> Self::Target
+//     where
+//         F: FnOnce(A) -> B,
+//         A: Sized,
+//         B: Sized,
+//     {
+//         self.map(f)
+//     }
+// }
+
 #[test]
 fn test_functor() {
     let z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
     assert_eq!(z, Some(3));
+
+    // let v = vec![3, 4];
+    // assert_eq!(vec![5, 6], v.iter().fmap(|x| x + 1).fmap(|x| x + 1));
 }
 
 /*
