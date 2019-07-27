@@ -248,12 +248,23 @@ They define 0 as `\f . \x. x` and adding one as `\n. \f. \x. f(n(f)(x))`.
 That isn't even ASCII art, so let's add: `0 + 1`:
 
 ```
-(\n. \f. \x. f(n(f)(x)))(\f. \x. x) = \f. \x. f((\f'. \x'. x')(x)) = f(\x'. x')
+(\n. \f. \x. f(n(f)(x)))(\f. \x. x) = \f. \x. f((\x'. x')(x)) = \f. \x. f(x)
 ```
 
 Basically, the number of `f`s in the expression is the number. I'll leave figuring out larger numbers as a exercise.
-Instead, here's addition: `\n m. \f. \x. n(m(f)(x))`. Multiplication is harder and there's better
+With patience, you can show that `\f. \x. f(f(x))` is two.  This will help with addition: `\n m. \f. \x. n(m(f)(x))`
+should add two numbers. Let's make 4:
+
+```
+(\n m. \f. \x. n(f)(m(f)(x)))(\f. x. f(f(x)), \f. \x. f(f(x)))
+  = \f. \x. (\f'. \x'. f'(f'(x')))(f)((\f'. \x'. f'(f'(x')))(f)(x))
+  = \f. \x. (\x'. f(f(x')))(f(f(x')))
+  = \f. \x. f(f(f(f(x))))
+```
+
+Multiplication is harder and there's better
 [exposition on Wikipedia](https://en.wikipedia.org/wiki/Church_encoding#Calculation_with_Church_numerals).
+Another good reference is [on stackoverflow](https://stackoverflow.com/questions/3077908/church-numeral-for-addition).
 
 ## Purity
 
@@ -810,8 +821,8 @@ fn monad_example() {
 
 Importantly, it is worth noting that monads are a rather advanced topic in category theory. In fact, they are called
 triples by some as they involve adjoint functors and their unit -- both of which are rare to see in functional programming.
-The meme is to think of a monad as a burrito with "pure" being the act of taking a tortilla (the empty burrito) and ingredient
-is added using "chain".
+The meme is to think of a monad as a burrito with "pure" being the act of taking a tortilla (the empty burrito) and
+adding ingredients using "chain".
 
 The purely mathematical presentation of monads does not look anything like this, but there is an equivalence.
 
