@@ -216,6 +216,45 @@ You can assign a lambda to a variable, as shown above.
 
 A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
 
+This is in contrast to a [Turing machine](https://www.youtube.com/watch?v=dNRDvLACg5Q), an equivalent model.
+
+Lambda calculus has three key components: variables, abstraction, and application. A variable is just some
+symbol, say `x`. An abstraction is sort of a function: it binds variables into "formulae". Applications
+are function calls. This is meaningless without examples.
+
+The identity function (`|x| x` in rust) looks like `\ x. x` in most literature (`\` is a Lambda where Latex
+or Unicode make it available). It is an abstraction. If `1` were a value we could use, `(\ x. x) 1` would
+be an application (and evaluating it gives you `1`).
+
+But there's more...
+
+__Computation in Pure Lambda Calculus__
+
+Let's invent booleans. `\ x y. x` can be true and `\ x y. y` can be false.
+If so, `\ b1 b2. b1(b2,(\x y. y))` is `and`. Let's evaluate it to show how:
+
+| `b1` | `b2` | Their `and` |
+| --- | --- | --- |
+| `\ x y. x` | `\x y. x` | `\x y. x` |
+| `\ x y. x` | `\x y. y` | `\x y. y` |
+| `\ x y. y` | `\x y. y` | `\x y. y` |
+| `\ x y. y` | `\x y. x` | `\x y. y` |
+
+I'll leave `or` as an exercise. Furthermore, `if` can now be implemented: `\c t e. c(t, e)` where `c` is the condition, `t`
+the consequent (`then`) and `e` the else clause.
+
+[SICP leaves numbers as an exercise.](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-14.html#%_idx_1474)
+They define 0 as `\f . \x. x` and adding one as `\n. \f. \x. f(n(f)(x))`.
+That isn't even ASCII art, so let's add: `0 + 1`:
+
+```
+(\n. \f. \x. f(n(f)(x)))(\f. \x. x) = \f. \x. f((\f'. \x'. x')(x)) = f(\x'. x')
+```
+
+Basically, the number of `f`s in the expression is the number. I'll leave figuring out larger numbers as a exercise.
+Instead, here's addition: `\n m. \f. \x. n(m(f)(x))`. Multiplication is harder and there's better
+[exposition on Wikipedia](https://en.wikipedia.org/wiki/Church_encoding#Calculation_with_Church_numerals).
+
 ## Purity
 
 A function is pure if the return value is only determined by its input values, and does not produce side effects.
@@ -564,6 +603,33 @@ impl<A, B> Functor<A, B> for Option<A> {
     }
 }
 
+// This conflicts with the above, so isn't tested
+// below and is commented out. TODO: add a careful
+// implementation that makes sure Optional and this
+// don't conflict.
+impl<A, B, T> HKT<A, B> for T
+where
+    T: Sized + Iterator<Item = A>,
+    U: Sized + Iterator<Item = B>,
+{
+    type URI = Self;
+    type Target = U;
+}
+
+impl<A, B, T> Functor<A, B> for T
+where
+    T: Iterator<Item = A>,
+{
+    fn fmap<F>(self, f: F) -> Self::Target
+    where
+        F: FnOnce(A) -> B,
+        A: Sized,
+        B: Sized,
+    {
+        self.map(f)
+    }
+}
+
 #[test]
 fn test_functor() {
     let z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1); // Return Option<B>
@@ -583,10 +649,8 @@ thing in `1`. So, data isn't quite preserved in a "nice" sense. Such functors ar
 they drop structure.
 
 However, less forgetful examples provide more insight and empower useful statements about types.
+Unfortunately, these are rather heavy-handed in the mathematics they evoke.
 
-__Examples__
-
-* Generic types are generally functors.
 
 ## Pointed Functor
 
@@ -632,7 +696,7 @@ When an application is composed of expressions and devoid of side effects, truth
 
 ## Monoid
 
-An object with a function that "combines" that object with another of the same type.
+An set with a binary function that "combines" pairs from that set into another element of the set.
 
 One simple monoid is the addition of numbers:
 
@@ -641,7 +705,7 @@ One simple monoid is the addition of numbers:
 // i32: 2
 ```
 
-In this case number is the object and `+` is the function.
+In this case numbers are the set and `+` is the function.
 
 An "identity" value must also exist that when combined with a value doesn't change it.
 
@@ -744,6 +808,13 @@ fn monad_example() {
 
 `pure` is also known as `return` in other functional languages. `flat_map` is also known as `bind` in other languages.
 
+Importantly, it is worth noting that monads are a rather advanced topic in category theory. In fact, they are called
+triples by some as they involve adjoint functors and their unit -- both of which are rare to see in functional programming.
+The meme is to think of a monad as a burrito with "pure" being the act of taking a tortilla (the empty burrito) and ingredient
+is added using "chain".
+
+The purely mathematical presentation of monads does not look anything like this, but there is an equivalence.
+
 ## Comonad
 
 An object that has `extract` and `extend` functions.
@@ -781,7 +852,7 @@ impl<A> Extract<A> for Option<A> {
 }
 ```
 
-Extract takes a value out of a functor.
+Extract takes a value out of a comonad.
 
 ```rust
 Some(1).extract(); // 1
@@ -792,6 +863,10 @@ Extend runs a function on the Comonad.
 ```rust
 Some(1).extend(|co| co.extract() + 1); // Some(2)
 ```
+
+This can be thought of as the reverse of a monad. In fact, this is called
+the "dual" in category theory. (Basically, if you know what `A` is, a `coA`
+is everything in `A`'s definition with the arrows reversed.)
 
 ## Applicative
 
@@ -863,7 +938,17 @@ assert_eq!(x, Some(2));
 
 ## Morphism
 
-A transformation function.
+A function that preserves the structure of its domain.
+See [the category definition](#category) from more.
+
+The first few (endomorphism, homomorphism, and isomorphism) are easier to
+understand than the rest. The rest require the notion of an F-algebra.
+The simpler Haskell declarations are listed in [the wikipedia on paramorphisms](https://en.wikipedia.org/wiki/Paramorphism)
+but the notions have yet to be extended to more general category theory.
+Briefly, the view of F-algebras is to take the set-theoretic definition of algebraic
+objects and redefined them on a purely category theoretic footing: to move the ideas
+away from sets containing elements to collections of objects with morphisms.
+However, some of the ideas here have yet to be generalised into this movement.
 
 ### Endomorphism
 
@@ -879,7 +964,7 @@ let decrement = |x: i32| x - 1;
 
 ### Isomorphism
 
-A pair of transformations between 2 types of objects that is structural in nature and no data is lost.
+A pair of transformations between 2 types of objects that is invertible.
 
 For example, 2D coordinates could be stored as a i32 vector [2,3] or a struct {x: 2, y: 3}.
 
@@ -902,9 +987,14 @@ assert_eq!(
 ); // passes
 ```
 
+Isomorphisms are critical in making structures identical. Since we know that the struct above is
+identical to a pair, all the functions that exist on the pair can exist on the struct. If `f`
+is the isomorphism and `g` and endomorphism on the codomain: `f^{-1} g f` would extend `g`
+to apply on the domain.
+
 ### Homomorphism
 
-A homomorphism is just a structure preserving map.
+A homomorphism is just a structure preserving map. It is the older term of morphism.
 In fact, a functor is just a homomorphism between categories as it preserves the original category's structure under the mapping.
 
 ```rust
@@ -956,11 +1046,14 @@ assert_eq!(
 The combination of anamorphism and catamorphism.
 
 ### Apomorphism
+
 It's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism.
 Whereas with paramorphism, you combine with access to the accumulator and what has been accumulated,
 apomorphism lets you unfold with the potential to return early.
 
 ## Setoid
+
+This is a set with an equivalence relation.
 
 An object that has an `equals` function which can be used to compare other objects of the same type.
 
