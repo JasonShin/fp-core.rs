@@ -1,11 +1,9 @@
-use std::num;
-
 #[test]
 fn idempotent_sort() {
     let sort = |x: Vec<i32>| -> Vec<i32> {
-        let mut cloned_x = x.clone();
-        cloned_x.sort();
-        cloned_x
+        let mut x = x;
+        x.sort();
+        x
     };
 
     let x = vec![2, 1];

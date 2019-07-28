@@ -1,3 +1,5 @@
+use crate::applicative_example::Applicative;
+
 macro_rules! compose {
     ( $last:expr ) => { $last };
     ( $head:expr, $($tail:expr), +) => {
@@ -19,6 +21,16 @@ fn identity<A>(a: A) -> A {
 
 fn foo(a: i32) -> i32 {
     a + 20
+}
+
+trait Empty<A> {
+    fn empty() -> A;
+}
+
+trait Monoid<A, F, B>: Empty<A> + Applicative<A, F, B>
+where
+    F: FnOnce(A) -> B,
+{
 }
 
 #[test]

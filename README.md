@@ -8,7 +8,7 @@ Functional programming (FP) provides many advantages, and its popularity has bee
 However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary,
 we hope to make learning FP easier.
 
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land) 
+Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 and Rust programming language to give code examples.
 
 Also please be mindful that the project sometimes utilise FP related crates that are unfinished but contains
@@ -17,7 +17,6 @@ are not suitable for production usage.
 
 __Table of Contents__
 <!-- RM(noparent,notop) -->
-
 
 * [Arity](#arity)
 * [Higher-Order Functions (HOF)](#higher-order-functions-hof)
@@ -129,7 +128,7 @@ __Further reading__
 * [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
 * [How do JavaScript Closures Work?](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
 
-## Partial Application 
+## Partial Application
 
 Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
 
@@ -217,6 +216,56 @@ You can assign a lambda to a variable, as shown above.
 
 A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
 
+This is in contrast to a [Turing machine](https://www.youtube.com/watch?v=dNRDvLACg5Q), an equivalent model.
+
+Lambda calculus has three key components: variables, abstraction, and application. A variable is just some
+symbol, say `x`. An abstraction is sort of a function: it binds variables into "formulae". Applications
+are function calls. This is meaningless without examples.
+
+The identity function (`|x| x` in rust) looks like `\ x. x` in most literature (`\` is a Lambda where Latex
+or Unicode make it available). It is an abstraction. If `1` were a value we could use, `(\ x. x) 1` would
+be an application (and evaluating it gives you `1`).
+
+But there's more...
+
+__Computation in Pure Lambda Calculus__
+
+Let's invent booleans. `\ x y. x` can be true and `\ x y. y` can be false.
+If so, `\ b1 b2. b1(b2,(\x y. y))` is `and`. Let's evaluate it to show how:
+
+| `b1` | `b2` | Their `and` |
+| --- | --- | --- |
+| `\ x y. x` | `\x y. x` | `\x y. x` |
+| `\ x y. x` | `\x y. y` | `\x y. y` |
+| `\ x y. y` | `\x y. y` | `\x y. y` |
+| `\ x y. y` | `\x y. x` | `\x y. y` |
+
+I'll leave `or` as an exercise. Furthermore, `if` can now be implemented: `\c t e. c(t, e)` where `c` is the condition, `t`
+the consequent (`then`) and `e` the else clause.
+
+[SICP leaves numbers as an exercise.](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-14.html#%_idx_1474)
+They define 0 as `\f . \x. x` and adding one as `\n. \f. \x. f(n(f)(x))`.
+That isn't even ASCII art, so let's add: `0 + 1`:
+
+```
+(\n. \f. \x. f(n(f)(x)))(\f. \x. x) = \f. \x. f((\x'. x')(x)) = \f. \x. f(x)
+```
+
+Basically, the number of `f`s in the expression is the number. I'll leave figuring out larger numbers as a exercise.
+With patience, you can show that `\f. \x. f(f(x))` is two.  This will help with addition: `\n m. \f. \x. n(m(f)(x))`
+should add two numbers. Let's make 4:
+
+```
+(\n m. \f. \x. n(f)(m(f)(x)))(\f. x. f(f(x)), \f. \x. f(f(x)))
+  = \f. \x. (\f'. \x'. f'(f'(x')))(f)((\f'. \x'. f'(f'(x')))(f)(x))
+  = \f. \x. (\x'. f(f(x')))(f(f(x')))
+  = \f. \x. f(f(f(f(x))))
+```
+
+Multiplication is harder and there's better
+[exposition on Wikipedia](https://en.wikipedia.org/wiki/Church_encoding#Calculation_with_Church_numerals).
+Another good reference is [on stackoverflow](https://stackoverflow.com/questions/3077908/church-numeral-for-addition).
+
 ## Purity
 
 A function is pure if the return value is only determined by its input values, and does not produce side effects.
@@ -277,10 +326,10 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 
 ```rust
 // Custom immutable sort method
-let sort = | x: Vec<i32> | -> Vec<i32> {
-    let mut cloned_x = x.clone();
-    cloned_x.sort();
-    cloned_x
+let sort = |x: Vec<i32>| -> Vec<i32> {
+    let mut x = x;
+    x.sort();
+    x
 };
 ```
 
@@ -426,10 +475,27 @@ To be a valid category 3 rules must be met:
     `f • (g • h)` is the same as `(f • g) • h`
 
 Since these rules govern composition at very abstract level, category theory is great at uncovering new ways of composing things.
+In particular, many see this as another foundation of mathematics (so, everything would be a category from this view of math).
+Various definitions in this guide are related to category theory since this approach applies elegantly to functional programming.
+
+__Examples of categories__
+
+When one specifies a category, the objects and morphisms are essential. Additionally, showing that the rules are met is nice
+though usually left to the reader as an exercise.
+
+* Any type and pure functions on the type. (Note, we require purity since side-effects affect associativity (the third rule).)
+
+These examples come up in mathematics:
+
+* 1: the category with 1 object and its identity morphism.
+* Monoidal categories: [monoids are defined later](#monoids) but any monoid is a category with 1 object and many morphisms
+  from the object to itself. (Yes, there is also a category of monoids -- this is not that -- this example is that any monoid is its own
+  category.)
 
 __Further reading__
 
 * [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+* [Awodey's introduction](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.211.4754&rep=rep1&type=pdf) for those who like math.
 
 ## Value
 
@@ -473,7 +539,7 @@ Variance in Rust is used during the type checking against type and lifetime para
 
 ## Higher Kinded Type (HKT)
 
-Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a 
+Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a
 type with a "hole" in it, so you can declare a type signature such as `trait Functor<F<A>>`.
 
 Although Rust lacks in a native support for HKT, we always have a walk around called [Lightweight Higher Kinded Type](https://www.cl.cam.ac.uk/~jdy22/papers/lightweight-higher-kinded-polymorphism.pdf)
@@ -548,12 +614,54 @@ impl<A, B> Functor<A, B> for Option<A> {
     }
 }
 
+// This conflicts with the above, so isn't tested
+// below and is commented out. TODO: add a careful
+// implementation that makes sure Optional and this
+// don't conflict.
+impl<A, B, T> HKT<A, B> for T
+where
+    T: Sized + Iterator<Item = A>,
+    U: Sized + Iterator<Item = B>,
+{
+    type URI = Self;
+    type Target = U;
+}
+
+impl<A, B, T> Functor<A, B> for T
+where
+    T: Iterator<Item = A>,
+{
+    fn fmap<F>(self, f: F) -> Self::Target
+    where
+        F: FnOnce(A) -> B,
+        A: Sized,
+        B: Sized,
+    {
+        self.map(f)
+    }
+}
+
 #[test]
 fn test_functor() {
     let z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1); // Return Option<B>
     assert_eq!(z, Some(3)); // passes
 }
 ```
+
+__The Underlying Math__
+
+The confusing fact is that functors are morphisms in the category of categories. Really, this means that
+a functor from category `C` into `D` preserves properties of the category, so that the data is somewhat
+preserved.
+
+Technically, every category has a functor into the simplest (non-empty) category (1): since the category `1` just
+has one object and one function, map all the objects and functions in whatever category you start from into the
+thing in `1`. So, data isn't quite preserved in a "nice" sense. Such functors are called forgetful sometimes as
+they drop structure.
+
+However, less forgetful examples provide more insight and empower useful statements about types.
+Unfortunately, these are rather heavy-handed in the mathematics they evoke.
+
 
 ## Pointed Functor
 
@@ -584,7 +692,7 @@ assert_eq!(pointed_functor, Maybe::Just(1));
 
 ## Lifting
 
-Lifting in functional programming typically means to lift a function into a context (a Functor or Monad). 
+Lifting in functional programming typically means to lift a function into a context (a Functor or Monad).
 For example, give a function `a -> b` and lift it into a `List` then the signature would
 look like `List[a] -> List[b]`.
 
@@ -599,7 +707,7 @@ When an application is composed of expressions and devoid of side effects, truth
 
 ## Monoid
 
-An object with a function that "combines" that object with another of the same type.
+An set with a binary function that "combines" pairs from that set into another element of the set.
 
 One simple monoid is the addition of numbers:
 
@@ -608,14 +716,14 @@ One simple monoid is the addition of numbers:
 // i32: 2
 ```
 
-In this case number is the object and `+` is the function.
+In this case numbers are the set and `+` is the function.
 
 An "identity" value must also exist that when combined with a value doesn't change it.
 
 The identity value for addition is `0`.
 
 ```rust
-1 + 0 
+1 + 0
 // i32: 1
 ```
 
@@ -653,6 +761,24 @@ fn identity<A>(a: A) -> A {
 ```rust
 compose(foo, identity) ≍ compose(identity, foo) ≍ foo
 ```
+
+We can express Monoid as a Rust trait and the type signature would look like below
+
+```rust
+use crate::applicative_example::Applicative;
+
+trait Empty<A> {
+    fn empty() -> A;
+}
+
+trait Monoid<A, F, B>: Empty<A> + Applicative<A, F, B>
+where
+    F: FnOnce(A) -> B,
+{
+}
+```
+
+According to Fantasy Land Specification, Monoid should implement `Empty` and `Applicative`.
 
 ## Monad
 
@@ -693,9 +819,16 @@ fn monad_example() {
 
 `pure` is also known as `return` in other functional languages. `flat_map` is also known as `bind` in other languages.
 
+Importantly, it is worth noting that monads are a rather advanced topic in category theory. In fact, they are called
+triples by some as they involve adjoint functors and their unit -- both of which are rare to see in functional programming.
+The meme is to think of a monad as a burrito with "pure" being the act of taking a tortilla (the empty burrito) and
+adding ingredients using "chain".
+
+The purely mathematical presentation of monads does not look anything like this, but there is an equivalence.
+
 ## Comonad
 
-An object that has `extract` and `extend` functions. 
+An object that has `extract` and `extend` functions.
 
 ```rust
 trait Extend<A, B>: Functor<A, B> + Sized {
@@ -730,7 +863,7 @@ impl<A> Extract<A> for Option<A> {
 }
 ```
 
-Extract takes a value out of a functor.
+Extract takes a value out of a comonad.
 
 ```rust
 Some(1).extract(); // 1
@@ -742,7 +875,11 @@ Extend runs a function on the Comonad.
 Some(1).extend(|co| co.extract() + 1); // Some(2)
 ```
 
-## Applicative 
+This can be thought of as the reverse of a monad. In fact, this is called
+the "dual" in category theory. (Basically, if you know what `A` is, a `coA`
+is everything in `A`'s definition with the arrows reversed.)
+
+## Applicative
 
 An applicative functor is an object with an `ap` function. `ap` applies a function in the object to a value in another
 object of the same type. Given a pure program `g: (b: A) -> B`, we must lift it to `g: (fb: F<A>) -> F<B>`. In order to achieve
@@ -812,7 +949,17 @@ assert_eq!(x, Some(2));
 
 ## Morphism
 
-A transformation function.
+A function that preserves the structure of its domain.
+See [the category definition](#category) from more.
+
+The first few (endomorphism, homomorphism, and isomorphism) are easier to
+understand than the rest. The rest require the notion of an F-algebra.
+The simpler Haskell declarations are listed in [the wikipedia on paramorphisms](https://en.wikipedia.org/wiki/Paramorphism)
+but the notions have yet to be extended to more general category theory.
+Briefly, the view of F-algebras is to take the set-theoretic definition of algebraic
+objects and redefined them on a purely category theoretic footing: to move the ideas
+away from sets containing elements to collections of objects with morphisms.
+However, some of the ideas here have yet to be generalised into this movement.
 
 ### Endomorphism
 
@@ -828,7 +975,7 @@ let decrement = |x: i32| x - 1;
 
 ### Isomorphism
 
-A pair of transformations between 2 types of objects that is structural in nature and no data is lost.
+A pair of transformations between 2 types of objects that is invertible.
 
 For example, 2D coordinates could be stored as a i32 vector [2,3] or a struct {x: 2, y: 3}.
 
@@ -851,9 +998,14 @@ assert_eq!(
 ); // passes
 ```
 
+Isomorphisms are critical in making structures identical. Since we know that the struct above is
+identical to a pair, all the functions that exist on the pair can exist on the struct. If `f`
+is the isomorphism and `g` and endomorphism on the codomain: `f^{-1} g f` would extend `g`
+to apply on the domain.
+
 ### Homomorphism
 
-A homomorphism is just a structure preserving map.
+A homomorphism is just a structure preserving map. It is the older term of morphism.
 In fact, a functor is just a homomorphism between categories as it preserves the original category's structure under the mapping.
 
 ```rust
@@ -905,11 +1057,14 @@ assert_eq!(
 The combination of anamorphism and catamorphism.
 
 ### Apomorphism
+
 It's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism.
 Whereas with paramorphism, you combine with access to the accumulator and what has been accumulated,
 apomorphism lets you unfold with the potential to return early.
 
 ## Setoid
+
+This is a set with an equivalence relation.
 
 An object that has an `equals` function which can be used to compare other objects of the same type.
 
@@ -1315,5 +1470,5 @@ pub trait Limit<A>: Cone<A>{
 ## My thought on this project
 
 Please be mindful that the project does not fully cover every single definitions with code examples since it does not worth
-investing too much time in a glossary project. I have put extra effort in adding complementary external references that 
+investing too much time in a glossary project. I have put extra effort in adding complementary external references that
 you can check out for further study.
