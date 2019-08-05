@@ -5,6 +5,30 @@ authors = ["Jason Shin <visualbbasic@gmail.com>"]
 edition = "2018"
 description = "A library for functional programming in Rust"
 license = "MIT"
+authors = ["Jason Shin <visualbbasic@gmail.com>"]
+keywords = [
+  "functional programming",
+  "haskell",
+  "pure",
+  "fantasy land",
+  "applicative",
+  "apply",
+  "chain",
+  "comonad",
+  "compose",
+  "empty",
+  "extend",
+  "extract",
+  "functor",
+  "hkt",
+  "higher kinded type",
+  "identity",
+  "lens",
+  "monad",
+  "monoid",
+  "semigroup",
+  "setoid"
+]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
