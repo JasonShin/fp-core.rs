@@ -1,31 +1,8 @@
+use fp_core::apply::Apply;
 use fp_core::functor::Functor;
-use fp_core::hkt::HKT;
-
-// HKT 3
-pub trait HKT3<A, B, C> {
-    type Target2;
-}
-
-impl<A, B, C> HKT3<A, B, C> for Option<A> {
-    type Target2 = Option<B>;
-}
+use fp_core::hkt::{HKT, HKT3};
 
 // Apply
-pub trait Apply<A, F, B>: Functor<A, B> + HKT3<A, F, B>
-where
-    F: FnOnce(A) -> B,
-{
-    fn ap(self, f: <Self as HKT3<A, F, B>>::Target2) -> <Self as HKT<A, B>>::Target;
-}
-
-impl<A, F, B> Apply<A, F, B> for Option<A>
-where
-    F: FnOnce(A) -> B,
-{
-    fn ap(self, f: Self::Target2) -> Self::Target {
-        self.and_then(|v| f.map(|z| z(v)))
-    }
-}
 
 // Pure
 pub trait Pure<A>: HKT<A, A> {
