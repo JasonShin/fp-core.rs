@@ -1,9 +1,6 @@
+use fp_core::comonad::*;
 use fp_core::extend::*;
 use fp_core::extract::*;
-use fp_core::functor::Functor;
-use fp_core::hkt::HKT;
-
-trait Comonad<A, B>: Extend<A, B> + Extract<A> {}
 
 #[test]
 fn comonad_test() {

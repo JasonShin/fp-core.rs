@@ -1,6 +1,7 @@
 pub mod applicative;
 pub mod apply;
 pub mod chain;
+pub mod comonad;
 pub mod extend;
 pub mod extract;
 pub mod functor;
