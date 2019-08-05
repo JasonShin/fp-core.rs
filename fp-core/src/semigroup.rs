@@ -1,3 +1,5 @@
+use itertools::concat;
+
 pub trait Semigroup {
     fn combine(&self, b: &Self) -> Self;
 }
