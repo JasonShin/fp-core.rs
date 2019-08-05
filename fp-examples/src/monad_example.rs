@@ -1,5 +1,6 @@
-use crate::applicative_example::{Applicative, Pure};
+use fp_core::applicative::*;
 use fp_core::hkt::HKT;
+use fp_core::pure::*;
 
 pub trait Chain<A, B>: HKT<A, B> {
     fn chain<F>(self, f: F) -> <Self as HKT<A, B>>::Target

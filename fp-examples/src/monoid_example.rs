@@ -1,4 +1,4 @@
-use crate::applicative_example::Applicative;
+use fp_core::applicative::Applicative;
 
 macro_rules! compose {
     ( $last:expr ) => { $last };

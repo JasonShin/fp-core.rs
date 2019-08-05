@@ -1,6 +1,7 @@
-use fp_core::applicative;
-use fp_core::apply;
-use fp_core::pure;
+use fp_core::applicative::*;
+use fp_core::apply::*;
+use fp_core::hkt::HKT;
+use fp_core::pure::*;
 
 #[test]
 fn applicative_example() {
