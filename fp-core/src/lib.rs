@@ -6,5 +6,6 @@ pub mod extend;
 pub mod extract;
 pub mod functor;
 pub mod hkt;
+pub mod lens;
 pub mod monad;
 pub mod pure;
