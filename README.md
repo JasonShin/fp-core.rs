@@ -2,9 +2,21 @@
 
 [![Build Status](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_apis/build/status/JasonShin.functional-programming-jargon.rs?branchName=master)](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_build/latest?definitionId=3&branchName=master)
 
+The project is a library for functional programming in Rust. However, it also contains a README project with a list of [functional programming jargon](#functional-programming-jargon-in-rust) with their definition.
+
 # fp-core
 
-A library for functional programming in Rust. 
+A library for functional programming in Rust.
+
+It contains purely functional data structures to supplement the functional programming needs alongside with the Rust Standard Library.
+
+# Getting started
+
+Add below to your Cargo.toml
+
+```rust
+fp-core = "0.1.2"
+```
 
 # Functional Programming Jargon in Rust
 
