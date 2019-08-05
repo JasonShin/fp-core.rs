@@ -1,6 +1,4 @@
-use fp_core::applicative::Applicative;
 use fp_core::compose::*;
-use fp_core::empty::Empty;
 use fp_core::identity::*;
 
 fn foo(a: i32) -> i32 {

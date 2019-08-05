@@ -13,7 +13,8 @@ impl Lens<Person, String> for PersonNameLens {
         Some(&s.name)
     }
 
-    fn set(a: String, s: &Person) -> Person {
+    #[allow(dead_code)]
+    fn set(a: String, _s: &Person) -> Person {
         Person { name: a }
     }
 }
@@ -25,7 +26,8 @@ impl<A> Lens<Vec<A>, A> for FirstLens {
         s.first()
     }
 
-    fn set(a: A, s: &Vec<A>) -> Vec<A> {
+    #[allow(dead_code)]
+    fn set(_a: A, _s: &Vec<A>) -> Vec<A> {
         unimplemented!()
     }
 }

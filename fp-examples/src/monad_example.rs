@@ -1,5 +1,4 @@
 use fp_core::chain::*;
-use fp_core::monad::*;
 use fp_core::pure::*;
 
 #[test]

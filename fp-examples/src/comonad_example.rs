@@ -1,4 +1,3 @@
-use fp_core::comonad::*;
 use fp_core::extend::*;
 use fp_core::extract::*;
 
