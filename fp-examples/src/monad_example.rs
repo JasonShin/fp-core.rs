@@ -1,21 +1,7 @@
 use fp_core::applicative::*;
+use fp_core::chain::*;
 use fp_core::hkt::HKT;
 use fp_core::pure::*;
-
-pub trait Chain<A, B>: HKT<A, B> {
-    fn chain<F>(self, f: F) -> <Self as HKT<A, B>>::Target
-    where
-        F: FnOnce(A) -> <Self as HKT<A, B>>::Target;
-}
-
-impl<A, B> Chain<A, B> for Option<A> {
-    fn chain<F>(self, f: F) -> Self::Target
-    where
-        F: FnOnce(A) -> <Self as HKT<A, B>>::Target,
-    {
-        self.and_then(f)
-    }
-}
 
 pub trait Monad<A, F, B>: Chain<A, B> + Applicative<A, F, B>
 where
