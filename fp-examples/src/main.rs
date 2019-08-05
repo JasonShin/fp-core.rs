@@ -1,8 +1,9 @@
 #[macro_use]
 extern crate partial_application;
+extern crate fp_core;
 extern crate rats;
 
-mod adt_example;
+pub mod adt_example;
 mod anamorphism_example;
 mod applicative_example;
 mod arity_example;
@@ -33,7 +34,3 @@ mod semigroup_example;
 mod setoid_example;
 mod side_effects_example;
 mod type_signature_example;
-
-fn main() {
-    println!("Hello, PureRust!");
-}
