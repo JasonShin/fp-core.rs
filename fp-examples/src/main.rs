@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate partial_application;
+#[macro_use]
 extern crate fp_core;
 extern crate rats;
 

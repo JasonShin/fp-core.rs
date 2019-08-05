@@ -1,24 +1,7 @@
 use fp_core::applicative::Applicative;
+use fp_core::compose::*;
 use fp_core::empty::Empty;
-
-macro_rules! compose {
-    ( $last:expr ) => { $last };
-    ( $head:expr, $($tail:expr), +) => {
-        compose_two($head, compose!($($tail),+))
-    };
-}
-
-fn compose_two<A, B, C, G, F>(f: F, g: G) -> impl Fn(A) -> C
-where
-    F: Fn(A) -> B,
-    G: Fn(B) -> C,
-{
-    move |x| g(f(x))
-}
-
-fn identity<A>(a: A) -> A {
-    a
-}
+use fp_core::identity::*;
 
 fn foo(a: i32) -> i32 {
     a + 20
