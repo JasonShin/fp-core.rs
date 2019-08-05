@@ -1,6 +1,8 @@
 pub mod applicative;
 pub mod apply;
 pub mod chain;
+pub mod extend;
+pub mod extract;
 pub mod functor;
 pub mod hkt;
 pub mod monad;
