@@ -6,10 +6,10 @@ edition = "2018"
 description = "A library for functional programming in Rust"
 license = "MIT"
 keywords = [
-  "functional programming",
+  "fp",
   "haskell",
   "pure",
-  "fantasy land",
+  "fantasyland",
   "applicative",
   "apply",
   "chain",
@@ -20,7 +20,6 @@ keywords = [
   "extract",
   "functor",
   "hkt",
-  "higher kinded type",
   "identity",
   "lens",
   "monad",
