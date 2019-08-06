@@ -22,7 +22,7 @@ fp-core = "0.1.3"
 If you have [Cargo Edit](https://github.com/killercup/cargo-edit) you may simply
 
 ```bash
-# cargo add fp-core
+$ cargo add fp-core
 ```
 
 # Functional Programming Jargon in Rust
