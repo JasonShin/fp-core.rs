@@ -8,24 +8,9 @@ license = "MIT"
 keywords = [
   "fp",
   "haskell",
-  "pure",
-  "fantasyland",
   "applicative",
-  "apply",
-  "chain",
-  "comonad",
-  "compose",
-  "empty",
-  "extend",
-  "extract",
   "functor",
-  "hkt",
-  "identity",
-  "lens",
   "monad",
-  "monoid",
-  "semigroup",
-  "setoid"
 ]
 readme = "../README.md"
 
