@@ -1,4 +1,3 @@
-use crate::applicative::Applicative;
 use crate::empty::Empty;
 use crate::semigroup::Semigroup;
 
