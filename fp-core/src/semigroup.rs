@@ -1,3 +1,3 @@
-use std::ops::{Add, Sub};
+use std::ops::{Add, Mul};
 
-pub trait Semigroup<M>: Add<M> + Sub<M> {}
+pub trait Semigroup<M>: Add<M> + Mul<M> {}
