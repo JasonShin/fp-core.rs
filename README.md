@@ -1121,29 +1121,22 @@ An object that has a `combine` function that combines it with another object of 
 
 It must obey following rules to be `Semigroup`
 
-1. `a.combine(b).combine(c)` is equivalent to `a.combine(b.combine(c))` (associativity)
+1. `a.add(b).add(c)` is equivalent to `a.add(b.add(c))` (associativity)
 
 ```rust
-use itertools::concat;
+use std::ops::Add;
 
-trait Semigroup {
-    fn combine(&self, b: &Self) -> Self;
-}
-
-impl Semigroup for Vec<i32> {
-    fn combine(&self, b: &Self) -> Vec<i32> {
-        concat(vec![self.clone(), b.clone()])
-    }
+pub trait Semigroup<M>: Add<M> {
 }
 
 assert_eq!(
-    vec![1, 2].combine(&vec![3, 4]),
+    vec![1, 2].add(&vec![3, 4]),
     vec![1, 2, 3, 4],
 ); // passes
 
 assert_eq!(
-    a.combine(&b).combine(&c),
-    a.combine(&b.combine(&c)),
+    a.add(&b).add(&c),
+    a.add(&b.add(&c)),
 ); // passes
 ```
 

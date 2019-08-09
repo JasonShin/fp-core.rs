@@ -35,3 +35,7 @@ mod semigroup_example;
 mod setoid_example;
 mod side_effects_example;
 mod type_signature_example;
+
+fn main() {
+    println!("Welcome to fp-core!");
+}
