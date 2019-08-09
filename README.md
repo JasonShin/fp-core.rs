@@ -1166,6 +1166,16 @@ let result = VecKind::fold_right(k, 0, | (i, acc) | i + acc);
 assert_eq!(result, 6);
 ```
 
+If you were to implement `Foldable` manually, the trait of it would look like below
+
+```rust
+pub trait Foldable<A, B>: HKT<A, B> {
+    fn reduce<F>(b: B, ba: F) -> <Self as HKT<A, B>>::Target
+    where
+        F: FnOnce(B, A) -> (B, B);
+}
+```
+
 ## Lens
 
 A lens is a type that pairs a getter and a non-mutating setter for some other data structure.
