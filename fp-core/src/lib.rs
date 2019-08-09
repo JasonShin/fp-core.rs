@@ -6,6 +6,7 @@ pub mod compose;
 pub mod empty;
 pub mod extend;
 pub mod extract;
+pub mod foldable;
 pub mod functor;
 pub mod hkt;
 pub mod identity;
