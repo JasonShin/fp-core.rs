@@ -14,4 +14,5 @@ pub mod lens;
 pub mod monad;
 pub mod monoid;
 pub mod pure;
+pub mod semigroup;
 pub mod setoid;
