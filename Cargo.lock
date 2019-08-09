@@ -7,7 +7,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "fp-core"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "itertools 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -16,7 +16,7 @@ dependencies = [
 name = "fp-examples"
 version = "0.1.0"
 dependencies = [
- "fp-core 0.1.5",
+ "fp-core 0.1.6",
  "itertools 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "partial_application 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "rats 0.0.1 (registry+https://github.com/rust-lang/crates.io-index)",

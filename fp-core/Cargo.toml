@@ -1,6 +1,6 @@
 [package]
 name = "fp-core"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["Jason Shin <visualbbasic@gmail.com>", "Heman Gandhi <hemangandhi@gmail.com>"]
 edition = "2018"
 description = "A library for functional programming in Rust"
