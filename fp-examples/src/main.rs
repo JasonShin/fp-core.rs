@@ -8,7 +8,6 @@ pub mod adt_example;
 mod anamorphism_example;
 mod applicative_example;
 mod arity_example;
-mod cartesian_product;
 mod catamorphism_example;
 mod closure_example;
 mod comonad_example;
