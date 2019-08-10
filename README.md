@@ -2,11 +2,13 @@
 
 [![Build Status](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_apis/build/status/JasonShin.functional-programming-jargon.rs?branchName=master)](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_build/latest?definitionId=3&branchName=master)
 
-The project is a library for functional programming in Rust. 
+The project is a library for functional programming in Rust.
 
-If you are looking for the FP Jargon, jump to [functional programming jargon](#functional-programming-jargon-in-rust) with their definition.
+* [fp-core.rs](#fp-corers)
+* [installation](#installation)
+* [functional programming jargon in rust](#functional-programming-jargon-in-rust)
 
-# fp-core
+# fp-core.rs
 
 A library for functional programming in Rust.
 
