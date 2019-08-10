@@ -1267,7 +1267,6 @@ Lens::over(composeL!(FirstLens, NameLens), &|x: Option<&String>| {
 }, people); // vec![Person { name: "JASON" }, Person { name: "John" }];
 ```
 
-
 **Further Reading**
 
 - [A Little Lens Starter](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial)
@@ -1400,101 +1399,6 @@ match price {
 ```
 
 `Option` is also known as `Maybe`. `Some` is sometimes called `Just`. `None` is sometimes called `Nothing`.
-
-## Limits and Colimits
-
-These are purely category-theoretic concepts.
-
-In most mathematical discussions of category theory, cones and
-cocones are first described and are the foundation of limits.
-Cones and cocones, in turn, require the notion of diagrams.
-
-To follow with this dependency chain, the notion of products is
-a common example. This is the set-theoretic cartesian product:
-
-```rust
-fn cartesian_product<A, B>(s: impl Iterator<Item=A>,
-                           t: impl Iterator<Item=B>)
-    -> impl Iterator<Item=(A, B)>{
-    s.flat_map(|x| t.map(|y| (x, y)))
-}
-```
-
-(At least, if we suspend disbelief and say that an `impl Iterator`
-is a set.) Concretely, the product of `S = {A, B, C}` and `T = {1, 2, 3}`
-is `{(A, 1), (B, 1), (C, 1), (A, 2), (B, 2), (C, 2), (A, 3), (B, 3), (C, 3)}`. I'll refer back to this throughout.
-
-### Diagrams
-
-**Diagrams** are smaller categories with just the objects and
-morphisms we care about. The most formal way to present this
-is to have the diagram category be some "formal category" (that
-is, a category with just a pre-defined set of objects and arrows
-so that the axioms are satisfied) and then have a functor from the
-diagram into the larger category. To anybody used to graph theory
-a "transitively closed directed multi-graph" should be a sufficient summary
-(with every node having at least one self-edge).
-
-The category-theoretic notion of a product starts with a diagram:
-the diagram has only 2 objects and no extra arrows (just the identity arrows on the objects).
-So in the above example, the diagram would just be `{A, B, C}`
-and `{1, 2, 3}` as two objects.
-
-### Cones
-
-**Cones** are "taken over diagrams." Formally, a cone is an object,
-a diagram, and a set of arrows from the object to the objects in
-the diagram. Furthermore, the triangles formed must commute.
-
-Resuming the example: if P is the the
-product of S and T, we have a diagram with a "projection" arrow
-from P to S and another projection arrow from P to T.
-In the concrete example, `f((x, y)) = x` and `g((x, y)) = y`
-would be the arrows mentioned here. P is in the cone and so the
-arrows are forced from the defintion. Given the example, we are
-lucky that no triangles are formed so we need not check for
-commutativity.
-
-### Limits
-
-Finally: **limits** are special cones: they are cones so that
-for any other cone
-the object in the cone has a unique arrow to the object of
-the limit over the same diagram. The object in the limit cone
-is generally called the limit.
-
-In the example, `P = {(A, 1), (B, 1), (C, 1), (A, 2), (B, 2), (C, 2), (A, 3), (B, 3), (C, 3)}` is the limit.
-To prove this, one must consider the cones: in particular, the `f` and `g` above (`|(x, _)| x` and `|(_, y)| y`)
-are generally the projection arrows from the product to the two multiplicands.
-Now, suppose there was another cone: a set `X` where `ff: Fn(X) -> S` and `gg: Fn(X) -> T`.
-If `P` is indeed a limit, we'd have some `h: Fn(X) -> P` so that `f h = ff` and `g h = gg`.
-For this, we fix a `z` in `X` and define: `h(z) = (ff(z), gg(z))`.
-
-Here is some contrived psuedo-Rust that might clarify:
-
-```rust
-pub trait Diagram<A>{
-    fn objects(&self) -> Vec<A>;
-    fn arrows(&self) -> Vec<(A, A)>;
-
-    // TODO: Not sure if I did this right, but want to say
-    // that the Embedding is a functor from the diagram into C
-    // (this doesn't compile).
-    type Embedding<C> = Functor<Self, C, URI=Self, Target=C>;
-}
-
-pub trait Cone<A>{
-    // Rustc apparently doesn't like the impl here...
-    fn underlying_diagram(&self) -> impl Diagram<A>;
-    fn object_at_tip(&self) -> A;
-    fn arrows_into_diagram(&self) -> Vec<(A, A)>;
-}
-
-pub trait Limit<A>: Cone<A>{
-    fn unique_arrow_from_cone(&self, other_cone: impl Cone<A>)
-        -> Vec<(A, A)>;
-}
-```
 
 ## Functional Programming references
 
