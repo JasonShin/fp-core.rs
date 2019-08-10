@@ -16,7 +16,7 @@ with the Rust Standard Library.
 Add below line to your Cargo.toml
 
 ```rust
-fp-core = "0.1.6"
+fp-core = "0.1.7"
 ```
 
 If you have [Cargo Edit](https://github.com/killercup/cargo-edit) you may simply
