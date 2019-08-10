@@ -2,7 +2,9 @@
 
 [![Build Status](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_apis/build/status/JasonShin.functional-programming-jargon.rs?branchName=master)](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_build/latest?definitionId=3&branchName=master)
 
-The project is a library for functional programming in Rust. In addition, it contains a list of [functional programming jargon](#functional-programming-jargon-in-rust) with their definition.
+The project is a library for functional programming in Rust. 
+
+If you are looking for the FP Jargon, jump to [functional programming jargon](#functional-programming-jargon-in-rust) with their definition.
 
 # fp-core
 
@@ -25,7 +27,7 @@ If you have [Cargo Edit](https://github.com/killercup/cargo-edit) you may simply
 $ cargo add fp-core
 ```
 
-# Functional Programming Jargon in Rust
+# functional programming jargon in rust
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result.
 However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary,
