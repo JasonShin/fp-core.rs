@@ -10,4 +10,8 @@ pub trait Foldable<A, B>: HKT<A, B> {
     where
         M: Monoid<N>,
         F: FnOnce(<Self as HKT<A, B>>::URI) -> M;
+
+    fn reduce_right<F>(b: B, f: F) -> <Self as HKT<A, B>>::Target
+    where
+        F: FnOnce(A, B) -> (B, B);
 }
