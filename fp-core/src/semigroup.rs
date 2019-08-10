@@ -1,15 +1,14 @@
 use std::ops::Add;
 
-pub trait Semigroup<T> {
-    fn combine(self, other: T) -> T;
+pub trait Semigroup {
+    fn combine(self, other: Self) -> Self;
 }
 
-impl<T, I> Semigroup<T> for I
+impl<I> Semigroup for I
 where
-    I: Add<T, Output = T>,
-    Self: Into<T>,
+    I: Add<I>,
 {
-    fn combine(self, other: T) -> T {
+    fn combine(self, other: I) -> I {
         self.add(other)
     }
 }
