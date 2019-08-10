@@ -5,7 +5,7 @@
 The project is a library for functional programming in Rust.
 
 * [fp-core.rs](#fp-corers)
-* [installation](#installation)
+    * [installation](#installation)
 * [functional programming jargon in rust](#functional-programming-jargon-in-rust)
 
 # fp-core.rs
@@ -15,7 +15,7 @@ A library for functional programming in Rust.
 It contains purely functional data structures to supplement the functional programming needs alongside
 with the Rust Standard Library.
 
-# Installation 
+## Installation 
 
 Add below line to your Cargo.toml
 
