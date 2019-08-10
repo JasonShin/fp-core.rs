@@ -1,11 +1,4 @@
-trait Lens<S, A> {
-    fn over(s: &S, f: &Fn(Option<&A>) -> A) -> S {
-        let result: A = f(Self::get(s));
-        Self::set(result, &s)
-    }
-    fn get(s: &S) -> Option<&A>;
-    fn set(a: A, s: &S) -> S;
-}
+use fp_core::lens::Lens;
 
 #[derive(Debug, PartialEq, Clone)]
 struct Person {
@@ -20,7 +13,8 @@ impl Lens<Person, String> for PersonNameLens {
         Some(&s.name)
     }
 
-    fn set(a: String, s: &Person) -> Person {
+    #[allow(dead_code)]
+    fn set(a: String, _s: &Person) -> Person {
         Person { name: a }
     }
 }
@@ -32,7 +26,8 @@ impl<A> Lens<Vec<A>, A> for FirstLens {
         s.first()
     }
 
-    fn set(a: A, s: &Vec<A>) -> Vec<A> {
+    #[allow(dead_code)]
+    fn set(_a: A, _s: &Vec<A>) -> Vec<A> {
         unimplemented!()
     }
 }
