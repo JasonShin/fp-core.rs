@@ -1,3 +1,4 @@
+#[test]
 fn endomorphism_example() {
     let uppercase = |x: &str| x.to_uppercase();
     let decrement = |x: i32| x - 1;

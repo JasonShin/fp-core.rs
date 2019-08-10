@@ -1,14 +1,7 @@
-use itertools::concat;
-
-trait Semigroup {
-    fn combine(&self, b: &Self) -> Self;
-}
-
-impl Semigroup for Vec<i32> {
-    fn combine(&self, b: &Self) -> Vec<i32> {
-        concat(vec![self.clone(), b.clone()])
-    }
-}
+/*
+// Note that below are just example code. We no longer use manual semigroup implementation.
+// Instead we favour Add, Mul, Sub and etc from std.
+use fp_core::semigroup::*;
 
 #[test]
 fn semigroup_test() {
@@ -18,3 +11,4 @@ fn semigroup_test() {
     assert_eq!(vec![1, 2].combine(&vec![3, 4]), vec![1, 2, 3, 4],);
     assert_eq!(a.combine(&b).combine(&c), a.combine(&b.combine(&c)),);
 }
+*/

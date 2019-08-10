@@ -1,27 +1,4 @@
-pub trait HKT<A, B> {
-    type URI;
-    type Target;
-}
-
-pub trait Functor<A, B>: HKT<A, B> {
-    fn fmap<F>(self, f: F) -> <Self as HKT<A, B>>::Target
-    where
-        F: FnOnce(A) -> B;
-}
-
-impl<A, B> HKT<A, B> for Option<A> {
-    type URI = Self;
-    type Target = Option<B>;
-}
-
-impl<A, B> Functor<A, B> for Option<A> {
-    fn fmap<F>(self, f: F) -> Self::Target
-    where
-        F: FnOnce(A) -> B,
-    {
-        self.map(f)
-    }
-}
+use fp_core::functor::Functor;
 
 // impl<A, B, T> HKT<A, B> for T
 // where

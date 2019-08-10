@@ -1,5 +1,6 @@
 #[derive(Debug, PartialEq, Eq)]
 enum Maybe<T> {
+    #[allow(dead_code)]
     Nothing,
     Just(T),
 }

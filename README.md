@@ -2,7 +2,34 @@
 
 [![Build Status](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_apis/build/status/JasonShin.functional-programming-jargon.rs?branchName=master)](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_build/latest?definitionId=3&branchName=master)
 
-# Functional Programming Jargon in Rust
+The project is a library for functional programming in Rust.
+
+* [fp-core.rs](#fp-corers)
+    * [installation](#installation)
+* [functional programming jargon in rust](#functional-programming-jargon-in-rust)
+
+# fp-core.rs
+
+A library for functional programming in Rust.
+
+It contains purely functional data structures to supplement the functional programming needs alongside
+with the Rust Standard Library.
+
+## Installation 
+
+Add below line to your Cargo.toml
+
+```rust
+fp-core = "0.1.8"
+```
+
+If you have [Cargo Edit](https://github.com/killercup/cargo-edit) you may simply
+
+```bash
+$ cargo add fp-core
+```
+
+# functional programming jargon in rust
 
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result.
 However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary,
@@ -1098,29 +1125,22 @@ An object that has a `combine` function that combines it with another object of 
 
 It must obey following rules to be `Semigroup`
 
-1. `a.combine(b).combine(c)` is equivalent to `a.combine(b.combine(c))` (associativity)
+1. `a.add(b).add(c)` is equivalent to `a.add(b.add(c))` (associativity)
 
 ```rust
-use itertools::concat;
+use std::ops::Add;
 
-trait Semigroup {
-    fn combine(&self, b: &Self) -> Self;
-}
-
-impl Semigroup for Vec<i32> {
-    fn combine(&self, b: &Self) -> Vec<i32> {
-        concat(vec![self.clone(), b.clone()])
-    }
+pub trait Semigroup<M>: Add<M> {
 }
 
 assert_eq!(
-    vec![1, 2].combine(&vec![3, 4]),
+    vec![1, 2].add(&vec![3, 4]),
     vec![1, 2, 3, 4],
 ); // passes
 
 assert_eq!(
-    a.combine(&b).combine(&c),
-    a.combine(&b.combine(&c)),
+    a.add(&b).add(&c),
+    a.add(&b.add(&c)),
 ); // passes
 ```
 
@@ -1141,6 +1161,28 @@ use rats::kinds::VecKind;
 let k = vec![1, 2, 3].into_kind();
 let result = VecKind::fold_right(k, 0, | (i, acc) | i + acc);
 assert_eq!(result, 6);
+```
+
+If you were to implement `Foldable` manually, the trait of it would look like below
+
+```rust
+use crate::hkt::HKT;
+use crate::monoid::Monoid;
+
+pub trait Foldable<A, B>: HKT<A, B> {
+    fn reduce<F>(b: B, ba: F) -> <Self as HKT<A, B>>::Target
+    where
+        F: FnOnce(B, A) -> (B, B);
+
+    fn fold_map<M, N, F>(m: M, fa: F) -> M
+    where
+        M: Monoid<N>,
+        F: FnOnce(<Self as HKT<A, B>>::URI) -> M;
+
+    fn reduce_right<F>(b: B, f: F) -> <Self as HKT<A, B>>::Target
+    where
+        F: FnOnce(A, B) -> (B, B);
+}
 ```
 
 ## Lens
