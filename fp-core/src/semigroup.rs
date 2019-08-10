@@ -6,7 +6,7 @@ pub trait Semigroup {
 
 impl<I> Semigroup for I
 where
-    I: Add<I>,
+    I: Add<I, Output = I>,
 {
     fn combine(self, other: I) -> I {
         self.add(other)

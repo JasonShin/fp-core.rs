@@ -1,9 +1,10 @@
 use crate::applicative::Applicative;
 use crate::chain::Chain;
+use crate::hkt::HKT;
 
-pub trait Monad<A, F, B>: Chain<A, B> + Applicative<A, F, B>
+pub trait Monad<A, F, B>: Chain<B> + Applicative<A, F, B>
 where
-    F: FnOnce(A) -> B,
+    F: FnOnce(<Self as HKT<B>>::Current) -> B,
 {
 }
 

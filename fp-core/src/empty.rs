@@ -1,3 +1,3 @@
-pub trait Empty<A> {
-    fn empty() -> A;
+pub trait Empty {
+    fn empty() -> Self;
 }

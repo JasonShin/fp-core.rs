@@ -1,13 +1,13 @@
 use crate::functor::Functor;
 use crate::hkt::HKT;
 
-pub trait Extend<A, B>: Functor<A, B> + Sized {
-    fn extend<W>(self, f: W) -> <Self as HKT<A, B>>::Target
+pub trait Extend<B>: Functor<B> + Sized {
+    fn extend<W>(self, f: W) -> <Self as HKT<B>>::Target
     where
         W: FnOnce(Self) -> B;
 }
 
-impl<A, B> Extend<A, B> for Option<A> {
+impl<A, B> Extend<B> for Option<A> {
     fn extend<W>(self, f: W) -> Self::Target
     where
         W: FnOnce(Self) -> B,

@@ -1,13 +1,21 @@
-pub trait HKT<A, B> {
-    type URI;
-    type Target;
+pub trait HKT<U> {
+    type Current; // The current contained type
+    type Target; // The next type (how to generically fill in U)
 }
 
-impl<A, B> HKT<A, B> for Option<A> {
-    type URI = Self;
-    type Target = Option<B>;
+macro_rules! derive_hkt {
+    ($t:ident) => {
+        impl<T, U> HKT<U> for $t<T> {
+            type Current = T;
+            type Target = $t<U>;
+        }
+    };
 }
 
+derive_hkt!(Option);
+derive_hkt!(Vec);
+
+// TODO: what is this?
 pub trait HKT3<A, B, C> {
     type Target2;
 }
