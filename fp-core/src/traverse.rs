@@ -1,0 +1,3 @@
+trait Traverse<F, G> {
+
+}
