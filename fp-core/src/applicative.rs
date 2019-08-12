@@ -1,11 +1,6 @@
 use crate::apply::Apply;
-use crate::hkt::HKT;
 use crate::pure::Pure;
 
-pub trait Applicative<A, F, B>: Apply<F, B> + Pure<A>
-where
-    F: FnOnce(<Self as HKT<B>>::Current) -> B,
-{
-}
+pub trait Applicative<A, B>: Apply<B> + Pure<A> {}
 
-impl<A, F, B> Applicative<A, F, B> for Option<A> where F: FnOnce(A) -> B {}
+impl<A, B> Applicative<A, B> for Option<A> {}
