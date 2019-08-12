@@ -1,7 +1,7 @@
 use crate::apply::Apply;
 use crate::pure::Pure;
 
-pub trait Applicative<A, F, B>: Apply<A, F, B> + Pure<A>
+pub trait Applicative<A, F, B>: Apply<A, B> + Pure<A>
 where
     F: FnOnce(A) -> B,
 {

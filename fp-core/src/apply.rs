@@ -1,18 +1,18 @@
 use crate::functor::Functor;
 use crate::hkt::{HKT, HKT3};
 
-pub trait Apply<A, F, B>: Functor<A, B> + HKT3<A, F, B>
-where
-    F: FnOnce(A) -> B,
+pub trait Apply<A, B>: Functor<A, B>
 {
-    fn ap(self, f: <Self as HKT3<A, F, B>>::Target2) -> <Self as HKT<A, B>>::Target;
+    type FAB;
+    type Output;
+    fn ap(self, f: Self::FAB) -> Self::Output;
 }
 
-impl<A, F, B> Apply<A, F, B> for Option<A>
-where
-    F: FnOnce(A) -> B,
+impl<A, B> Apply<A, B> for Option<A>
 {
-    fn ap(self, f: Self::Target2) -> Self::Target {
+    type FAB = Option<dyn Fn(A) -> B>;
+    type Output = Option<B>;
+    fn ap(self, f: Self::FAB) -> Self::Output {
         self.and_then(|v| f.map(|z| z(v)))
     }
 }
