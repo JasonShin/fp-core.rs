@@ -26,6 +26,7 @@ pub trait HKT3<U1, U2> {
     type Target;
 }
 
+/*
 macro_rules! derive_hkt3 {
     ($t:ident) => {
         impl<T1, T2, U1, U2> HKT3<U1, U2> for $t<T1, T2> {
@@ -39,3 +40,4 @@ macro_rules! derive_hkt3 {
 }
 
 derive_hkt3!(HashMap);
+*/
