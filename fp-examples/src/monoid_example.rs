@@ -1,5 +1,6 @@
 use fp_core::compose::*;
 use fp_core::identity::*;
+use fp_core::semigroup::*;
 
 fn foo(a: i32) -> i32 {
     a + 20
@@ -17,4 +18,7 @@ fn monoid_example() {
     assert_eq!(y, vec![1, 2, 3, 4, 5, 6]);
     assert_eq!(u, vec![1, 2]);
     assert_eq!(i, true);
+
+    let j = 1i32.combine(2i32);
+    assert_eq!(j, 3i32);
 }
