@@ -21,4 +21,5 @@ fn monoid_example() {
 
     let j = 1i32.combine(2i32);
     assert_eq!(j, 3i32);
+    let b: i32 = 0;
 }
