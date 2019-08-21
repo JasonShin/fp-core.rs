@@ -20,11 +20,16 @@ macro_rules! derive_hkt {
 derive_hkt!(Option);
 derive_hkt!(Vec);
 
-pub trait HKT3<U1, U2> {
-    type Current1;
-    type Current2;
-    type Target;
+pub trait HKT3<U, U2>: HKT<U> {
+    type Target2;
 }
+
+// * -> * -> *
+impl<T, U, U2> HKT3<U, U2> for Option<List<T>> {
+    type Target2 = Option<List<U2>>;
+}
+
+// impl trait HKT3<>
 
 /*
 macro_rules! derive_hkt3 {
