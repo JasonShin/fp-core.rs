@@ -2,7 +2,7 @@ use crate::functor::Functor;
 use crate::hkt::HKT;
 
 pub trait Extend<B>: Functor<B> + Sized {
-    fn extend<W>(self, f: W) -> <Self as HKT<B>>::Target
+    fn extend<W>(self, f: W) -> Self::Target
     where
         W: FnOnce(Self) -> B;
 }
