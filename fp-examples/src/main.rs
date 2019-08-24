@@ -14,6 +14,7 @@ mod comonad_example;
 mod continuation_example;
 mod contracts_example;
 mod currying_example;
+mod empty_example;
 mod endomorphism_example;
 mod foldable_example;
 mod function_composition_example;
