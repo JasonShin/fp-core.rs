@@ -1,17 +1,21 @@
-pub trait HKT<A, B> {
-    type URI;
+// * -> *
+// For example Option<A> -> Option<B>
+pub trait HKT<B> {
+    type Source;
     type Target;
 }
 
-impl<A, B> HKT<A, B> for Option<A> {
-    type URI = Self;
+impl<A, B> HKT<B> for Option<A> {
+    type Source = Self;
     type Target = Option<B>;
 }
 
-pub trait HKT3<A, B, C> {
-    type Target2;
+// * -> * -> *
+// For example Result<A, Error> -> Result<B, Error>
+pub trait HKT3<B, C>: HKT<B> {
+    type Error;
 }
 
-impl<A, B, C> HKT3<A, B, C> for Option<A> {
-    type Target2 = Option<B>;
+impl<A, B, C> HKT3<B, C> for Option<A> {
+    type Error = Option<B>;
 }
