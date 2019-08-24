@@ -1,8 +1,8 @@
 use crate::functor::Functor;
-use crate::hkt::HKT;
+use crate::hkt::HKT2;
 
 pub trait Extend<A, B>: Functor<A, B> + Sized {
-    fn extend<W>(self, f: W) -> <Self as HKT<A, B>>::Target
+    fn extend<W>(self, f: W) -> <Self as HKT2<A, B>>::Target
     where
         W: FnOnce(Self) -> B;
 }

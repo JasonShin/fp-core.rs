@@ -1,7 +1,7 @@
-use crate::hkt::HKT;
+use crate::hkt::HKT2;
 
-pub trait Functor<A, B>: HKT<A, B> {
-    fn fmap<F>(self, f: F) -> <Self as HKT<A, B>>::Target
+pub trait Functor<A, B>: HKT2<A, B> {
+    fn fmap<F>(self, f: F) -> <Self as HKT2<A, B>>::Target
     where
         F: FnOnce(A) -> B;
 }
