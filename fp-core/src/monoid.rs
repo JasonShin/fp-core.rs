@@ -5,3 +5,5 @@ use std::ops::Add;
 pub trait Monoid: Empty + Semigroup {}
 
 // impl<I> Monoid for I where I: Add<I, Output = I> + From<i32> {}
+
+impl<A> Monoid for Vec<A> {}

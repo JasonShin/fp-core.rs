@@ -18,3 +18,4 @@ readme = "../README.md"
 
 [dependencies]
 itertools = "0.8.0"
+im = "13.0.0"

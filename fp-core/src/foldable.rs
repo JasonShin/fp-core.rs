@@ -44,6 +44,13 @@ where
 }
 */
 
+impl<A, C, F> FoldableM<C, F> for Vec<A>
+where
+    C: Foldable<Self>,
+    F: Fn(&<C as HKT<Self>>::Current) -> Self,
+{
+}
+
 impl<A, B> Foldable<B> for Vec<A> {
     fn reduce<F>(self, b: B, fa: F) -> B
     where
