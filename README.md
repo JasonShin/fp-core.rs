@@ -1130,9 +1130,9 @@ An object or value that implements Ord specification, also implements [Setoid](#
 
 The Ord object or value must satisfy below rules for all `a`, `b` or `c`:
 
-1. totality: `a < b` or `b < a`
-2. antisymmetric: `a < b` and `b < a`, then `a == b`
-3. transivity: `a < b` and `b < c`, then `a < c`
+1. totality: `a <= b` or `b <= a`
+2. antisymmetric: `a <= b` and `b <= a`, then `a == b`
+3. transivity: `a <= b` and `b <= c`, then `a <= c`
 
 Rust documentation for Ord can be found here [Ord](https://doc.rust-lang.org/std/cmp/trait.Ord.html)
 
