@@ -2,17 +2,29 @@ pub trait Empty {
     fn empty() -> Self;
 }
 
-impl Empty for i32 {
-    fn empty() -> Self {
-        0.into()
-    }
+macro_rules! numeric_empty {
+    ($($t:ty)*) => ($(
+        impl Empty for $t {
+            fn empty() -> Self {
+                0
+            }
+        }
+    )*)
 }
 
-impl Empty for i64 {
-    fn empty() -> Self {
-        0.into()
-    }
+numeric_empty! { usize u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128 }
+
+macro_rules! floating_numeric_empty {
+    ($($t:ty)*) => ($(
+        impl Empty for $t {
+            fn empty() -> Self {
+                0.0
+            }
+        }
+    )*)
 }
+
+floating_numeric_empty! { f32 f64 }
 
 impl<T> Empty for Vec<T> {
     fn empty() -> Self {
