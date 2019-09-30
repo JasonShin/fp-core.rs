@@ -4,17 +4,17 @@ pub trait Semigroup {
     fn combine(self, other: Self) -> Self;
 }
 
-impl Semigroup for i32 {
-    fn combine(self, other: Self) -> Self {
-        self + other
-    }
+macro_rules! semigroup_numeric_impl {
+    ($($t:ty)*) => ($(
+        impl Semigroup for $t {
+            fn combine(self, other: Self) -> Self {
+                self + other
+            }
+        }
+    )*)
 }
 
-impl Semigroup for i64 {
-    fn combine(self, other: Self) -> Self {
-        self + other
-    }
-}
+semigroup_numeric_impl! { usize u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128 f32 f64 }
 
 impl<T: Clone> Semigroup for Vec<T> {
     fn combine(self, other: Self) -> Self {
