@@ -9,3 +9,9 @@ impl<A> Pure<A> for Option<A> {
         Some(a)
     }
 }
+
+impl<A, E> Pure<A> for Result<A, E> {
+    fn of(a: A) -> Self::Target {
+        Ok(a)
+    }
+}
