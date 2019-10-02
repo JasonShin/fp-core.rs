@@ -31,3 +31,9 @@ impl<T> Empty for Vec<T> {
         Vec::empty()
     }
 }
+
+impl Empty for String {
+    fn empty() -> Self {
+        String::empty()
+    }
+}

@@ -23,3 +23,9 @@ impl<T: Clone> Semigroup for Vec<T> {
         concat
     }
 }
+
+impl Semigroup for String {
+    fn combine(self, other: Self) -> Self {
+        format!("{}{}", self, other)
+    }
+}
