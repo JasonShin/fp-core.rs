@@ -14,3 +14,12 @@ impl<A, B> Chain<B> for Option<A> {
         self.and_then(f)
     }
 }
+
+impl<A, B, E> Chain<B> for Result<A, E> {
+    fn chain<F>(self, f: F) -> Self::Target
+    where
+        F: FnOnce(A) -> <Self as HKT<B>>::Target,
+    {
+        self.and_then(f)
+    }
+}
