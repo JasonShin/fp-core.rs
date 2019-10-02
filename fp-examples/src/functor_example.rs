@@ -32,6 +32,12 @@ fn test_functor() {
     // assert_eq!(vec![5, 6], v.iter().fmap(|x| x + 1).fmap(|x| x + 1));
 }
 
+#[test]
+fn test_functor_for_result() {
+    let z = Result::<_,()>::fmap(Ok(1), |x| x + 1).fmap(|x| x + 1);
+    assert_eq!(z, Ok(3));
+}
+
 /*
 // Below is an old implementation
 #[derive(Debug, PartialEq, Eq)]

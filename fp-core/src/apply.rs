@@ -12,3 +12,9 @@ impl<A, B> Apply<B> for Option<A> {
         self.and_then(|v| f.map(|z| z(v)))
     }
 }
+
+impl<A, B, E> Apply<B> for Result<A, E> {
+    fn ap(self, f: Applicator<B, Self>) -> <Self as HKT<B>>::Target {
+        self.and_then(|v| f.map(|z| z(v)))
+    }
+}
