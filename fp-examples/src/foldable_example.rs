@@ -12,7 +12,7 @@ pub trait Foldable<A, B>: HKT<A, B> {
 #[test]
 fn foldable_example() {
     let k = vec![1, 2, 3];
-    let result = k.reduce(0, |i, acc| i + acc);
+    let result = k.reduce(0, |i, acc| i + *acc);
     assert_eq!(result, 6);
 }
 
