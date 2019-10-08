@@ -18,6 +18,7 @@ macro_rules! derive_hkt {
 }
 
 // A nice way of saying G<F<B>> purely through HKT.
+// TODO(after declarative macros stabilize): make a macro to define arbitrary lists of these.
 pub type HktInHkt<G, F, B> = <G as HKT<<F as HKT<B>>::Target>>::Target;
 
 derive_hkt!(Option);
