@@ -40,3 +40,18 @@ impl<A, B> Traversable<B> for Option<A> {
         }
     }
 }
+
+impl<A, B, E> Traversable<B> for Result<A, E> {
+    fn traverse<A, F, AFB>(&self, traverser: AFB) -> HktInHkt<F, Self, B>
+    // (Self is a HKT<B> so this works out)
+    where
+        F: Applicative<B>,
+        AFB: Box<Fn(A) -> <F as HKT<B>>::Target>,
+    {
+        match &self {
+            Result::Err(e) => Result::Err(e),
+            Result::Ok(a) => Result::Ok(traverser(a)),
+        }
+    }
+}
+
