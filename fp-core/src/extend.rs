@@ -15,3 +15,12 @@ impl<A, B> Extend<B> for Option<A> {
         self.map(|x| f(Some(x)))
     }
 }
+
+impl<A, B, E> Extend<B> for Result<A, E> {
+    fn extend<W>(self, f: W) -> Self::Target
+    where
+        W: FnOnce(Self) -> B,
+    {
+        self.map(|x| f(Ok(x)))
+    }
+}

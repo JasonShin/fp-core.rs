@@ -24,6 +24,11 @@ pub type HktInHkt<G, F, B> = <G as HKT<<F as HKT<B>>::Target>>::Target;
 derive_hkt!(Option);
 derive_hkt!(Vec);
 
+impl<T, U, E> HKT<U> for Result<T, E> {
+    type Current = T;
+    type Target = Result<U, E>;
+}
+
 pub trait HKT3<U1, U2> {
     type Current1;
     type Current2;
