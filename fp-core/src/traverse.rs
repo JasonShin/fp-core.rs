@@ -41,6 +41,22 @@ impl<A, B> Traversable<B> for Option<A> {
     }
 }
 
+impl<A, B> Traversable<B> for Vec<A> {
+    fn traverse<A, F, AFB>(&self, traverser: AFB) -> HktInHkt<F, Self, B>
+    where
+        F: Applicative<B>,
+        AFB: Box<Fn(A) -> <F as HKT<B>>::Target>,
+    {
+        // Interestingly only uses that Self is a monoid.
+        let acc = F::of(vec![]);
+        for item in self {
+            let t = traverser(item);
+            acc = acc.apply(|acc_list| acc_list + vec![t]);
+        }
+        return acc;
+    }
+}
+
 impl<A, B, E> Traversable<B> for Result<A, E> {
     fn traverse<A, F, AFB>(&self, traverser: AFB) -> HktInHkt<F, Self, B>
     // (Self is a HKT<B> so this works out)

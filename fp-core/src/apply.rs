@@ -18,3 +18,9 @@ impl<A, B, E> Apply<B> for Result<A, E> {
         self.and_then(|v| f.map(|z| z(v)))
     }
 }
+
+impl<A, B> Apply<B> for Vec<A> {
+    fn ap(self, f: Applicator<B, Self>) -> <Self as HKT<B>>::Target {
+        self.iter().flat_map(|v| f.iter().map(|z| z(v))).collect()
+    }
+}
