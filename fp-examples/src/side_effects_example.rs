@@ -8,4 +8,3 @@ mod example {
         println!("{:?}", now);
     }
 }
-
