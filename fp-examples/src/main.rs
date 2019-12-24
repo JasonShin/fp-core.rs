@@ -2,7 +2,6 @@
 extern crate partial_application;
 #[macro_use]
 extern crate fp_core;
-extern crate rats;
 
 pub mod adt_example;
 mod anamorphism_example;
