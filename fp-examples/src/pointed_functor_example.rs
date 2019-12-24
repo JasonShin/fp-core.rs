@@ -6,6 +6,7 @@ pub enum Maybe<T> {
 }
 
 impl<T> Maybe<T> {
+    #[allow(dead_code)]
     pub fn of(x: T) -> Self {
         Maybe::Just(x)
     }
