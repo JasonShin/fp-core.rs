@@ -9,6 +9,6 @@ fn applicative_example() {
 
 #[test]
 fn applicative_example_on_result() {
-    let x = Result::<_,()>::of(1).ap(Ok(Box::new(|x| x + 1)));
+    let x = Result::<_, ()>::of(1).ap(Ok(Box::new(|x| x + 1)));
     assert_eq!(x, Ok(2));
 }

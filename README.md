@@ -1,6 +1,6 @@
 <p align="center"><img src="https://i.imgur.com/pqQLDFz.png" width="30%" /></p>
 
-[![Build Status](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_apis/build/status/JasonShin.functional-programming-jargon.rs?branchName=master)](https://dev.azure.com/jasonShin91/functional-programming-jargon.rs/_build/latest?definitionId=3&branchName=master)
+[![Build Status](https://travis-ci.com/JasonShin/fp-core.rs.svg?branch=master)](https://travis-ci.com/JasonShin/fp-core.rs)
 
 The project is a library for functional programming in Rust.
 

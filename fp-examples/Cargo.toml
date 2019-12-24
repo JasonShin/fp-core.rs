@@ -9,5 +9,4 @@ edition = "2018"
 [dependencies]
 partial_application = "0.1.0"
 itertools = "0.8.0"
-rats = "0.0.1"
 fp-core = { path = "../fp-core" }

@@ -9,6 +9,6 @@ fn monad_example() {
 
 #[test]
 fn monad_example_on_result() {
-    let x = Result::<_,()>::of(1).chain(|x| Ok(x + 1));
+    let x = Result::<_, ()>::of(1).chain(|x| Ok(x + 1));
     assert_eq!(x, Ok(2));
 }
