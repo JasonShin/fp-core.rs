@@ -567,7 +567,7 @@ Variance in Rust is used during the type checking against type and lifetime para
 
 ## Higher Kinded Type (HKT)
 
-Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a
+Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rfcs/issues/324). First of all, HKT is a
 type with a "hole" in it, so you can declare a type signature such as `trait Functor<F<A>>`.
 
 Although Rust lacks in a native support for HKT, we always have a walk around called [Lightweight Higher Kinded Type](https://www.cl.cam.ac.uk/~jdy22/papers/lightweight-higher-kinded-polymorphism.pdf)
