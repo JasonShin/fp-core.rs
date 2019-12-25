@@ -27,8 +27,8 @@ macro_rules! floating_numeric_empty_impl {
 floating_numeric_empty_impl! { f32 f64 }
 
 impl<T> Empty for Vec<T> {
-    fn empty() -> Self {
-        Vec::empty()
+    fn empty() -> Vec<T> {
+        vec![]
     }
 }
 
