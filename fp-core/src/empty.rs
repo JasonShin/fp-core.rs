@@ -33,7 +33,7 @@ impl<T> Empty for Vec<T> {
 }
 
 impl Empty for String {
-    fn empty() -> Self {
-        String::empty()
+    fn empty() -> String {
+        "".to_string()
     }
 }
