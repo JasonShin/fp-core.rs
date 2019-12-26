@@ -1,5 +1,3 @@
-use std::ops::Add;
-
 pub trait Semigroup {
     fn combine(self, other: Self) -> Self;
 }
