@@ -1,5 +1,5 @@
 pub trait Lens<S, A> {
-    fn over(s: &S, f: &Fn(Option<&A>) -> A) -> S {
+    fn over(s: &S, f: &dyn Fn(Option<&A>) -> A) -> S {
         let result: A = f(Self::get(s));
         Self::set(result, &s)
     }

@@ -1,12 +1,13 @@
 #[derive(Debug, PartialEq, Eq)]
-enum Maybe<T> {
+pub enum Maybe<T> {
     #[allow(dead_code)]
     Nothing,
     Just(T),
 }
 
 impl<T> Maybe<T> {
-    fn of(x: T) -> Self {
+    #[allow(dead_code)]
+    pub fn of(x: T) -> Self {
         Maybe::Just(x)
     }
 }
