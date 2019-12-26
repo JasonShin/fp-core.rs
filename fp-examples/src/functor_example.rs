@@ -1,5 +1,3 @@
-use fp_core::functor::Functor;
-
 // impl<A, B, T> HKT<A, B> for T
 // where
 //     T: Sized + Iterator<Item = A>,
@@ -23,19 +21,24 @@ use fp_core::functor::Functor;
 //     }
 // }
 
-#[test]
-fn test_functor() {
-    let z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
-    assert_eq!(z, Some(3));
+#[cfg(test)]
+mod example {
+    use fp_core::functor::Functor;
 
-    // let v = vec![3, 4];
-    // assert_eq!(vec![5, 6], v.iter().fmap(|x| x + 1).fmap(|x| x + 1));
-}
+    #[test]
+    fn test_functor() {
+        let z = Option::fmap(Some(1), |x| x + 1).fmap(|x| x + 1);
+        assert_eq!(z, Some(3));
 
-#[test]
-fn test_functor_for_result() {
-    let z = Result::<_, ()>::fmap(Ok(1), |x| x + 1).fmap(|x| x + 1);
-    assert_eq!(z, Ok(3));
+        // let v = vec![3, 4];
+        // assert_eq!(vec![5, 6], v.iter().fmap(|x| x + 1).fmap(|x| x + 1));
+    }
+
+    #[test]
+    fn test_functor_for_result() {
+        let z = Result::<_, ()>::fmap(Ok(1), |x| x + 1).fmap(|x| x + 1);
+        assert_eq!(z, Ok(3));
+    }
 }
 
 /*
