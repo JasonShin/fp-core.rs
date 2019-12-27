@@ -1430,8 +1430,8 @@ match price {
 - [Currying in Rust](https://internals.rust-lang.org/t/currying-in-rust/10326)
 - [Auto-Currying in Rust](https://internals.rust-lang.org/t/auto-currying-in-rust/149)
 
-## My thought on this project
+## Inspiration
 
-Please be mindful that the project does not fully cover every single definitions with code examples since it does not worth
-investing too much time in a glossary project. I have put extra effort in adding complementary external references that
-you can check out for further study.
+As a community, we have chosen our value as "learn by teaching".
+We want to share our knowledge with the world while we are learning.
+
