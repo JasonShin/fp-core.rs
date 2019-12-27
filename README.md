@@ -1429,3 +1429,9 @@ match price {
 - [Higher Kinded Polymorphism RFC](https://github.com/rust-lang/rfcs/issues/324)
 - [Currying in Rust](https://internals.rust-lang.org/t/currying-in-rust/10326)
 - [Auto-Currying in Rust](https://internals.rust-lang.org/t/auto-currying-in-rust/149)
+
+## Inspiration
+
+As a community, we have chosen our value as "learn by teaching".
+We want to share our knowledge with the world while we are learning.
+
