@@ -1163,20 +1163,17 @@ assert_eq!(
 
 ## Foldable
 
-An object that has a `foldr/l` function that can transform that object into some other type. We are using `rats` to give
-an example but the crate only implements `fold_right`.
+An object that has a `foldr/l` function that can transform that object into some other type.
 
 `fold_right` is equivalent to Fantasy Land Foldable's `reduce`, which goes like:
 
 `fantasy-land/reduce :: Foldable f => f a ~> ((b, a) -> b, b) -> b`
 
 ```rust
-use rats::foldable::Foldable;
-use rats::kind::IntoKind;
-use rats::kinds::VecKind;
+use fp_core::foldable::*;
 
-let k = vec![1, 2, 3].into_kind();
-let result = VecKind::fold_right(k, 0, | (i, acc) | i + acc);
+let k = vec![1, 2, 3];
+let result = k.reduce(0, |i, acc| i + acc);
 assert_eq!(result, 6);
 ```
 
