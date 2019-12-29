@@ -1,8 +1,8 @@
 use crate::applicative::Applicative;
 use crate::chain::Chain;
 
-pub trait Monad<A, B>: Chain<B> + Applicative<A, B> {}
+pub trait Monad<B>: Chain<B> + Applicative<B> {}
 
-impl<A, B> Monad<A, B> for Option<A> {}
+impl<A> Monad<A> for Option<A> {}
 
-impl<A, B, E> Monad<A, B> for Result<A, E> {}
+impl<A, E> Monad<A> for Result<A, E> {}
