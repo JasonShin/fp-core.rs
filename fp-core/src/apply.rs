@@ -19,6 +19,8 @@ impl<A, B> Apply<B> for Option<A> {
     }
 }
 
+// TODO(when as_deref is stable): remove the Copy restruction and replace the
+// `or_else` with `as_deref_err`.
 impl<A, B, E: Copy> Apply<B> for Result<A, E> {
     fn ap(self, f: &Applicator<B, Self>) -> <Self as HKT<B>>::Target {
         self.and_then(|v| f.as_ref().map(|z| z(&v)).or_else(move |e| Result::Err(*e)))

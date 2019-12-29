@@ -5,4 +5,4 @@ pub trait Monad<B>: Chain<B> + Applicative<B> {}
 
 impl<A> Monad<A> for Option<A> {}
 
-impl<A, E> Monad<A> for Result<A, E> {}
+impl<A, E: Copy> Monad<A> for Result<A, E> {}
