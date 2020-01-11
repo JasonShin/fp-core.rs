@@ -7,15 +7,13 @@ use std::fmt::Debug;
 
 // Re-statement of the Haskell definition
 // (http://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Traversable.html)
-pub trait Traversable<B, F>: Functor<B> + Foldable<B>
-where
-    F: Applicative<B> + Applicative<<Self as HKT<B>>::Target>,
+pub trait Traversable<B>: Functor<B> + Foldable<B>
 {
     // A is the source type, F the functor, and AFB a natural transformation
     // from A into F<B>. Pursuant to Cats in Scala (https://www.scala-exercises.org/cats/traverse),
     // A would be a User, F a future, and Self would be a list. AFB would be the sort of "user
     // promise" function in the example.
-    fn traverse<AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
+    fn traverse(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
     // (Self is a HKT<B> so this works out)
     where
         AFB: Fn(<Self as HKT<B>>::Current) -> <F as HKT<B>>::Target;
