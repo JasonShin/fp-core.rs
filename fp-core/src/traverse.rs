@@ -7,15 +7,17 @@ use std::fmt::Debug;
 
 // Re-statement of the Haskell definition
 // (http://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Traversable.html)
-pub trait Traversable<B>: Functor<B> + Foldable<B> {
+pub trait Traversable<B, F>: Functor<B> + Foldable<B>
+where
+    F: Applicative<B> + Applicative<<Self as HKT<B>>::Target>,
+{
     // A is the source type, F the functor, and AFB a natural transformation
     // from A into F<B>. Pursuant to Cats in Scala (https://www.scala-exercises.org/cats/traverse),
     // A would be a User, F a future, and Self would be a list. AFB would be the sort of "user
     // promise" function in the example.
-    fn traverse<F, AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
+    fn traverse<AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
     // (Self is a HKT<B> so this works out)
     where
-        F: Applicative<B> + Applicative<<Self as HKT<B>>::Target>,
         AFB: Fn(<Self as HKT<B>>::Current) -> <F as HKT<B>>::Target;
 }
 
@@ -23,16 +25,19 @@ pub trait Traversable<B>: Functor<B> + Foldable<B> {
 // (http://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Traversable.html)
 pub fn sequenceA<T, F, A>(wrong_order: HktInHkt<T, F, A>) -> HktInHkt<F, T, A>
 where
-    T: Traversable<A> + HKT<<F as HKT<A>>::Target>,
-    F: Applicative<A> + HKT<<T as HKT<A>>::Target>,
+    T: Traversable<A, F> + HKT<<F as HKT<A>>::Target>,
+    F: Applicative<A> + Applicative<<T as HKT<A>>::Target>,
+    HktInHkt<T, F, A>: Traversable<A, F>
 {
-    wrong_order.traverse(|x| x)
+    Traversable::<A, F>::traverse(&wrong_order, Box::new(|x| x))
 }
 
-impl<A, B> Traversable<B> for Option<A> {
-    fn traverse<F, AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
+impl<A, B, F> Traversable<B, F> for Option<A>
+where
+    F: Applicative<B> + Applicative<Option<B>>,
+{
+    fn traverse<AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
     where
-        F: Applicative<B> + Applicative<<Self as HKT<B>>::Target>,
         AFB: Fn(A) -> <F as HKT<B>>::Target,
     {
         match &self {
@@ -42,10 +47,12 @@ impl<A, B> Traversable<B> for Option<A> {
     }
 }
 
-impl<A, B> Traversable<B> for Vec<A> {
-    fn traverse<F, AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
+impl<A, B, F> Traversable<B, F> for Vec<A>
+where
+    F: Applicative<B> + Applicative<Vec<B>>,
+{
+    fn traverse<AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
     where
-        F: Applicative<B> + Applicative<Vec<B>>,
         AFB: Fn(A) -> <F as HKT<B>>::Target,
     {
         // Interestingly only uses that Self is a monoid.
@@ -58,10 +65,12 @@ impl<A, B> Traversable<B> for Vec<A> {
     }
 }
 
-impl<A, B, E: Debug> Traversable<B> for Result<A, E> {
-    fn traverse<F, AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
+impl<A, B, E: Debug, F> Traversable<B, F> for Result<A, E>
+where
+    F: Applicative<B> + Applicative<Result<B, E>>,
+{
+    fn traverse<AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
     where
-        F: Applicative<B> + Applicative<Result<B, E>>,
         AFB: Fn(A) -> <F as HKT<B>>::Target,
     {
         match &self {
