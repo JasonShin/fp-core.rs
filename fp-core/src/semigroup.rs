@@ -1,3 +1,7 @@
+use crate::empty::Empty;
+
+use std::fmt::Debug;
+
 pub trait Semigroup {
     fn combine(self, other: Self) -> Self;
 }
@@ -25,5 +29,30 @@ impl<T: Clone> Semigroup for Vec<T> {
 impl Semigroup for String {
     fn combine(self, other: Self) -> Self {
         format!("{}{}", self, other)
+    }
+}
+
+impl<A> Semigroup for Option<A>
+where
+    A: Semigroup,
+{
+    fn combine(self, other: Self) -> Self {
+        if self.is_some() && other.is_some() {
+            return Option::Some(self.unwrap().combine(other.unwrap()));
+        }
+        Option::None
+    }
+}
+
+impl<A, E> Semigroup for Result<A, E>
+where
+    A: Semigroup,
+    E: Empty + Debug,
+{
+    fn combine(self, other: Self) -> Self {
+        if self.is_ok() && other.is_ok() {
+            return Result::Ok(self.unwrap().combine(other.unwrap()));
+        }
+        Result::Err(E::empty())
     }
 }
