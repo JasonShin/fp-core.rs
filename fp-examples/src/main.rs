@@ -34,6 +34,7 @@ mod referential_transparency_example;
 mod semigroup_example;
 mod setoid_example;
 mod side_effects_example;
+mod traverse_example;
 mod type_signature_example;
 
 fn main() {

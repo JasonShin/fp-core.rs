@@ -1,8 +1,11 @@
 use crate::apply::Apply;
 use crate::pure::Pure;
 
-pub trait Applicative<A, B>: Apply<B> + Pure<A> {}
+pub trait Applicative<B>: Apply<B> + Pure<B> {}
 
-impl<A, B> Applicative<A, B> for Option<A> {}
+impl<A, B> Applicative<B> for Option<A> {}
+impl<A, B> Applicative<B> for Vec<A> {}
 
-impl<A, B, E> Applicative<A, B> for Result<A, E> {}
+// Note on trait bound: look in apply.rs with the
+// impl Apply for Result
+impl<A, B, E: Copy> Applicative<B> for Result<A, E> {}

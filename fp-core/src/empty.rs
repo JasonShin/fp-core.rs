@@ -37,3 +37,15 @@ impl Empty for String {
         "".to_string()
     }
 }
+
+impl<A> Empty for Option<A> {
+    fn empty() -> Option<A> {
+        Option::None
+    }
+}
+
+impl<A, E: Empty> Empty for Result<A, E> {
+    fn empty() -> Result<A, E> {
+        Result::Err(E::empty())
+    }
+}

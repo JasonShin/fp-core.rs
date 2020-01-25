@@ -1,17 +1,23 @@
 use crate::hkt::HKT;
 
 pub trait Pure<A>: HKT<A> {
-    fn of(c: Self::Current) -> Self::Target;
+    fn of(c: A) -> Self::Target;
 }
 
-impl<A> Pure<A> for Option<A> {
-    fn of(a: A) -> Self::Target {
+impl<A, B> Pure<A> for Option<B> {
+    fn of(a: A) -> <Self as HKT<A>>::Target {
         Some(a)
     }
 }
 
-impl<A, E> Pure<A> for Result<A, E> {
+impl<A, B> Pure<A> for Vec<B> {
     fn of(a: A) -> Self::Target {
+        vec![a]
+    }
+}
+
+impl<A, B, E> Pure<A> for Result<B, E> {
+    fn of(a: A) -> <Self as HKT<A>>::Target {
         Ok(a)
     }
 }

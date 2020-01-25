@@ -1,6 +1,8 @@
 use crate::hkt::HKT;
 use crate::monoid::Monoid;
 
+use std::fmt::Debug;
+
 // Cheating: all HKT instances exist for any B,
 // so HKT<B> here isn't about Self<B> having any meaning,
 // it's about folding on some Self<A> -- the HKT lets us
@@ -45,5 +47,37 @@ impl<A, B> Foldable<B> for Vec<A> {
         F: Fn(&A, B) -> B,
     {
         self.iter().rev().fold(b, |x, y| fa(y, x))
+    }
+}
+
+impl<A, B> Foldable<B> for Option<A> {
+    fn reduce<F>(self, b: B, fa: F) -> B
+    where
+        F: Fn(B, &A) -> B,
+    {
+        self.as_ref().and_then(|v| Option::Some(fa(b, v))).unwrap()
+    }
+
+    fn reduce_right<F>(self, b: B, fa: F) -> B
+    where
+        F: Fn(&A, B) -> B,
+    {
+        self.as_ref().and_then(|v| Option::Some(fa(v, b))).unwrap()
+    }
+}
+
+impl<A, B, E: Debug> Foldable<B> for Result<A, E> {
+    fn reduce<F>(self, b: B, fa: F) -> B
+    where
+        F: Fn(B, &A) -> B,
+    {
+        self.as_ref().and_then(|v| Result::Ok(fa(b, v))).unwrap()
+    }
+
+    fn reduce_right<F>(self, b: B, fa: F) -> B
+    where
+        F: Fn(&A, B) -> B,
+    {
+        self.as_ref().and_then(|v| Result::Ok(fa(v, b))).unwrap()
     }
 }
