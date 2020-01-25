@@ -1,7 +1,8 @@
-use crate::applicative::Applicative;
+use crate::applicative::{Applicative, Applicator};
 use crate::foldable::Foldable;
 use crate::functor::Functor;
 use crate::hkt::{HktInHkt, HKT};
+use crate::pure::Pure;
 
 use std::fmt::Debug;
 
@@ -18,25 +19,27 @@ pub trait Traversable<B, F>:
     Functor<B> + Foldable<B> + Functor<<F as HKT<B>>::Target> + Foldable<<F as HKT<B>>::Target>
 where
     F: Applicative<B> + Applicative<<Self as HKT<B>>::Target>,
+    Self:
+        Functor<B> + Foldable<B> + Functor<<F as HKT<B>>::Target> + Foldable<<F as HKT<B>>::Target>,
 {
     fn sequence(tfb: HktInHkt<Self, F, B>) -> HktInHkt<F, Self, B>;
 }
 
 impl<A, B, F> Traversable<B, F> for Option<A>
 where
-    F: Applicative<B> + Applicative<Option<B>>,
+    F: Applicative<B> + Applicative<Option<B>> + Pure<Applicator<B, Option<A>>>,
 {
     fn sequence(tbf: HktInHkt<Self, F, B>) -> HktInHkt<F, Self, B> {
         match tbf {
             Option::None => F::of(Option::None),
-            Option::Some(fb) => F::of
+            Option::Some(fb) => fb.ap(F::of(Box::new(|v| Option::Some(v)))),
         }
     }
 }
 
 impl<A, B, F> Traversable<B, F> for Vec<A>
 where
-    F: Applicative<B> + Applicative<Vec<B>>,
+    F: Applicative<B> + Applicative<Vec<B>> + Pure<Applicator<B, Vec<A>>>,
 {
     fn traverse<AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
     where
@@ -50,19 +53,24 @@ where
         }
         return acc;
     }
+
+    fn sequence(tbf: HktInHkt<Self, F, B>) -> HktInHkt<F, Self, B> {
+        let acc = F::of(vec![]);
+        for item in tbf {
+            acc = item.ap(F::of(Box::new(|b| acc.ap(F::of(Box::new(|v| v.extend(&[b])))))))
+        }
+        return acc;
+    }
 }
 
 impl<A, B, E: Debug, F> Traversable<B, F> for Result<A, E>
 where
-    F: Applicative<B> + Applicative<Result<B, E>>,
+    F: Applicative<B> + Applicative<Result<B, E>> + Pure<Applicator<B, Result<A, E>>>,
 {
-    fn traverse<AFB>(&self, traverser: Box<AFB>) -> HktInHkt<F, Self, B>
-    where
-        AFB: Fn(A) -> <F as HKT<B>>::Target,
-    {
-        match &self {
+    fn sequence(tbf: HktInHkt<Self, F, B>) -> HktInHkt<F, Self, B> {
+        match tbf {
             Result::Err(e) => F::of(Result::Err(e)),
-            Result::Ok(a) => F::of(Result::Ok(traverser(*a))),
+            Result::Ok(fb) => fb.ap(F::of(Box::new(|v| Result::Ok(v)))),
         }
     }
 }
