@@ -692,7 +692,7 @@ Unfortunately, these are rather heavy-handed in the mathematics they evoke.
 
 ## Pointed Functor
 
-An object with an of function that puts any single value into it.
+An object with an `of` function that puts any single value into it.
 
 ```rust
 #[derive(Debug, PartialEq, Eq)]
@@ -734,7 +734,7 @@ When an application is composed of expressions and devoid of side effects, truth
 
 ## Monoid
 
-An set with a binary function that "combines" pairs from that set into another element of the set.
+A set with a binary function that "combines" pairs from that set into another element of the set.
 
 One simple monoid is the addition of numbers:
 
@@ -1004,7 +1004,7 @@ let decrement = |x: i32| x - 1;
 
 A pair of transformations between 2 types of objects that is invertible.
 
-For example, 2D coordinates could be stored as a i32 vector [2,3] or a struct {x: 2, y: 3}.
+For example, 2D coordinates could be stored as a i32 vector `[2, 3]` or a struct `{ x: 2, y: 3 }`.
 
 ```rust
 #[derive(PartialEq, Debug)]
@@ -1311,7 +1311,7 @@ fn call<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
 ```
 
 The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type.
-The following version of map takes `a` function that transforms `a` value of some type `a` into another type `b`,
+The following version of map takes a function that transforms a value of some type `a` into another type `b`,
 an array of values of type `a`, and returns an array of values of type `b`.
 
 ```rust
