@@ -4,7 +4,7 @@ fn partial_application() {
         (a + b * b + c.pow(3) + d.pow(4)) * mul - off
     }
 
-    let bar = partial!(foo(_, _, 10, 42, 10, 10));
+    let bar = partial!(foo => _, _, 10, 42, 10, 10);
 
     assert_eq!(foo(15, 15, 10, 42, 10, 10), bar(15, 15));
 }
