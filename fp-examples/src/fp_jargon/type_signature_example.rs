@@ -14,7 +14,7 @@ fn type_signature_example() {
 
     // call :: (a -> b) -> a -> b
     #[allow(dead_code)]
-    fn call<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
+    fn call<A, B>(f: &(dyn Fn(A) -> B)) -> impl Fn(A) -> B + '_ {
         move |x| f(x)
     }
 
@@ -26,7 +26,7 @@ fn type_signature_example() {
 
     // map :: (a -> b) -> [a] -> [b]
     #[allow(dead_code)]
-    fn map<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
+    fn map<A, B>(f: &(dyn Fn(A) -> B)) -> impl Fn(A) -> B + '_ {
         move |x| f(x)
     }
 }
