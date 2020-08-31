@@ -1,0 +1,11 @@
+mod applicative_example;
+mod comonad_example;
+mod empty_example;
+mod foldable_example;
+mod function_composition_example;
+mod functor_example;
+mod lens_example;
+mod monad_example;
+mod monoid_example;
+mod semigroup_example;
+mod setoid_example;
