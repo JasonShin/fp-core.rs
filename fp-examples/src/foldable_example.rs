@@ -2,7 +2,6 @@
 mod example {
     use fp_core::empty::Empty;
     use fp_core::foldable::*;
-    use fp_core::semigroup::Semigroup;
 
     /*
     // Check out foldable.rs in fp-core
@@ -22,8 +21,8 @@ mod example {
 
     #[test]
     fn fold_map_example() {
-        let k = vec![Some(1 as i64), Some(2 as i64), Some(3 as i64), None];
-        let result = fold_map(k, |&opt| if let Some(x) = opt { x } else { 0 });
+        let k = vec![Some(1_i64), Some(2_i64), Some(3_i64), None];
+        let result = fold_map(k, |&opt| opt.unwrap_or_default());
         assert_eq!(result, 6);
     }
 

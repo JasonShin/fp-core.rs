@@ -17,10 +17,10 @@ mod example {
         let u = [vec![1, 2], vec![]].concat();
         let i = compose!(foo, identity)(1) == compose!(identity, foo)(1);
         assert_eq!(z, 2);
-        assert_eq!(x, true);
+        assert!(x);
         assert_eq!(y, vec![1, 2, 3, 4, 5, 6]);
         assert_eq!(u, vec![1, 2]);
-        assert_eq!(i, true);
+        assert!(i);
     }
 
     // Additional comprehensive monoid tests

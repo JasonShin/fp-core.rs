@@ -1,4 +1,5 @@
 #[derive(PartialEq, Debug)]
+#[allow(dead_code)]
 struct Coords {
     x: i32,
     y: i32,

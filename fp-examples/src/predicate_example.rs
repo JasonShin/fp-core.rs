@@ -1,6 +1,6 @@
 #[test]
 fn predicate_example() {
-    let predicate = |a: &i32| a.clone() > 2;
+    let predicate = |a: &i32| *a > 2;
 
     let result = (vec![1, 2, 3, 4])
         .into_iter()

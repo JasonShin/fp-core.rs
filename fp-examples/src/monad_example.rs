@@ -89,7 +89,7 @@ mod example {
     fn test_monad_right_identity_option() {
         // Right identity: m.chain(pure) == m
         let m = Some(5);
-        let result = m.chain(|x| Some(x));
+        let result = m.chain(Some);
         assert_eq!(result, m);
     }
 
