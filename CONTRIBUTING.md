@@ -27,21 +27,47 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
 ## Development Environments
 
-| type   | version                |
-| ------ | ---------------------- |
-| nodejs | Greater than 8.11.0    |
-| OS     | Linux, Windows and Mac |
+| type | version                |
+| ---- | ---------------------- |
+| OS   | Linux, Windows and Mac |
 
-You will need to install Rust to work on this project. Installation instruction can be found https://www.rust-lang.org/tools/install.
+You will need to install Rust to work on this project. Installation instruction can be found at https://www.rust-lang.org/tools/install.
 
-I have used following versions of Rust and its dependencies while developing
+### Requirements
 
-| type   | version                                     |
-| ------ | ------------------------------------------- |
-| rustc  | rustc 1.36.0-nightly (7158ed9cb 2019-05-15) |
-| cargo  | cargo 1.36.0-nightly (759b6161a 2019-05-06) |
+- **Rust stable** (1.70.0 or later recommended)
+- **No nightly features required** - this project uses only stable Rust features
 
-Also I've enabled nightly mode to use some of the latest features of Rust, follow this instruction: https://github.com/rust-lang/rustup.rs#working-with-nightly-rust
+The project automatically uses the correct Rust version via `rust-toolchain.toml`.
+
+### Running Tests
+
+```bash
+# Run all tests
+cargo test --workspace
+
+# Run tests for a specific package
+cargo test -p fp-core
+
+# Run with output
+cargo test -- --nocapture
+```
+
+### Code Quality Checks
+
+```bash
+# Format code
+cargo fmt --all
+
+# Check formatting
+cargo fmt --all -- --check
+
+# Run clippy lints
+cargo clippy --all-targets --all-features
+
+# Fix clippy warnings automatically (where possible)
+cargo clippy --all-targets --all-features --fix
+```
 
 ## Copyright and Licensing
 
