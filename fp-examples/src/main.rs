@@ -1,5 +1,7 @@
+#[allow(unused_imports)]
 #[macro_use]
 extern crate partial_application;
+#[allow(unused_imports)]
 #[macro_use]
 extern crate fp_core;
 
