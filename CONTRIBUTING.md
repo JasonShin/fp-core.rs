@@ -88,7 +88,7 @@ You can copy and paste the MIT license summary from below.
 ```
 MIT License
 
-Copyright (c) 2019 Jason Shin
+Copyright (c) 2026 Jason Shin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
